@@ -3,7 +3,7 @@ import './App.scss'
 function App() {
   return (
     <>
-      <p>Ското тут буде чат</p>
+      <p>Скоро тут буде чат</p>
     </>
   )
 }
