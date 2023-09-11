@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { increment, decrement } from '../features/counter/counterSlice';
+import { increment, decrement } from './modules/counter/counterSlice';
 import './App.scss'
 
 function App() {
