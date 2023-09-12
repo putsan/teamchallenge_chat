@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { decrement, increment } from "../app/store/counter/counterSlice";
+import GoogleIcon from '@mui/icons-material/Google';
 
 function Auth() {
   const dispatch = useDispatch();
@@ -10,13 +11,27 @@ function Auth() {
   return (
     <div>
       <p>Скоро тут буде чат</p>
-      <p>Це сторінка під твої екрани для входу та реєстрації. Павда подумай чи треба їх розділяти на 2 на різних ендпоїнтах чи зробиш на одному, як мінімум поки.. Або разом можемо подумати щодо цього</p>
+
+     <div style={{margin: "25px"}}>
+     <TextField label="Ім’я користувача" variant="standard" />
+     </div>
+     <div style={{margin: "25px"}}>
+     <TextField label="Пароль" variant="standard" type="password"/>
+     </div>
+     <div style={{margin: "25px"}}>
+     <TextField label="Підтвердіть пароль" variant="standard" type="password"/>
+     </div>
+      <div>
+      <Link to="/"><Button variant="contained" sx={{marginRight:"10px"}}>Продовжити</Button> </Link>
+      <Link to="/"> <Button variant="contained"><GoogleIcon/> </Button></Link>
+      </div>
       <br/>
       <h1>Counter: {count}</h1>
-      <Button onClick={() => dispatch(increment())}>Increment</Button>
-      <Button onClick={() => dispatch(decrement())}>Decrement</Button>
+      <p>Вже є аккаунт?</p>
+    <Link to="/"> <p style={{textDecoration: "underline"}}> Вхід </p></Link>
       <br />
       <Link to="/"><Button variant="contained" sx={{fontSize: "16px"}}>Назад</Button></Link>
+
     </div>
   )
 }
