@@ -45,7 +45,7 @@ function StartFlow() {
           Реєстрація
         </Button>
       </Link>
-      <Link to="/auth">
+      <Link to="/login">
         <Button variant="contained">
           Вхід
         </Button>

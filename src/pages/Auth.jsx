@@ -1,8 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button, TextField } from "@mui/material";
+import { Button, makeStyles, TextField } from "@mui/material";
+
 import { decrement, increment } from "../app/store/counter/counterSlice";
 import GoogleIcon from '@mui/icons-material/Google';
+
+
 
 function Auth() {
   const dispatch = useDispatch();
@@ -23,7 +26,7 @@ function Auth() {
      </div>
       <div>
       <Link to="/"><Button variant="contained" sx={{marginRight:"10px"}}>Продовжити</Button> </Link>
-      <Link to="/"> <Button variant="contained"><GoogleIcon/> </Button></Link>
+      <Link to="/"> <Button variant="contained" ><GoogleIcon/> </Button></Link>
       </div>
       <br/>
       <h1>Counter: {count}</h1>
@@ -35,4 +38,4 @@ function Auth() {
     </div>
   )
 }
-export default Auth
+export default Auth;
