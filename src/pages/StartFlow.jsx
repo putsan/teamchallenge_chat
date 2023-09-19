@@ -45,7 +45,7 @@ function StartFlow() {
           Реєстрація
         </Button>
       </Link>
-      <Link to="/login"  state={{ stage: "login" }} >
+      <Link to="/auth" >
         <Button variant="contained">
           Вхід
         </Button>
