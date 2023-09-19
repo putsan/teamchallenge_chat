@@ -40,12 +40,12 @@ function StartFlow() {
       </div>
 
       <div>
-      <Link to="/auth" style={{ marginRight: '25px' }}>
+      <Link to="/auth" style={{ marginRight: '25px' }} state={{ stage: "registration" }}>
         <Button variant="contained">
           Реєстрація
         </Button>
       </Link>
-      <Link to="/login">
+      <Link to="/login"  state={{ stage: "login" }} >
         <Button variant="contained">
           Вхід
         </Button>
