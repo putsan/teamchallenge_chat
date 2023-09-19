@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
+import Authentication from "../pages/Authentication ";
 import StartFlow from '../pages/StartFlow';
-import Auth from '../pages/Auth';
 import './App.scss'
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <Router>
         <Routes>
           <Route path="/" element={<StartFlow />} />
-          <Route path="/auth" element={<Auth />} />
+          <Route path="/auth" element={<Authentication />} />
         </Routes>
     </Router>
   );
