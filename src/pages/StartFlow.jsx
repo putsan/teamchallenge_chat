@@ -1,7 +1,14 @@
-import { Button } from "@mui/material"
+import { Box, Button, Modal, TextField, Typography } from "@mui/material"
+import React from "react";
 import { Link } from "react-router-dom";
+import ModalName from "../components/modal/modalName";
 
-function StartFlow() {
+
+
+function StartFlow( ) {
+  const   [isActive , setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
   return (
     <div>
       <div>
@@ -16,7 +23,7 @@ function StartFlow() {
           Залітай і починай{" "}
         </h3>
 
-        <Button
+        <Button  onClick={handleOpen}
         variant="contained"
         sx={{
           width: '140px',
@@ -26,7 +33,18 @@ function StartFlow() {
         }}
       >
         Обрати <br />чат
+        <Modal
+             open={isActive}
+             onClose={handleClose}> 
+                 <Box>
+                 <Typography id="modal-modal-title" variant="h6" component="h2">
+      Text in a modal
+    </Typography>
+             <TextField helperText="Це ім’я бачитимуть усі користувачі чату" />
+             </Box>
+             </Modal>
       </Button>
+
       <Button
         variant="contained"
         sx={{
@@ -40,17 +58,18 @@ function StartFlow() {
       </div>
 
       <div>
-      <Link to="/auth" style={{ marginRight: '25px' }}>
+      <Link to="/auth" style={{ marginRight: '25px' }} state={{ stage: "login" }}>
         <Button variant="contained">
           Реєстрація
         </Button>
       </Link>
-      <Link to="/login">
+      <Link to="/login" state={{ stage: "registration" }}>
         <Button variant="contained">
           Вхід
         </Button>
       </Link>
     </div>
+
     </div>
   );
 }
