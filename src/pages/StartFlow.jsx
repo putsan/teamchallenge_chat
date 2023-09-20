@@ -33,16 +33,7 @@ function StartFlow( ) {
         }}
       >
         Обрати <br />чат
-        <Modal
-             open={isActive}
-             onClose={handleClose}> 
-                 <Box>
-                 <Typography id="modal-modal-title" variant="h6" component="h2">
-      Text in a modal
-    </Typography>
-             <TextField helperText="Це ім’я бачитимуть усі користувачі чату" />
-             </Box>
-             </Modal>
+
       </Button>
 
       <Button
@@ -69,7 +60,17 @@ function StartFlow( ) {
         </Button>
       </Link>
     </div>
+    <Modal sx={{width: "310px", height:"380px", backgroundColor: "blue", }}
 
+             open={isActive}
+             onClose={handleClose}> 
+                 <Box>
+                 <Typography id="modal-modal-title" variant="h6" component="h2">
+      Text in a modal
+    </Typography>
+             <TextField helperText="Це ім’я бачитимуть усі користувачі чату" />
+             </Box>
+             </Modal>
     </div>
   );
 }
