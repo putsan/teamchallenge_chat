@@ -6,7 +6,6 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
-    "@mate-academy/eslint-config-react-internal",
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs', 'node_modules'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
