@@ -1,9 +1,8 @@
-import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { Button, TextField } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 
-const Authentication = () => {
+function Authentication() {
   const location = useLocation();
   const { state } = location;
   const isItRegistrationScreen = state && state.stage === "registration";
@@ -48,38 +47,42 @@ const Authentication = () => {
       {(isItRegistrationScreen && <RegistrationFooter />) || <LoginFooter />}
     </div>
   );
-};
+}
 
 export default Authentication;
 
-const RegistrationFooter = () => (
-  <>
-    <p>Вже є аккаунт?</p>
-    <Link to="/auth">
-      <p style={{ textDecoration: "underline" }}> Вхід </p>
-    </Link>
-    <br />
-    <Link to="/">
-      <Button variant="contained" sx={{ fontSize: "16px" }}>
-        Назад
-      </Button>
-    </Link>
-  </>
-);
+function RegistrationFooter() {
+  return (
+    <>
+      <p>Вже є аккаунт?</p>
+      <Link to="/auth">
+        <p style={{ textDecoration: "underline" }}> Вхід </p>
+      </Link>
+      <br />
+      <Link to="/">
+        <Button variant="contained" sx={{ fontSize: "16px" }}>
+          Назад
+        </Button>
+      </Link>
+    </>
+  );
+}
 
-const LoginFooter = () => (
-  <>
-    <p>Перший раз? ?</p>
+function LoginFooter() {
+  return (
+    <>
+      <p>Перший раз? ?</p>
 
-    <Link to="/auth" state={{ stage: "registration" }}>
-      <p style={{ textDecoration: "underline" }}> Зареєстуватись </p>
-    </Link>
+      <Link to="/auth" state={{ stage: "registration" }}>
+        <p style={{ textDecoration: "underline" }}> Зареєстуватись </p>
+      </Link>
 
-    <br />
-    <Link to="/">
-      <Button variant="contained" sx={{ fontSize: "16px" }}>
-        Назад
-      </Button>
-    </Link>
-  </>
-);
+      <br />
+      <Link to="/">
+        <Button variant="contained" sx={{ fontSize: "16px" }}>
+          Назад
+        </Button>
+      </Link>
+    </>
+  );
+}
