@@ -1,6 +1,6 @@
 import "./ChatBubble.scss";
 
-export const ChatBubble = ({message}) => {
+function ChatBubble({ message }) {
   return (
     <div
       className={`chat-bubble ${
@@ -12,4 +12,6 @@ export const ChatBubble = ({message}) => {
       <div className="chat-time">{message.time}</div>
     </div>
   );
-};
+}
+
+export default ChatBubble;

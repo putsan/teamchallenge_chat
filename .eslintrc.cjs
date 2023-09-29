@@ -11,7 +11,7 @@ module.exports = {
     'plugin:react-hooks/recommended',
     "prettier",
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs', 'node_modules'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'node_modules', "*.scss"],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   settings: { react: { version: '18.2' } },
   plugins: ['react-refresh', "prettier"],
@@ -29,5 +29,6 @@ module.exports = {
     }],
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
+    "react/prop-types": "off",
   },
 }

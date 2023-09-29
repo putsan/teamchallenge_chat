@@ -1,6 +1,6 @@
-import ChatFooter from "../components/ChatFooter/ChatFooter"
-import MessagesArea from "../components/MessagesArea/MessagesArea"
-import NavHeader from "../components/NavHeader/NavHeader"
+import ChatFooter from "../components/ChatFooter/ChatFooter";
+import MessagesArea from "../components/MessagesArea/MessagesArea";
+import NavHeader from "../components/NavHeader/NavHeader";
 
 function ChatScreen() {
   return (
@@ -9,6 +9,6 @@ function ChatScreen() {
       <MessagesArea />
       <ChatFooter />
     </div>
-  )
+  );
 }
-export default ChatScreen
+export default ChatScreen;

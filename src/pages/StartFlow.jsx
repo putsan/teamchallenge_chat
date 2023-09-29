@@ -1,7 +1,14 @@
-import { Button } from "@mui/material"
 import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
+import { useState } from "react";
+
+import { GetNameModal } from "../components/GetNameModal/GetNameModal";
 
 function StartFlow() {
+  const [showModal, setShowModal] = useState(false);
+
+  const toShowModal = () => setShowModal(true);
+
   return (
     <div>
       <div>
@@ -17,41 +24,50 @@ function StartFlow() {
         </h3>
 
         <Button
-        variant="contained"
-        sx={{
-          width: '140px',
-          height: '140px',
-          borderRadius: '50%',
-          marginRight: '10px'
-        }}
-      >
-        Обрати <br />чат
-      </Button>
-      <Button
-        variant="contained"
-        sx={{
-          width: '140px',
-          height: '140px',
-          borderRadius: '50%'
-        }}
-      >
-        Здивуй <br />мене
-      </Button>
+          onClick={toShowModal}
+          variant="contained"
+          sx={{
+            width: "140px",
+            height: "140px",
+            borderRadius: "50%",
+            marginRight: "10px",
+          }}
+        >
+          Обрати <br />
+          чат
+        </Button>
+
+        <Button
+          onClick={toShowModal}
+          variant="contained"
+          sx={{
+            width: "140px",
+            height: "140px",
+            borderRadius: "50%",
+          }}
+        >
+          Здивуй <br />
+          мене
+        </Button>
       </div>
 
       <div>
-      <Link to="/auth" style={{ marginRight: '25px' }} state={{ stage: "registration" }}>
-        <Button variant="contained">
-          Реєстрація
-        </Button>
-      </Link>
-      <Link to="/auth" >
-        <Button variant="contained">
-          Вхід
-        </Button>
-      </Link>
-    </div>
+        <Link
+          to="/auth"
+          style={{ marginRight: "25px" }}
+          state={{ stage: "registration" }}
+        >
+          <Button variant="contained">Реєстрація</Button>
+        </Link>
+
+        <Link to="/auth">
+          <Button variant="contained">Вхід</Button>
+        </Link>
+      </div>
+
+      {showModal && <GetNameModal handleClose={() => setShowModal(false)} />}
     </div>
   );
 }
-export default StartFlow
+
+export default StartFlow;
