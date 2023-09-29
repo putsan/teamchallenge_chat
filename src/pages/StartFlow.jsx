@@ -1,90 +1,71 @@
-import { Box, Button, Modal, TextField, Typography } from "@mui/material"
-import React from "react";
+import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import ModalName from "../components/modal/modalName";
+import { GetNameModal } from "../components/GetNameModal/GetNameModal";
+import { useState } from "react";
 
 function StartFlow() {
-  const [isActive, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [showModal, setShowModal] = useState(false);
+
+  const toShowModal = () => setShowModal(true);
 
   return (
     <div>
-      {!isActive && (
+      <div>
         <div>
-          <div>
-            <h1>LDIS</h1>
-            <p>Привіт, готовий до найкращого спілкування в своєму житті?</p>
-          </div>
-
-          <div style={{ margin: "55px 0 92px" }}>
-            <h3>
-              Реєстрація не потрібна!
-              <br />
-              Залітай і починай{" "}
-            </h3>
-
-            <Button
-              onClick={handleOpen}
-              variant="contained"
-              sx={{
-                width: '140px',
-                height: '140px',
-                borderRadius: '50%',
-                marginRight: '10px'
-              }}
-            >
-              Обрати <br />чат
-            </Button>
-
-            <Button
-              variant="contained"
-              sx={{
-                width: '140px',
-                height: '140px',
-                borderRadius: '50%'
-              }}
-            >
-              Здивуй <br />мене
-            </Button>
-          </div>
-
-          <div>
-            <Link to="/auth" style={{ marginRight: '25px' }} state={{ stage: "login" }}>
-              <Button variant="contained">
-                Реєстрація
-              </Button>
-            </Link>
-            <Link to="/login" state={{ stage: "registration" }}>
-              <Button variant="contained">
-                Вхід
-              </Button>
-            </Link>
-          </div>
+          <h1>LDIS</h1>
+          <p>Привіт, готовий до найкращого спілкування в своєму житті?</p>
         </div>
-      )}
 
-      {isActive && (
-        <Modal
-          sx={{
-            display: "flex",
-            width: "100%",
-            height: "100%",
-            backgroundColor: 'none',
-            justifyContent: "center",
-            alignItems: "center"
-          }}
-          open={isActive}
-          onClose={handleClose}
-        >
-          <Box>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Text in a modal
-            </Typography>
-            <TextField helperText="Це ім’я бачитимуть усі користувачі чату" />
-          </Box>
-        </Modal>
-      )}
+        <div style={{ margin: "55px 0 92px" }}>
+          <h3>
+            Реєстрація не потрібна!
+            <br />
+            Залітай і починай{" "}
+          </h3>
+
+          <Button
+            onClick={toShowModal}
+            variant="contained"
+            sx={{
+              width: "140px",
+              height: "140px",
+              borderRadius: "50%",
+              marginRight: "10px",
+            }}
+          >
+            Обрати <br />
+            чат
+          </Button>
+
+          <Button
+            onClick={toShowModal}
+            variant="contained"
+            sx={{
+              width: "140px",
+              height: "140px",
+              borderRadius: "50%",
+            }}
+          >
+            Здивуй <br />
+            мене
+          </Button>
+        </div>
+
+        <div>
+          <Link
+            to="/auth"
+            style={{ marginRight: "25px" }}
+            state={{ stage: "login" }}
+          >
+            <Button variant="contained">Реєстрація</Button>
+          </Link>
+          <Link to="/login" state={{ stage: "registration" }}>
+            <Button variant="contained">Вхід</Button>
+          </Link>
+        </div>
+      </div>
+
+      {showModal && <GetNameModal handleClose={() => setShowModal(false)} />}
     </div>
   );
 }
