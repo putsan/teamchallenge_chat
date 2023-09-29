@@ -1,4 +1,4 @@
-import { ChatBubble } from "../ChatBubble/ChatBubble";
+import ChatBubble from "../ChatBubble/ChatBubble";
 import "./MessagesArea.scss";
 
 const messages = [
