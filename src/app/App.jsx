@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import HeaderLobbyIcons from "../components/HeaderLobby/HeaderLobbyIcons.jsx";
+
 
 import Authentication from "../pages/Authentication.jsx";
 import ChatScreen from "../pages/ChatScreen";

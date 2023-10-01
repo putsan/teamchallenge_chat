@@ -1,6 +1,7 @@
 import "./HeaderLobbyIcons.scss"
 import ForumIcon from '@mui/icons-material/Forum';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { Button } from "@mui/material";
  const HeaderLobbyIcons = () => {
     return(
     <div className="Header">  
@@ -35,8 +36,12 @@ import SettingsIcon from '@mui/icons-material/Settings';
         </svg>
       </div>
       <div style={{display: "flex"}}>
-    <ForumIcon />  
+    <Button>
+  <div style={{display:"block"}}><ForumIcon /> </div>
+    </Button> 
+    <Button>
    <SettingsIcon/>
+   </Button> 
     </div>
     </div>
 

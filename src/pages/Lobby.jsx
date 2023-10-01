@@ -1,9 +1,8 @@
-import HeaderLobbyIcons from "../components/HeaderLobby/HeaderLobbyIcons";
-
+import HeaderLobby from "../components/HeaderLobby/HeaderLobby";
 const Lobby = () =>{
 return(
     <div> 
-    <HeaderLobbyIcons />
+    <HeaderLobby />
     </div>
    
 )
