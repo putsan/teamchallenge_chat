@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-
 import Authentication from "../pages/Authentication.jsx";
 import ChatScreen from "../pages/ChatScreen";
 import Lobby from "../pages/Lobby.jsx";
@@ -14,7 +13,7 @@ function App() {
         <Route path="/" element={<StartFlow />} />
         <Route path="/auth" element={<Authentication />} />
         <Route path="/chat/:chatId" element={<ChatScreen />} />
-        <Route path="/demo" element={<Lobby />} />
+        <Route path="/lobby" element={<Lobby />} />
       </Routes>
     </Router>
   );
