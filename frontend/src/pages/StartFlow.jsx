@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import { useState } from "react";
 
-import { GetNameModal } from "../components/GetNameModal/GetNameModal";
+import GetNameModal from "../components/GetNameModal/GetNameModal";
 import { MODAL_CHOOSE, MODAL_RANDOM } from "../app/constants";
 
 function StartFlow() {
