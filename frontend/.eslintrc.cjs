@@ -30,5 +30,12 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
     "react/prop-types": "off",
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": ["function-declaration", "arrow-function"]
+      }
+    ],
+    "arrow-body-style": "off",
   },
 }

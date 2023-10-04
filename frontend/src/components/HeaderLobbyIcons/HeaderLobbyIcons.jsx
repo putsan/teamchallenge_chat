@@ -1,19 +1,12 @@
+import "./HeaderLobbyIcons.scss"
+import ForumIcon from '@mui/icons-material/Forum';
+import SettingsIcon from '@mui/icons-material/Settings';
 import { Button } from "@mui/material";
-import "./NavHeader.scss";
+ const HeaderLobbyIcons = () => {
+    return(
+    <div className="Header">  
 
-function NavHeader() {
-  return (
-    <div className="nav-header">
-      <div>
-        <Button>&#60; Chats</Button>
-      </div>
-
-      <div>
-        <p>Cеріаломани</p>
-        <p>35 учаcники, 10 в мережі</p>
-      </div>
-
-      <div>
+    <div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="39"
@@ -42,7 +35,19 @@ function NavHeader() {
           </defs>
         </svg>
       </div>
+      <div style={{display: "flex"}}>
+    <Button>
+  <div style={{display:"block"}}><ForumIcon /> </div>
+    </Button> 
+    <Button>
+   <SettingsIcon/>
+   </Button> 
     </div>
-  );
+    </div>
+
+
+
+    )
 }
-export default NavHeader;
+
+export default HeaderLobbyIcons;

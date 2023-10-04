@@ -2,12 +2,17 @@ import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import { useState } from "react";
 
-import { GetNameModal } from "../components/GetNameModal/GetNameModal";
+import GetNameModal from "../components/GetNameModal/GetNameModal";
+import { MODAL_CHOOSE, MODAL_RANDOM } from "../app/constants";
 
 function StartFlow() {
   const [showModal, setShowModal] = useState(false);
+  const [flow, setFlow] = useState(null);
 
-  const toShowModal = () => setShowModal(true);
+  const toShowModal = (flowType) => {
+    setFlow(flowType);
+    setShowModal(true);
+  };
 
   return (
     <div>
@@ -24,7 +29,7 @@ function StartFlow() {
         </h3>
 
         <Button
-          onClick={toShowModal}
+          onClick={() => toShowModal(MODAL_CHOOSE)}
           variant="contained"
           sx={{
             width: "140px",
@@ -38,7 +43,7 @@ function StartFlow() {
         </Button>
 
         <Button
-          onClick={toShowModal}
+          onClick={() => toShowModal(MODAL_RANDOM)}
           variant="contained"
           sx={{
             width: "140px",
@@ -65,7 +70,9 @@ function StartFlow() {
         </Link>
       </div>
 
-      {showModal && <GetNameModal handleClose={() => setShowModal(false)} />}
+      {showModal && (
+        <GetNameModal handleClose={() => setShowModal(false)} flow={flow} />
+      )}
     </div>
   );
 }
