@@ -24,6 +24,7 @@
   - **Білд**: Vitejs
 - **Бекенд**: ASP.NET Core Web API
 
----
+## Рекомендації щодо запуску проекту
 
-Детальний опис кожної функції буде додано згодом.
+- **Бекенд**:
+  - [Перший запуск Backend частини коду на Linux](https://github.com/putsan/teamchallenge_chat/blob/main/run_back_on_Linux.md) системах
