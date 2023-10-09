@@ -12,6 +12,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 builder.Services.AddDbContext<DbContextApplication>();
+builder.Services.AddHttpClient();
 builder.Services.AddCors();
 builder.Services.AddSession(options =>
 {

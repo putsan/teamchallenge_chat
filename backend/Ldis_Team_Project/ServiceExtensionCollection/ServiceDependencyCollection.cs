@@ -1,4 +1,6 @@
-﻿using Ldis_Team_Project.Services.Interfaces;
+﻿using Ldis_Team_Project.Repository.RealizationRepository;
+using Ldis_Team_Project.Repository.Services;
+using Ldis_Team_Project.Services.Interfaces;
 using Ldis_Team_Project.Services.RealizationInterfaces;
 using System.Runtime.CompilerServices;
 
@@ -17,6 +19,8 @@ namespace Ldis_Team_Project.ServiceExtensionCollection
             services.AddTransient<IClaimsAuthentificationService, ClaimsAuthentification>();
             services.AddTransient<IGetUserDataWithAccessTokenService, GetUserDataWithAccesToken>();
             services.AddTransient<ISendPasswordOnEmailService,SendPasswordEmail>();
+            services.AddTransient<ISha256EncoderService, Sha256Encoder>();
+            services.AddTransient<IRepositoryService, ServiceRealization>();
             return services;
         }
     }

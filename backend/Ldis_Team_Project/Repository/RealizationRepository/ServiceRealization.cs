@@ -14,6 +14,20 @@ namespace Ldis_Team_Project.Repository.RealizationRepository
             _Context = context;
         }
 
+        public void CreateUser(string Email, string Code, string UserName)
+        {
+            var UserInstance = new User
+            {
+                UserName = UserName,
+                Password = Code,
+                Email = Email,
+                Actual = 1,
+                Status = "Online"
+            };
+            _Context.Add(UserInstance);
+            _Context.SaveChanges();
+        }
+
         public bool FindUserByEmail(string Email)
         {
             var User = _Context.Users.AsNoTracking().FirstOrDefault(x => x.Email == Email);

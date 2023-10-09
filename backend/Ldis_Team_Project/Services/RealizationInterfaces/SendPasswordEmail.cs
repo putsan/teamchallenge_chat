@@ -7,7 +7,7 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
 {
     public class SendPasswordEmail : ISendPasswordOnEmailService
     {
-        private const string SessionKeySendPassword = "PasswordKey";
+        public const string SessionKeySendPassword = "PasswordKey";
         private readonly IHttpContextAccessor _ContextAccessor;
         public SendPasswordEmail(IHttpContextAccessor contextAccessor)
         {

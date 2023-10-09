@@ -8,47 +8,27 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Ldis_Team_Project.Controllers
 {
-    [EnableCors("MyCorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class ApiRequestController : ControllerBase
     {
-        private readonly ISha256EncoderService _Sha256Encoder;
-        private readonly IGeneratedOauthRequestUrlService _GeneratedUrl;
-        private readonly IExchangeCodeOnTokenService _ExchangeToken;
-        private readonly IGetUserDataWithAccessTokenService _GetDataUser;
-        private readonly IRepositoryService _Repository;
-        private readonly IHttpContextAccessor _ContextAccessor;
-        private readonly IClaimsAuthentificationService _ClaimsAuthentification;
-        private readonly ISendPasswordOnEmailService _SendPassword;
-        private readonly DbContextApplication _Context;
-
-        public ApiRequestController(
-            DbContextApplication context,
-            IHttpContextAccessor contextAccessor,
-            ISha256EncoderService sha256Encoder,
-            IGeneratedOauthRequestUrlService generatedUrl,
-            IExchangeCodeOnTokenService exchangeToken,
-            IGetUserDataWithAccessTokenService getDataUser,
-            IRepositoryService repository,
-            IClaimsAuthentificationService claimsAuthentification,
-            ISendPasswordOnEmailService sendPassword)
+        public const string SessionKeyApi = "NameKey";
+        private readonly IHttpClientFactory _HttpClient;
+        private readonly string _str;
+        public ApiRequestController(IHttpClientFactory httpClientFactory)
         {
-            _Context = context;
-            _ContextAccessor = contextAccessor;
-            _Sha256Encoder = sha256Encoder;
-            _GeneratedUrl = generatedUrl;
-            _ExchangeToken = exchangeToken;
-            _GetDataUser = getDataUser;
-            _Repository = repository;
-            _SendPassword = sendPassword;
-            _ClaimsAuthentification = claimsAuthentification;
+            _str = "https://localhost:7237/GoogleOauthController/RedirectToOauthServer";
+            _HttpClient = httpClientFactory;
         }
-        [HttpGet]
-        public IActionResult GetHandler()
+    /*    [HttpGet]
+        public async Task<IActionResult>  GetHandler()
         {
-            /*            GoogleOauthController contr = new GoogleOauthController(_Context,_ContextAccessor,_Sha256Encoder,_GeneratedUrl,_ExchangeToken,_GetDataUser,_Repository,_ClaimsAuthentification,_SendPassword);
-                        return new JsonResult(contr.RedirectToOauthServer());*/
+
+        }*/
+        [HttpPost]
+        public IActionResult GetUserName(string Name)
+        {
+            HttpContext.Session.SetString(SessionKeyApi,Name);
             return Ok();
         }
     }

@@ -3,5 +3,6 @@
     public interface IRepositoryService
     {
         bool FindUserByEmail(string Email);
+        void CreateUser(string Email, string Code, string UserName);
     }
 }
