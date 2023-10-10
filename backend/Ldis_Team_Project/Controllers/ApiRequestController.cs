@@ -5,6 +5,7 @@ using Ldis_Team_Project.Services.Interfaces;
 using Ldis_Team_Project.Services.RealizationInterfaces;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 
 namespace Ldis_Team_Project.Controllers
 {
@@ -12,23 +13,24 @@ namespace Ldis_Team_Project.Controllers
     [ApiController]
     public class ApiRequestController : ControllerBase
     {
-        public const string SessionKeyApi = "NameKey";
-        private readonly IHttpClientFactory _HttpClient;
-        private readonly string _str;
-        public ApiRequestController(IHttpClientFactory httpClientFactory)
+        public const string SessionKeyApi = "KeyApi";
+        private readonly IRegLogFromFormService _RegAndLog;
+        public ApiRequestController(IHttpClientFactory httpClientFactory,IRegLogFromFormService fromFormService )
         {
-            _str = "https://localhost:7237/GoogleOauthController/RedirectToOauthServer";
-            _HttpClient = httpClientFactory;
+            _RegAndLog = fromFormService;
         }
-    /*    [HttpGet]
-        public async Task<IActionResult>  GetHandler()
-        {
 
-        }*/
         [HttpPost]
-        public IActionResult GetUserName(string Name)
+        public IActionResult GetUserName(string UserName)
         {
-            HttpContext.Session.SetString(SessionKeyApi,Name);
+            HttpContext.Session.SetString(SessionKeyApi,UserName);
+            return Ok();
+        }
+
+        [HttpPost]
+        public IActionResult RegLogHandler (string UserName,string Password)
+        {
+            _RegAndLog.FormRegistrAndLogin(UserName,Password);
             return Ok();
         }
     }

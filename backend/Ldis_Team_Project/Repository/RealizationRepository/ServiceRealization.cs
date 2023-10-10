@@ -28,9 +28,22 @@ namespace Ldis_Team_Project.Repository.RealizationRepository
             _Context.SaveChanges();
         }
 
-        public bool FindUserByEmail(string Email)
+        public async Task<bool> FindUser(string UserName, string Password)
         {
-            var User = _Context.Users.AsNoTracking().FirstOrDefault(x => x.Email == Email);
+            var User = await _Context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.UserName == UserName &&  x.Password == Password);
+            if (User == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public async Task<bool> FindUserByEmail(string Email)
+        {
+            var User = await _Context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Email == Email);
             if (User == null)
             {
                 return false;

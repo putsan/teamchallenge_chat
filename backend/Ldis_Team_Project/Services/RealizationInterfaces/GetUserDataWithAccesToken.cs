@@ -32,7 +32,8 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
                         Log.Error($"Error {exeption.Message} DateTime Error - {DateTime.Now} ");
                     }
                 }
-                return null;
+
+                return new Dictionary<string, string> { };
             }
         }
     }

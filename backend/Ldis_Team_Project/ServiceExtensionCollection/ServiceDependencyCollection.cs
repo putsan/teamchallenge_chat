@@ -10,7 +10,7 @@ namespace Ldis_Team_Project.ServiceExtensionCollection
     {
         public static IServiceCollection AddDIContainerServices(this IServiceCollection services)
         {
-            services.AddTransient<IGeneratedOauthRequestUrlService, GeneratedOauthRequstUrl>();
+            services.AddTransient<IGeneratedOauthRequestUrlService, GeneratedOauthRequstUrl>(); 
             services.AddTransient<IExchangeCodeOnTokenService,ExchangeCodeOnToken>();
             services.AddTransient<ISendHttpRequestService,SendHttpRequest>();
             services.AddTransient<ISendPostRequestService,SendPostRequest>();
@@ -18,9 +18,11 @@ namespace Ldis_Team_Project.ServiceExtensionCollection
             services.AddTransient<IGetUserSecretDataService,GetUserSecret>();
             services.AddTransient<IClaimsAuthentificationService, ClaimsAuthentification>();
             services.AddTransient<IGetUserDataWithAccessTokenService, GetUserDataWithAccesToken>();
-            services.AddTransient<ISendPasswordOnEmailService,SendPasswordEmail>();
+            services.AddTransient<ISendCodeAuthService,SendCodeAuth>();
             services.AddTransient<ISha256EncoderService, Sha256Encoder>();
             services.AddTransient<IRepositoryService, ServiceRealization>();
+            services.AddTransient<IRegLogFromFormService,RegAndLogFromForm>();
+            services.AddTransient<IREgOrLogHandlerService,RegOrLogHandler>();
             return services;
         }
     }

@@ -2,7 +2,8 @@
 {
     public interface IRepositoryService
     {
-        bool FindUserByEmail(string Email);
+        Task<bool> FindUserByEmail(string Email);
         void CreateUser(string Email, string Code, string UserName);
+        Task<bool> FindUser(string UserName, string Password);
     }
 }
