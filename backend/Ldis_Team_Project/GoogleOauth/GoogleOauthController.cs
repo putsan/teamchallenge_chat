@@ -24,7 +24,6 @@ namespace Ldis_Team_Project.GoogleOauth
         private readonly IRepositoryService _Repository;
         private readonly IHttpContextAccessor _ContextAccessor;
         private readonly IClaimsAuthentificationService _ClaimsAuthentification;
-        private readonly ISendPasswordOnEmailService _SendPassword;
         private readonly IMemoryCache _Cache;
         private readonly IREgOrLogHandlerService _RegLog;
         private readonly DbContextApplication _Context;
@@ -39,8 +38,8 @@ namespace Ldis_Team_Project.GoogleOauth
             IGetUserDataWithAccessTokenService getDataUser,
             IREgOrLogHandlerService regLog,
             IRepositoryService repository,
-            IClaimsAuthentificationService claimsAuthentification,
-            ISendPasswordOnEmailService sendPassword)
+            IClaimsAuthentificationService claimsAuthentification
+            )
         {
             _Context = context;
             _Cache = cache;
@@ -51,17 +50,16 @@ namespace Ldis_Team_Project.GoogleOauth
             _ExchangeToken = exchangeToken;
             _GetDataUser = getDataUser;
             _Repository = repository;
-            _SendPassword = sendPassword;
             _ClaimsAuthentification = claimsAuthentification;
         }
         [HttpGet]
-        public string RedirectToOauthServer()
+        public void RedirectToOauthServer()
         {
             var CodeVerification = Guid.NewGuid().ToString();
             _Cache.Set("KeyMain",CodeVerification, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(4)));
             var CodeChallenge = _Sha256Encoder.ComputeHash(CodeVerification);
             var url = _GeneratedUrl.GeneratedUrl(Scope, RedirectUrl, CodeChallenge);
-            return url;
+            _Cache.Set("ApiKey", url, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(4)));
         }
        
         public async Task<IActionResult> ExchangeCodeOnToken(string code)
@@ -76,7 +74,7 @@ namespace Ldis_Team_Project.GoogleOauth
             return Ok();
         }
 
-        public async Task<IActionResult> RegistrationOrLoginHandler()
+        public IActionResult RegistrationOrLoginHandler()
         {
             var User = JsonSerializer.Deserialize<Dictionary<string, string>>((string)_Cache.Get("DictionaryUserKey"));
             _RegLog.UserHandlerLogOrReg(User);

@@ -4,6 +4,7 @@ namespace Ldis_Team_Project.Services.Interfaces
 {
     public interface IREgOrLogHandlerService
     {
-         void UserHandlerLogOrReg(Dictionary<string,string> UserValues);
+        Task UserHandlerLogOrReg(Dictionary<string,string> UserValues);
+        void CreateUser(string UserName);
     }
 }

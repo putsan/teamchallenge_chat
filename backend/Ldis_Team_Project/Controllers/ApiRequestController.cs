@@ -5,6 +5,7 @@ using Ldis_Team_Project.Services.Interfaces;
 using Ldis_Team_Project.Services.RealizationInterfaces;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Identity.Client;
 
 namespace Ldis_Team_Project.Controllers
@@ -14,16 +15,28 @@ namespace Ldis_Team_Project.Controllers
     public class ApiRequestController : ControllerBase
     {
         public const string SessionKeyApi = "KeyApi";
+        private readonly HttpClient _httpClient;
         private readonly IRegLogFromFormService _RegAndLog;
-        public ApiRequestController(IHttpClientFactory httpClientFactory,IRegLogFromFormService fromFormService )
+        private readonly IREgOrLogHandlerService _HandlerService;
+        private readonly IMemoryCache _Cache;
+        public ApiRequestController(IHttpClientFactory httpClientFactory,IRegLogFromFormService fromFormService, HttpClient client, IREgOrLogHandlerService handler,IMemoryCache cache )
         {
+            _Cache = cache;
+            _HandlerService = handler;
+            _httpClient = client;
             _RegAndLog = fromFormService;
+        }
+        [HttpGet]
+        public IActionResult GetUrlPauthServer()
+        {
+            string url =(string)_Cache.Get("ApiKey");
+            return new JsonResult(url);
         }
 
         [HttpPost]
         public IActionResult GetUserName(string UserName)
         {
-            HttpContext.Session.SetString(SessionKeyApi,UserName);
+            _HandlerService.CreateUser(UserName);
             return Ok();
         }
 

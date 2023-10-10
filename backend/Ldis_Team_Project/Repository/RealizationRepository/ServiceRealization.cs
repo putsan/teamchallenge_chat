@@ -9,8 +9,11 @@ namespace Ldis_Team_Project.Repository.RealizationRepository
     public class ServiceRealization : IRepositoryService
     {
         private readonly DbContextApplication _Context;
-        public ServiceRealization(DbContextApplication context)
+        private readonly IHttpContextAccessor _ContedxtAccessor;
+        public const string EmailKeySession = "KeyEmail"; 
+        public ServiceRealization(DbContextApplication context,IHttpContextAccessor contextAccessor)
         {
+            _ContedxtAccessor = contextAccessor;
             _Context = context;
         }
 
@@ -22,7 +25,7 @@ namespace Ldis_Team_Project.Repository.RealizationRepository
                 Password = Code,
                 Email = Email,
                 Actual = 1,
-                Status = "Online"
+                Status = "Online",             
             };
             _Context.Add(UserInstance);
             _Context.SaveChanges();
@@ -31,6 +34,8 @@ namespace Ldis_Team_Project.Repository.RealizationRepository
         public async Task<bool> FindUser(string UserName, string Password)
         {
             var User = await _Context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.UserName == UserName &&  x.Password == Password);
+            string Email = User.Email;
+            _ContedxtAccessor.HttpContext.Session.SetString(EmailKeySession,Email);
             if (User == null)
             {
                 return false;

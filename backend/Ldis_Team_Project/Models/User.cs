@@ -8,6 +8,7 @@
         public string Email { get; set; }
         public int Actual { get; set; }
         public string Status { get; set; }
+        public string ImageAvatarLink { get; set; }
         public ICollection<Message> MessageId { get; set; }
         public ICollection<Chat> ChatId { get; set; }
     }
