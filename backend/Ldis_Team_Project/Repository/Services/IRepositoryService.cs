@@ -4,6 +4,7 @@
     {
         Task<bool> FindUserByEmail(string Email);
         void CreateUser(string Email, string Code, string UserName, string ImageLInk);
-        Task<bool> FindUser(string UserName, string Password);
+        Task<bool> FindUserLogin(string UserName, string Password);
+        Task<bool> FindUserRegistration(string Email, string Password);
     }
 }

@@ -4,6 +4,7 @@ namespace Ldis_Team_Project.Services.Interfaces
 {
     public interface IRegLogFromFormService
     {
-        Task<string> FormRegistrAndLogin(string UserName, string Password);
+        Task<string> FormRegistration(string UserName, string Password,string Email);
+        Task<string> FormLogin(string UserName, string Password);
     }
 }

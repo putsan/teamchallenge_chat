@@ -23,6 +23,7 @@ namespace Ldis_Team_Project.ServiceExtensionCollection
             services.AddTransient<IRepositoryService, ServiceRealization>();
             services.AddTransient<IRegLogFromFormService,RegAndLogFromForm>();
             services.AddTransient<IREgOrLogHandlerService,RegOrLogHandler>();
+            services.AddTransient<IReturnUrlOauthServerService,ReturnUrlOauthServer>();
             return services;
         }
     }

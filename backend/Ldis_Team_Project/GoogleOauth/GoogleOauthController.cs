@@ -13,8 +13,7 @@ namespace Ldis_Team_Project.GoogleOauth
 
     public class GoogleOAuthController : Controller
     {
-        private const string RedirectUrl = "https://localhost:7237/GoogleOAuth/Code";
-        private const string Scope = "https://www.googleapis.com/auth/admin.directory.user.redonly";
+        private const string RedirectUrl = "https://localhost:7237/GoogleOAuth/ExchangeCodeOnToken";
         private string AccessToken;
         private string Email;
         private readonly ISha256EncoderService _Sha256Encoder;
@@ -51,15 +50,6 @@ namespace Ldis_Team_Project.GoogleOauth
             _GetDataUser = getDataUser;
             _Repository = repository;
             _ClaimsAuthentification = claimsAuthentification;
-        }
-        [HttpGet]
-        public void RedirectToOauthServer()
-        {
-            var CodeVerification = Guid.NewGuid().ToString();
-            _Cache.Set("KeyMain",CodeVerification, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(4)));
-            var CodeChallenge = _Sha256Encoder.ComputeHash(CodeVerification);
-            var url = _GeneratedUrl.GeneratedUrl(Scope, RedirectUrl, CodeChallenge);
-            _Cache.Set("ApiKey", url, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(4)));
         }
        
         public async Task<IActionResult> ExchangeCodeOnToken(string code)

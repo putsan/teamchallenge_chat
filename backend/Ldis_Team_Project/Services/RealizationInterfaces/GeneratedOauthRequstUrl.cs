@@ -18,7 +18,8 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
             var QueryParametrs = new Dictionary<string, string>
             {
                 {"client_id", UserId},
-                {"redirect_uri",OauthServerUrlEndpoint },
+                {"redirect_uri",redirectUrl },
+                { "response_type", "code" },
                 {"scope",scope },
                 {"code_challenge",CodeChallenge },
                 {"code_challenge_method","S256" },

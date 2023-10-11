@@ -8,7 +8,7 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
 {
     public class SendHttpRequest : ISendHttpRequestService
     {
-        async Task<T> ISendHttpRequestService.SendHttpRequest<T>(HttpMethod httpMethod, string endpoint, string accessToken, Dictionary<string, string> queryParams, HttpContent httpContent)
+        async Task<T> ISendHttpRequestService.SendHttpRequest<T>(HttpMethod httpMethod, string endpoint, string accessToken = null, Dictionary<string, string> queryParams = null, HttpContent httpContent = null)
         {
             var url = queryParams != null
                 ? QueryHelpers.AddQueryString(endpoint, queryParams)

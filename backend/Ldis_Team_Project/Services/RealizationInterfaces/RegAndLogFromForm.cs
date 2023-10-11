@@ -17,9 +17,37 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
             _Claims = claims;
             _Repository = repository;
         }
-        public async Task<string> FormRegistrAndLogin(string UserName, string Password)
+
+
+        public async Task<string> FormRegistration(string UserName, string Password,string Email)
         {
-            bool FindingResult = await _Repository.FindUser(UserName,Password);
+           bool BolleanResult = await _Repository.FindUserRegistration(Email,Password);
+            if (BolleanResult == false)
+            {
+                var AnswerJsonInstance = new AnswerOnRequest
+                {
+                    Status = "unsuccess",
+                    Message = "Пользователь с таким именем и паролем уже существует"
+                };
+                var JsonAnswer = JsonSerializer.Serialize(AnswerJsonInstance);
+                return JsonAnswer;
+            }
+            else
+            {
+                _Claims.ClaimsAuthentificationHandler(Email);
+                var AnswerJsonInstance = new AnswerOnRequest
+                {
+                    Status = "success",
+                    Message = "Вы успешно зарегистрировались"
+                };
+                var JsonAnswer = JsonSerializer.Serialize(AnswerJsonInstance);
+                return JsonAnswer;
+            }
+        }
+
+        public async Task<string> FormLogin(string UserName, string Password)
+        {
+            bool FindingResult = await _Repository.FindUserLogin(UserName, Password);
             string Email = _ContextAccessor.HttpContext.Session.GetString(ServiceRealization.EmailKeySession);
             if (FindingResult == true)
             {
@@ -27,9 +55,9 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
                 var AnswerJsonInstance = new AnswerOnRequest
                 {
                     Status = "success",
-                    Message = "Регистрация прошла успешно"
+                    Message = "Аутентификация прошла успешно"
                 };
-                var JsonSuccesAnswer =  JsonSerializer.Serialize(AnswerJsonInstance);
+                var JsonSuccesAnswer = JsonSerializer.Serialize(AnswerJsonInstance);
                 return JsonSuccesAnswer;
             }
             else
@@ -44,5 +72,7 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
                 return JsonUnsuccesAnswer;
             }
         }
+
+
     }
 }

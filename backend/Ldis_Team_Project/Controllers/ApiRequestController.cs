@@ -14,14 +14,21 @@ namespace Ldis_Team_Project.Controllers
     [ApiController]
     public class ApiRequestController : ControllerBase
     {
+        private readonly IReturnUrlOauthServerService _ReturnUrl;
         public const string SessionKeyApi = "KeyApi";
         private readonly HttpClient _httpClient;
         private readonly IRegLogFromFormService _RegAndLog;
         private readonly IREgOrLogHandlerService _HandlerService;
         private readonly IMemoryCache _Cache;
-        public ApiRequestController(IHttpClientFactory httpClientFactory,IRegLogFromFormService fromFormService, HttpClient client, IREgOrLogHandlerService handler,IMemoryCache cache )
+        public ApiRequestController(IHttpClientFactory httpClientFactory,
+            IRegLogFromFormService fromFormService,
+            HttpClient client,
+            IREgOrLogHandlerService handler,
+            IMemoryCache cache,
+            IReturnUrlOauthServerService returnUrl )
         {
             _Cache = cache;
+            _ReturnUrl = returnUrl;
             _HandlerService = handler;
             _httpClient = client;
             _RegAndLog = fromFormService;
@@ -29,8 +36,8 @@ namespace Ldis_Team_Project.Controllers
         [HttpGet]
         public IActionResult GetUrlPauthServer()
         {
-            string url =(string)_Cache.Get("ApiKey");
-            return new JsonResult(url);
+            string url = _ReturnUrl.ReturnUrl();
+            return new JsonResult(url);     
         }
 
         [HttpPost]
@@ -41,10 +48,16 @@ namespace Ldis_Team_Project.Controllers
         }
 
         [HttpPost]
-        public IActionResult RegLogHandler (string UserName,string Password)
+        public IActionResult RegistrationHandler (string UserName,string Password,string Email)
         {
-            _RegAndLog.FormRegistrAndLogin(UserName,Password);
+            _RegAndLog.FormRegistration(UserName,Password,Email);
             return Ok();
+        }
+        [HttpPost]
+        public IActionResult LoginHandler (string UserName, string Password )
+        {
+            _RegAndLog.FormLogin(UserName,Password);
+             return Ok();
         }
     }
 }

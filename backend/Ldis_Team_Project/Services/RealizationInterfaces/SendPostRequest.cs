@@ -13,9 +13,9 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
         {
             _SendHttp = new SendHttpRequest();
         }
-        async Task<T> ISendPostRequestService.SendPostRequest<T>(string endpoint, Dictionary<string, string> QueryParams)
+        async Task<T> ISendPostRequestService.SendPostRequest<T>(string endpoint, Dictionary<string, string> queryParams)
         {
-            var httpContent = new FormUrlEncodedContent(QueryParams);
+            var httpContent = new FormUrlEncodedContent(queryParams);
             return await _SendHttp.SendHttpRequest<T>(HttpMethod.Post ,endpoint,httpContent:httpContent);
         }
 

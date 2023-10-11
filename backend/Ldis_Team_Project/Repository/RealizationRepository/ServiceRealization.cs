@@ -17,7 +17,7 @@ namespace Ldis_Team_Project.Repository.RealizationRepository
             _Context = context;
         }
 
-        public void CreateUser(string Email, string Code, string UserName)
+        public void CreateUser(string Email, string Code, string UserName, string ImageLink)
         {
             var UserInstance = new User
             {
@@ -25,13 +25,14 @@ namespace Ldis_Team_Project.Repository.RealizationRepository
                 Password = Code,
                 Email = Email,
                 Actual = 1,
-                Status = "Online",             
+                Status = "Online",
+                ImageAvatarLink = ImageLink
             };
             _Context.Add(UserInstance);
             _Context.SaveChanges();
         }
 
-        public async Task<bool> FindUser(string UserName, string Password)
+        public async Task<bool> FindUserLogin(string UserName, string Password)
         {
             var User = await _Context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.UserName == UserName &&  x.Password == Password);
             string Email = User.Email;
@@ -45,11 +46,25 @@ namespace Ldis_Team_Project.Repository.RealizationRepository
                 return true;
             }
         }
+     
 
         public async Task<bool> FindUserByEmail(string Email)
         {
             var User = await _Context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Email == Email);
             if (User == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public async Task<bool> FindUserRegistration(string Email, string Password)
+        {
+            var User = await _Context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Email == Email || Password == Password);
+            if (User != null)
             {
                 return false;
             }
