@@ -35,14 +35,14 @@ namespace Ldis_Team_Project.Repository.RealizationRepository
         public async Task<bool> FindUserLogin(string UserName, string Password)
         {
             var User = await _Context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.UserName == UserName &&  x.Password == Password);
-            string Email = User.Email;
-            _ContedxtAccessor.HttpContext.Session.SetString(EmailKeySession,Email);
             if (User == null)
             {
                 return false;
             }
             else
             {
+                string Email = User.Email;
+                _ContedxtAccessor.HttpContext.Session.SetString(EmailKeySession, Email);
                 return true;
             }
         }

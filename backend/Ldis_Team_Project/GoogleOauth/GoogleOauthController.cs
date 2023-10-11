@@ -52,19 +52,20 @@ namespace Ldis_Team_Project.GoogleOauth
             _ClaimsAuthentification = claimsAuthentification;
         }
        
+        /*Обмен кода авторизации на токен доступа, регнистрация и авторизация пользователя на основе полученных данных*/
         public async Task<IActionResult> ExchangeCodeOnToken(string code)
         {
             string GetCacheCodeVerifier = (string)_Cache.Get("KeyMain");
             var TokenResult = await _ExchangeToken.ReturnExchangeAccessToken(code,GetCacheCodeVerifier,RedirectUrl);
             AccessToken = TokenResult.AccessToken;
-            var UserData = _GetDataUser.GetUserData(AccessToken);
+            var UserData = await _GetDataUser.GetUserData(AccessToken);
             var UserDataDictionary = JsonSerializer.Serialize(UserData);
             _Cache.Set("DictionaryUserKey",UserDataDictionary, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(4)));
             RegistrationOrLoginHandler();
             return Ok();
         }
 
-        public IActionResult RegistrationOrLoginHandler()
+        public async Task<IActionResult> RegistrationOrLoginHandler()
         {
             var User = JsonSerializer.Deserialize<Dictionary<string, string>>((string)_Cache.Get("DictionaryUserKey"));
             _RegLog.UserHandlerLogOrReg(User);

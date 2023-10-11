@@ -17,6 +17,7 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
             _EncoderSha256 = encoderSha256;
             _Cache = cache;
         }
+        /*Возврат Url сервера аутентификации на фронт*/
         public string ReturnUrl()
         {
             var CodeVerification = Guid.NewGuid().ToString();

@@ -18,7 +18,7 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
             _Repository = repository;
         }
 
-
+        /*Обработчик регистрации и авторизации через формы*/
         public async Task<string> FormRegistration(string UserName, string Password,string Email)
         {
            bool BolleanResult = await _Repository.FindUserRegistration(Email,Password);

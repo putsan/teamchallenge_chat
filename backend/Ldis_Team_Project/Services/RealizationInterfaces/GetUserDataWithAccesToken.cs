@@ -7,6 +7,7 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
 {
     public class GetUserDataWithAccesToken : IGetUserDataWithAccessTokenService
     {
+        /*Получение данных пользователя с помощью токена доступа*/
         public async Task<Dictionary<string,string>> GetUserData(string AccesToken)
         {
             string GoogleUserInfoUrl = "https://www.googleapis.com/oauth2/v2/userinfo";

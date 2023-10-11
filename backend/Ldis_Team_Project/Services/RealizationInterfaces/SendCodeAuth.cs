@@ -1,4 +1,5 @@
 ﻿using Ldis_Team_Project.Services.Interfaces;
+using Microsoft.Extensions.Caching.Memory;
 using Serilog;
 using System.Net;
 using System.Net.Mail;
@@ -8,10 +9,13 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
     public class SendCodeAuth : ISendCodeAuthService
     {
         private readonly IHttpContextAccessor _ContextAccessor;
-        public SendCodeAuth(IHttpContextAccessor contextAccessor)
+        private readonly IMemoryCache _Cache;
+        public SendCodeAuth(IHttpContextAccessor contextAccessor,IMemoryCache cache)
         {
+            _Cache = cache;
             _ContextAccessor = contextAccessor;
         }
+        /*Отправка кода аутентификации при попытка аутентификации через GoogleOauth но пользователь не был найден в БД*/
         public void SendCode(string Email)
         {
             var ConfigurationFile = new ConfigurationBuilder().AddUserSecrets<SendCodeAuth>().Build();
@@ -19,7 +23,7 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
             {
                 Random rand = new Random();
                 string Code = Convert.ToString(rand.Next(1000000));
-                _ContextAccessor.HttpContext.Session.SetString("CodeKey",Code);
+                _Cache.Set("CodeKey",Code,new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(4)));
                 string Sender = ConfigurationFile.GetValue<string>("CodeVerification:SenderEmail");
                 string AppPassword = ConfigurationFile.GetValue<string>("CodeVerification:AppPassword");
                 smtpClient.EnableSsl = true;

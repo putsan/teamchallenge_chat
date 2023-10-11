@@ -43,10 +43,7 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
                     Log.Error($"Error {response.StatusCode} DateTime Error - {ErrorDate} - more information about error {Exception.Message}");
                     throw;
                 }
-                
-
             }
-
             var result = JsonConvert.DeserializeObject<T>(resultJson);
             return result;
         }

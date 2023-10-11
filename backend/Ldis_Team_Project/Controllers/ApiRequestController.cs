@@ -33,27 +33,29 @@ namespace Ldis_Team_Project.Controllers
             _httpClient = client;
             _RegAndLog = fromFormService;
         }
+        /*Возвращение Url сервера аутентификации*/
         [HttpGet]
         public IActionResult GetUrlPauthServer()
         {
             string url = _ReturnUrl.ReturnUrl();
             return new JsonResult(url);     
         }
-
-        [HttpPost]
+        /*Получение имени пользователя при переадресации на страницу ввода имени при аутентификации с помощью Google*/
+        [HttpPost("{UserName}")]
         public IActionResult GetUserName(string UserName)
         {
             _HandlerService.CreateUser(UserName);
             return Ok();
         }
-
-        [HttpPost]
+       /*Получение данных пользователя из формы регистрации*/
+        [HttpPost("{UserName},{Password},{Email}")]
         public IActionResult RegistrationHandler (string UserName,string Password,string Email)
         {
             _RegAndLog.FormRegistration(UserName,Password,Email);
             return Ok();
         }
-        [HttpPost]
+       /*Получение даных пользователя из формы авторизации*/
+        [HttpPost("{UserName},{Password}")]
         public IActionResult LoginHandler (string UserName, string Password )
         {
             _RegAndLog.FormLogin(UserName,Password);
