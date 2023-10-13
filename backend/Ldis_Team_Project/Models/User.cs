@@ -11,5 +11,6 @@
         public string ImageAvatarLink { get; set; }
         public ICollection<Message> MessageId { get; set; }
         public ICollection<Chat> ChatId { get; set; }
+        public ICollection<NoRegisterUser> PersonalMessageNoRegisterUserId { get; set; }
     }
 }

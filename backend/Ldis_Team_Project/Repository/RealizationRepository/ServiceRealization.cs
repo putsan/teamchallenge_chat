@@ -73,5 +73,24 @@ namespace Ldis_Team_Project.Repository.RealizationRepository
                 return true;
             }
         }
+
+        public async Task AddPrivateMessage(int IdPrivateUser,int IdUser)
+        {
+            var PrivateUser = await _Context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id == IdPrivateUser);
+            var User = await _Context.NoRegisterUsers.AsNoTracking().FirstOrDefaultAsync(x => x.Id == IdUser);
+            User.PersonalMessageId.Add(PrivateUser);
+            _Context.SaveChanges();
+        }
+
+        public void CreateAnonymousUser(string UserName)
+        {
+            var AnonymousUserInstance = new NoRegisterUser
+            { 
+              UserName = UserName
+            };
+
+            _Context.Add(AnonymousUserInstance);
+            _Context.SaveChanges();
+        }
     }
 }

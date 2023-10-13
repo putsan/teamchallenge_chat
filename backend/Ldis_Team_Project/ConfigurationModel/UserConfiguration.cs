@@ -11,6 +11,7 @@ namespace Ldis_Team_Project.ConfigurationModel
         {
             builder.HasMany(x => x.ChatId).WithMany(x => x.UserId);
             builder.HasMany(x => x.MessageId).WithMany(x => x.UserId);
+            builder.HasMany(x => x.PersonalMessageNoRegisterUserId).WithMany(x => x.PersonalMessageId);
         }
     }
 }

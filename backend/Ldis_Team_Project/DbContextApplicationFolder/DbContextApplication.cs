@@ -8,6 +8,7 @@ namespace Ldis_Team_Project.DbContextApplicationFolder
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Chat> Chats { get; set; }
+        public DbSet<NoRegisterUser> NoRegisterUsers { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbContextApplication(DbContextOptions<DbContextApplication> options) : base (options)
         {
@@ -24,6 +25,7 @@ namespace Ldis_Team_Project.DbContextApplicationFolder
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new ChatConfiguration());
             modelBuilder.ApplyConfiguration(new MessageConfiguration());
+            modelBuilder.ApplyConfiguration(new NoRegisterUserConfiguration());
         }
     }
 }
