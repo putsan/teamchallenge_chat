@@ -13,6 +13,7 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
         {
             _ContextAccessor = context;
         }
+        /*Аутентификация пользователя с помощью Claims на основе*/
         public async Task ClaimsAuthentificationHandler(string Email)
         {
             var ClaimsList = new List<Claim>

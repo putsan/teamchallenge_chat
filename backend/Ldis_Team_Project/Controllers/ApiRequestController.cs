@@ -5,51 +5,61 @@ using Ldis_Team_Project.Services.Interfaces;
 using Ldis_Team_Project.Services.RealizationInterfaces;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Identity.Client;
 
 namespace Ldis_Team_Project.Controllers
 {
-    [EnableCors("MyCorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class ApiRequestController : ControllerBase
     {
-        private readonly ISha256EncoderService _Sha256Encoder;
-        private readonly IGeneratedOauthRequestUrlService _GeneratedUrl;
-        private readonly IExchangeCodeOnTokenService _ExchangeToken;
-        private readonly IGetUserDataWithAccessTokenService _GetDataUser;
-        private readonly IRepositoryService _Repository;
-        private readonly IHttpContextAccessor _ContextAccessor;
-        private readonly IClaimsAuthentificationService _ClaimsAuthentification;
-        private readonly ISendPasswordOnEmailService _SendPassword;
-        private readonly DbContextApplication _Context;
-
-        public ApiRequestController(
-            DbContextApplication context,
-            IHttpContextAccessor contextAccessor,
-            ISha256EncoderService sha256Encoder,
-            IGeneratedOauthRequestUrlService generatedUrl,
-            IExchangeCodeOnTokenService exchangeToken,
-            IGetUserDataWithAccessTokenService getDataUser,
-            IRepositoryService repository,
-            IClaimsAuthentificationService claimsAuthentification,
-            ISendPasswordOnEmailService sendPassword)
+        private readonly IReturnUrlOauthServerService _ReturnUrl;
+        public const string SessionKeyApi = "KeyApi";
+        private readonly HttpClient _httpClient;
+        private readonly IRegLogFromFormService _RegAndLog;
+        private readonly IREgOrLogHandlerService _HandlerService;
+        private readonly IMemoryCache _Cache;
+        public ApiRequestController(IHttpClientFactory httpClientFactory,
+            IRegLogFromFormService fromFormService,
+            HttpClient client,
+            IREgOrLogHandlerService handler,
+            IMemoryCache cache,
+            IReturnUrlOauthServerService returnUrl )
         {
-            _Context = context;
-            _ContextAccessor = contextAccessor;
-            _Sha256Encoder = sha256Encoder;
-            _GeneratedUrl = generatedUrl;
-            _ExchangeToken = exchangeToken;
-            _GetDataUser = getDataUser;
-            _Repository = repository;
-            _SendPassword = sendPassword;
-            _ClaimsAuthentification = claimsAuthentification;
+            _Cache = cache;
+            _ReturnUrl = returnUrl;
+            _HandlerService = handler;
+            _httpClient = client;
+            _RegAndLog = fromFormService;
         }
+        /*Возвращение Url сервера аутентификации*/
         [HttpGet]
-        public IActionResult GetHandler()
+        public IActionResult GetUrlPauthServer()
         {
-            /*            GoogleOauthController contr = new GoogleOauthController(_Context,_ContextAccessor,_Sha256Encoder,_GeneratedUrl,_ExchangeToken,_GetDataUser,_Repository,_ClaimsAuthentification,_SendPassword);
-                        return new JsonResult(contr.RedirectToOauthServer());*/
+            string url = _ReturnUrl.ReturnUrl();
+            return new JsonResult(url);     
+        }
+        /*Получение имени пользователя при переадресации на страницу ввода имени при аутентификации с помощью Google*/
+        [HttpPost("{UserName}")]
+        public IActionResult GetUserName(string UserName)
+        {
+            _HandlerService.CreateUser(UserName);
             return Ok();
+        }
+       /*Получение данных пользователя из формы регистрации*/
+        [HttpPost("{UserName},{Password},{Email}")]
+        public IActionResult RegistrationHandler (string UserName,string Password,string Email)
+        {
+            _RegAndLog.FormRegistration(UserName,Password,Email);
+            return Ok();
+        }
+       /*Получение даных пользователя из формы авторизации*/
+        [HttpPost("{UserName},{Password}")]
+        public IActionResult LoginHandler (string UserName, string Password )
+        {
+            _RegAndLog.FormLogin(UserName,Password);
+             return Ok();
         }
     }
 }

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
+import Chat from "../components/temporraryTestComponents/Chat.jsx";
 import Authentication from "../pages/Authentication.jsx";
 import ChatScreen from "../pages/ChatScreen";
 import Lobby from "../pages/Lobby.jsx";
@@ -14,6 +15,7 @@ function App() {
         <Route path="/auth" element={<Authentication />} />
         <Route path="/chat/:chatId" element={<ChatScreen />} />
         <Route path="/lobby" element={<Lobby />} />
+        <Route path="/testChat" element={<Chat />} />
       </Routes>
     </Router>
   );

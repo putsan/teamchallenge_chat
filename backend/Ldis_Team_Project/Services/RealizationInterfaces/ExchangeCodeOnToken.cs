@@ -12,6 +12,7 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
             _GetUserSecret = new GetUserSecret();
             _SendPostRequest = new SendPostRequest();
         }
+        /*Обмен кода авторизации на токен доступа*/
         public async Task<TokenResult> ReturnExchangeAccessToken(string Code, string CodeVerification, string RedirectUrl)
         {
             var ConfigurationFile = new ConfigurationBuilder().AddUserSecrets<ExchangeCodeOnToken>().Build();

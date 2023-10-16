@@ -11,6 +11,7 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
         {
             _GetUserSecret = new GetUserSecret();
         }
+        /*Генерация Url Oauth сервера для перехода по нему для получения токена доступа*/
         public string GeneratedUrl(string scope, string redirectUrl, string CodeChallenge)
         {
             var OauthServerUrlEndpoint = "https://accounts.google.com/o/oauth2/v2/auth";
@@ -18,7 +19,8 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
             var QueryParametrs = new Dictionary<string, string>
             {
                 {"client_id", UserId},
-                {"redirect_uri",OauthServerUrlEndpoint },
+                {"redirect_uri",redirectUrl },
+                { "response_type", "code" },
                 {"scope",scope },
                 {"code_challenge",CodeChallenge },
                 {"code_challenge_method","S256" },

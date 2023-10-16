@@ -5,18 +5,15 @@ using Ldis_Team_Project.Repository.Services;
 using Ldis_Team_Project.Services.Interfaces;
 using Ldis_Team_Project.Services.RealizationInterfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using System.Text.Json;
 
 namespace Ldis_Team_Project.GoogleOauth
 {
-    [Route("[controller]")]
-    [ApiController]
-    public class GoogleOauthController : ControllerBase
+
+    public class GoogleOAuthController : Controller
     {
-        private const string RedirectUrl = "https://localhost:7237/GoogleOAuth/Code";
-        private const string Scope = "https://www.googleapis.com/auth/admin.directory.user.redonly";
-        private const string SessionKey = "OauthSessionKey";
-        private const string SessionKeyRegLogHandler = "RegLogSessionKey";
+        private const string RedirectUrl = "https://localhost:7237/GoogleOAuth/ExchangeCodeOnToken";
         private string AccessToken;
         private string Email;
         private readonly ISha256EncoderService _Sha256Encoder;
@@ -26,71 +23,52 @@ namespace Ldis_Team_Project.GoogleOauth
         private readonly IRepositoryService _Repository;
         private readonly IHttpContextAccessor _ContextAccessor;
         private readonly IClaimsAuthentificationService _ClaimsAuthentification;
-        private readonly ISendPasswordOnEmailService _SendPassword;
+        private readonly IMemoryCache _Cache;
+        private readonly IREgOrLogHandlerService _RegLog;
         private readonly DbContextApplication _Context;
 
-        public GoogleOauthController(
+        public GoogleOAuthController(
             DbContextApplication context,
             IHttpContextAccessor contextAccessor,
+            IMemoryCache cache,
             ISha256EncoderService sha256Encoder,
             IGeneratedOauthRequestUrlService generatedUrl,
             IExchangeCodeOnTokenService exchangeToken,
             IGetUserDataWithAccessTokenService getDataUser,
+            IREgOrLogHandlerService regLog,
             IRepositoryService repository,
-            IClaimsAuthentificationService claimsAuthentification,
-            ISendPasswordOnEmailService sendPassword)
+            IClaimsAuthentificationService claimsAuthentification
+            )
         {
             _Context = context;
+            _Cache = cache;
+            _RegLog = regLog;
             _ContextAccessor = contextAccessor;
             _Sha256Encoder = sha256Encoder;
             _GeneratedUrl = generatedUrl;
             _ExchangeToken = exchangeToken;
             _GetDataUser = getDataUser;
             _Repository = repository;
-            _SendPassword = sendPassword;
             _ClaimsAuthentification = claimsAuthentification;
         }
-        [HttpGet]
-        public string RedirectToOauthServer()
-        {
-            var CodeVerification = Guid.NewGuid().ToString();
-            HttpContext.Session.SetString(SessionKey,CodeVerification);
-            var CodeChallenge = _Sha256Encoder.ComputeHash(CodeVerification);
-            var url = _GeneratedUrl.GeneratedUrl(Scope, RedirectUrl, CodeChallenge);
-            return url;
-        }
        
+        /*Обмен кода авторизации на токен доступа, регнистрация и авторизация пользователя на основе полученных данных*/
         public async Task<IActionResult> ExchangeCodeOnToken(string code)
-        {          
-            var CodeVerification = HttpContext.Session.GetString(SessionKey);
-            var TokenResult = await _ExchangeToken.ReturnExchangeAccessToken(code,CodeVerification,RedirectUrl);
+        {
+            string GetCacheCodeVerifier = (string)_Cache.Get("KeyMain");
+            var TokenResult = await _ExchangeToken.ReturnExchangeAccessToken(code,GetCacheCodeVerifier,RedirectUrl);
             AccessToken = TokenResult.AccessToken;
-            var UserData = _GetDataUser.GetUserData(AccessToken);
-            var UserDataSession = JsonSerializer.Serialize(UserData);
-            HttpContext.Session.SetString(SessionKeyRegLogHandler, UserDataSession);
+            var UserData = await _GetDataUser.GetUserData(AccessToken);
+            var UserDataDictionary = JsonSerializer.Serialize(UserData);
+            _Cache.Set("DictionaryUserKey",UserDataDictionary, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(4)));
+            RegistrationOrLoginHandler();
             return Ok();
         }
 
-        public IActionResult RegistrationOrLoginHandler ()
+        public async Task<IActionResult> RegistrationOrLoginHandler()
         {
-            var User = JsonSerializer.Deserialize<Dictionary<string,string>>(SessionKeyRegLogHandler);
-            foreach (var item in User)
-            {
-                if (item.Key == "email")
-                {
-                  Email = item.Value;
-                }           
-            }
-            bool SearchResult = _Repository.FindUserByEmail(Email);
-            if (SearchResult == true)
-            {
-                _ClaimsAuthentification.ClaimsAuthentificationHandler(Email);
-                return Ok();
-            }
-            else
-            {
-                _SendPassword.SendPassword(Email);
-            }
+            var User = JsonSerializer.Deserialize<Dictionary<string, string>>((string)_Cache.Get("DictionaryUserKey"));
+            _RegLog.UserHandlerLogOrReg(User);
             return Ok();
         }
     }
