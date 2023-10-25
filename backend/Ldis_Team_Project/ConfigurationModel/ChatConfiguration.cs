@@ -10,7 +10,7 @@ namespace Ldis_Team_Project.ConfigurationModel
         public void Configure(EntityTypeBuilder<Chat> builder)
         {
             builder.HasMany(x => x.MessageId).WithMany(x => x.ChatId);
-            builder.HasMany(x => x.UserId).WithMany(x => x.ChatId);
+            builder.HasMany(x => x.Users).WithMany(x => x.Chats);
         }
     }
 }

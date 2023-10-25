@@ -2,6 +2,7 @@
 using Ldis_Team_Project.Repository.RealizationRepository;
 using Ldis_Team_Project.Repository.Services;
 using Ldis_Team_Project.Services.Interfaces;
+using Ldis_Team_Project.SignalR;
 using System.Text.Json;
 
 namespace Ldis_Team_Project.Services.RealizationInterfaces
@@ -40,6 +41,9 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
                     Status = "success",
                     Message = "Вы успешно зарегистрировались"
                 };
+
+                _ContextAccessor.HttpContext.Response.Cookies.Append(GroupChatHub.EmailUserCookie, Email);
+
                 var JsonAnswer = JsonSerializer.Serialize(AnswerJsonInstance);
                 return JsonAnswer;
             }
@@ -57,6 +61,9 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
                     Status = "success",
                     Message = "Аутентификация прошла успешно"
                 };
+
+                _ContextAccessor.HttpContext.Response.Cookies.Append(GroupChatHub.EmailUserCookie,Email);
+
                 var JsonSuccesAnswer = JsonSerializer.Serialize(AnswerJsonInstance);
                 return JsonSuccesAnswer;
             }

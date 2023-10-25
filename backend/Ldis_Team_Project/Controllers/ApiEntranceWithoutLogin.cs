@@ -1,6 +1,17 @@
-﻿namespace Ldis_Team_Project.Controllers
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace Ldis_Team_Project.Controllers
 {
-    public class ApiEntranceWithoutLogin
+    [Route("controller")]
+    [ApiController]
+
+    public class ApiEntranceWithoutLogin : ControllerBase
     {
+        /*
+        [HttpPost("{UserName}")]
+        public IActionResult Entrance (string UserName)
+        {
+    
+        }*/
     }
 }

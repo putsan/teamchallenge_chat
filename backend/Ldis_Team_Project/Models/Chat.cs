@@ -7,7 +7,7 @@ namespace Ldis_Team_Project.Models
         public int Id { get; set; }
         public string Description { get; set; }
         public string ChatName { get; set; }
-        public ICollection<User> UserId { get; set; }   
+        public List<User> Users { get; set; } = new List<User>();
         public ICollection<Message> MessageId { get; set; }
         public int Actual { get; set; }               
     }
