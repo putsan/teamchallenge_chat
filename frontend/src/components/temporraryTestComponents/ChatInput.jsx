@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ChatInput = ({ sendMessage }) => {
+const ChatInput = ({ sendMessage, groupID }) => {
   const [user, setUser] = useState("");
   const [message, setMessage] = useState("");
 
@@ -11,7 +11,7 @@ const ChatInput = ({ sendMessage }) => {
     const isMessageProvided = message && message !== "";
 
     if (isUserProvided && isMessageProvided) {
-      sendMessage(user, message);
+      sendMessage(user, message, groupID);
     } else {
       alert("Please insert an user and a message.");
     }
@@ -52,7 +52,7 @@ const ChatInput = ({ sendMessage }) => {
       </label>
       <br />
       <br />
-      <button type="submit">Submit</button> {/* Додано атрибут type */}
+      <button type="submit">Submit</button>
     </form>
   );
 };

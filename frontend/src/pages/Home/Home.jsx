@@ -33,9 +33,12 @@ function Home() {
   );
 }
 
-function ChatItem({ title, subtitle }) {
+function ChatItem({ title, subtitle, chatId }) {
   return (
-    <Link to="/testChat" style={{ textDecoration: "none", color: "inherit" }}>
+    <Link
+      to={`/chat/${chatId}`}
+      style={{ textDecoration: "none", color: "inherit" }}
+    >
       <div className="chat-item">
         <div className="avatar">
           {/* Тут може бути аватар користувача або інший зображення */}
