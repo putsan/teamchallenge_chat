@@ -1,5 +1,5 @@
 const Message = ({ user, message }) => (
-  <div style={{ background: "#eee", borderRadius: "5px", padding: "0 10px" }}>
+  <div style={{ background: "#000", borderRadius: "5px", padding: "0 10px" }}>
     <p>
       <strong>{user}</strong> says:
     </p>
