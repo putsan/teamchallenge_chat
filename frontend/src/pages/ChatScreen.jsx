@@ -4,7 +4,7 @@ import NavHeader from "../components/NavHeader/NavHeader";
 
 function ChatScreen() {
   return (
-    <div>
+    <div style={{ maxWidth: "700px", margin: "auto" }}>
       <NavHeader />
       <MessagesArea />
       <ChatFooter />

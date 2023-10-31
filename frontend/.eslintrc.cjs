@@ -37,5 +37,6 @@ module.exports = {
       }
     ],
     "arrow-body-style": "off",
+    "no-alert": "off",
   },
 }
