@@ -3,6 +3,7 @@ using Ldis_Team_Project.DbContextApplicationFolder;
 using Ldis_Team_Project.Models.BusinesModels;
 using Ldis_Team_Project.Repository.Services;
 using Ldis_Team_Project.Services.Interfaces;
+using Ldis_Team_Project.SignalR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
@@ -61,6 +62,7 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
             }
             else
             {
+                _Cache.Set(GroupChatHub.EmailUserCookie,Email,new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromDays(2)));
                 _ClaimsAuth.ClaimsAuthentificationHandler(Email);
                 var AnsverInstance = new AnswerOnRequest
                 {
@@ -78,6 +80,7 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
             string Email = (string)_Cache.Get(SessionKeyEmail);
             string Image = (string)_Cache.Get(SessionKeyImage);
             _Repository.CreateUser(Email, Code, UserName,Image);
+            _ContextAccess.HttpContext.Response.Cookies.Append(GroupChatHub.EmailUserCookie, Email);
         }
     }
 }

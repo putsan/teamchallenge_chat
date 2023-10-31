@@ -1,6 +1,7 @@
 using Ldis_Team_Project.DbContextApplicationFolder;
 using Ldis_Team_Project.Models.BusinesModels;
 using Ldis_Team_Project.ServiceExtensionCollection;
+using Ldis_Team_Project.SignalR;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Configuration;
 using Serilog;
@@ -13,6 +14,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 builder.Services.AddDbContext<DbContextApplication>();
 builder.Services.AddHttpClient();
+builder.Services.AddSignalR();
 builder.Services.AddCors();
 builder.Services.AddSession(options =>
 {
@@ -35,6 +37,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapHub<GroupChatHub>("/groupchat");
 app.UseCors(
     builder
      => builder.AllowAnyOrigin()

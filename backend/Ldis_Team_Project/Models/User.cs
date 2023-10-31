@@ -10,6 +10,7 @@
         public string Status { get; set; }
         public string ImageAvatarLink { get; set; }
         public ICollection<Message> MessageId { get; set; }
-        public ICollection<Chat> ChatId { get; set; }
+        public List<Chat> Chats { get; set; } = new List<Chat>();
+        public ICollection<NoRegisterUser> PersonalMessageNoRegisterUserId { get; set; }
     }
 }
