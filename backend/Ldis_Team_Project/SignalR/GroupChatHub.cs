@@ -41,15 +41,15 @@ namespace Ldis_Team_Project.SignalR
         }
 
         public override Task OnConnectedAsync()
-        {
+       {
             string Email = (string)_Cache.Get(EmailUserCookie);
-            _Repository.ChangeStatus((string)_Cache.Get(EmailUserCookie), "Connected");
+            _Repository.ChangeStatus("illanazarov966@gmail.com", "Connected");
             return base.OnConnectedAsync();
         }
         public override Task OnDisconnectedAsync(Exception? exception)
         {
             string Email = (string)_Cache.Get(EmailUserCookie);
-            _Repository.ChangeStatus((string)_Cache.Get(EmailUserCookie), "Disconnected");
+            _Repository.ChangeStatus("illanazarov966@gmail.com", "Disconnected");
             return base.OnDisconnectedAsync(exception);
         }
     }

@@ -17,7 +17,7 @@ namespace Ldis_Team_Project.Repository.RealizationRepository
         private readonly DbContextApplication _Context;
         private readonly IHttpContextAccessor _ContedxtAccessor;
         public const string EmailKeySession = "KeyEmail";
-        private IMemoryCache _Cache;
+         private IMemoryCache _Cache;
         public ServiceRealization(DbContextApplication context,IHttpContextAccessor contextAccessor,IMemoryCache cache)
         {
             _Cache = cache;
