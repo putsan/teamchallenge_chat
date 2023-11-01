@@ -110,6 +110,7 @@ namespace Ldis_Team_Project.Repository.RealizationRepository
         {
             var User = await _Context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Email == Email);
             var Chats = await _Context.Chats.FirstOrDefaultAsync(x => x.ChatName == ChatName);
+
             var ConfigurationFile = new ConfigurationBuilder().AddUserSecrets<ServiceRealization>().Build();
             string ConnectionString = ConfigurationFile.GetConnectionString("DataBaseConnect");
             
@@ -133,6 +134,7 @@ namespace Ldis_Team_Project.Repository.RealizationRepository
         {
             var User = await _Context.Users.FirstOrDefaultAsync(x => x.UserName == userName);
             var Chat = await _Context.Chats.FirstOrDefaultAsync(x => x.ChatName == groupName);
+
             var MessageInstance = new Message
             {
                 DateSend = DateTime.Now,

@@ -24,6 +24,7 @@ namespace Ldis_Team_Project.ServiceExtensionCollection
             services.AddTransient<IRegLogFromFormService,RegAndLogFromForm>();
             services.AddTransient<IREgOrLogHandlerService,RegOrLogHandler>();
             services.AddTransient<IReturnUrlOauthServerService,ReturnUrlOauthServer>();
+            services.AddTransient<ILoadImageService,LoadImageOnServer>();
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequiredAuthentification", policy =>

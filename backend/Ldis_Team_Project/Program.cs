@@ -4,6 +4,7 @@ using Ldis_Team_Project.ServiceExtensionCollection;
 using Ldis_Team_Project.SignalR;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,16 @@ builder.Services.AddCors();
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(5);
+});
+builder.Services.AddCors(options =>
+{
+     options.AddPolicy("ClientPermission", policy =>
+    {
+        policy.AllowAnyHeader()
+            .AllowAnyMethod()
+            .WithOrigins("http://localhost:5173")
+            .AllowCredentials();
+    });
 });
 ServiceDependencyCollection.AddDIContainerServices(builder.Services);
 Log.Logger = new LoggerConfiguration().MinimumLevel
@@ -37,6 +48,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors("ClientPermission");
 app.MapHub<GroupChatHub>("/groupchat");
 app.UseCors(
     builder

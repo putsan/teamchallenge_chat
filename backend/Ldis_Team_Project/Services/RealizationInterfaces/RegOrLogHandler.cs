@@ -62,7 +62,7 @@ namespace Ldis_Team_Project.Services.RealizationInterfaces
             }
             else
             {
-                _Cache.Set(GroupChatHub.EmailUserCookie,Email,new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromDays(2)));
+                _Cache.Set(GroupChatHub.EmailUserCookie,Email,new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromDays(3)));
                 _ClaimsAuth.ClaimsAuthentificationHandler(Email);
                 var AnsverInstance = new AnswerOnRequest
                 {
