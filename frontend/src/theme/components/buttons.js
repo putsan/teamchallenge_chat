@@ -2,7 +2,15 @@ const buttons = {
   MuiButton: {
     styleOverrides: {
       root: {
-        outerHeight: "52px",
+        height: "52px",
+        textTransform: "none",
+        fontSize: "16px",
+        lineHeight: "16px",
+        letterSpacing: "1px",
+      },
+      sizeSmall: {
+        height: "48px",
+        minWidth: "160px",
       },
     },
   },

@@ -69,11 +69,15 @@ function StartFlow() {
           style={{ marginRight: "25px" }}
           state={{ stage: "registration" }}
         >
-          <Button variant="contained">Реєстрація</Button>
+          <Button variant="outlined" size="small">
+            Реєстрація
+          </Button>
         </Link>
 
         <Link to="/auth">
-          <Button variant="contained">Вхід</Button>
+          <Button variant="outlined" size="small">
+            Вхід
+          </Button>
         </Link>
       </div>
 
