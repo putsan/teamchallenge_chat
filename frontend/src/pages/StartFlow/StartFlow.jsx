@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import { useState } from "react";
 
-import GetNameModal from "../components/GetNameModal/GetNameModal";
-import { MODAL_CHOOSE, MODAL_RANDOM } from "../app/constants";
+import GetNameModal from "../../components/GetNameModal/GetNameModal";
+import { MODAL_MODES } from "../../app/constants";
+import StyledButton from "../../components/Button";
+
+import "./StartFlow.scss";
 
 function StartFlow() {
   const [showModal, setShowModal] = useState(false);
@@ -15,7 +18,7 @@ function StartFlow() {
   };
 
   return (
-    <div>
+    <div className="start-flow">
       <div>
         <h1>LDIS</h1>
         <p>Привіт, готовий до найкращого спілкування в своєму житті?</p>
@@ -29,7 +32,7 @@ function StartFlow() {
         </h3>
 
         <Button
-          onClick={() => toShowModal(MODAL_CHOOSE)}
+          onClick={() => toShowModal(MODAL_MODES.CHOOSE)}
           variant="contained"
           sx={{
             width: "140px",
@@ -43,7 +46,7 @@ function StartFlow() {
         </Button>
 
         <Button
-          onClick={() => toShowModal(MODAL_RANDOM)}
+          onClick={() => toShowModal(MODAL_MODES.RANDOM)}
           variant="contained"
           sx={{
             width: "140px",
@@ -56,17 +59,25 @@ function StartFlow() {
         </Button>
       </div>
 
-      <div>
+      <div className="start-flow__top" />
+
+      <div className="start-flow__bottom">
+        <StyledButton text="Продовжити без реєстрації" />
+
         <Link
           to="/auth"
           style={{ marginRight: "25px" }}
           state={{ stage: "registration" }}
         >
-          <Button variant="contained">Реєстрація</Button>
+          <Button variant="outlined" size="small">
+            Реєстрація
+          </Button>
         </Link>
 
         <Link to="/auth">
-          <Button variant="contained">Вхід</Button>
+          <Button variant="outlined" size="small">
+            Вхід
+          </Button>
         </Link>
       </div>
 

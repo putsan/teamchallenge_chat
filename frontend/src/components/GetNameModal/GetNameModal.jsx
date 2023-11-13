@@ -1,7 +1,7 @@
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import "./GetNameModal.scss";
-import { MODAL_CHOOSE } from "../../app/constants";
+import { MODAL_MODES } from "../../app/constants";
 
 const style = {
   position: "absolute",
@@ -16,7 +16,7 @@ const style = {
 };
 
 const GetNameModal = ({ handleClose, flow }) => {
-  const isChooseFlow = flow === MODAL_CHOOSE;
+  const isChooseFlow = flow === MODAL_MODES.CHOOSE;
 
   return (
     <Modal open onClose={handleClose}>
