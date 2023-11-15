@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "@mui/material";
-
 import Chat from "../components/temporraryTestComponents/Chat.jsx";
 import Authentication from "../pages/Authentication.jsx";
 import Home from "../pages/Home/Home.jsx";
