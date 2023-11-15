@@ -42,7 +42,7 @@ const Settings = () => {
         <Grid item>
           <div className="settings-profile-name">
             <Typography variant="h6">Alina</Typography>
-            <Typography variant="body2" style={{ color: palette.grey[300] }}>
+            <Typography variant="body2" style={{ color: palette.grey[250] }}>
               @jacob_d
             </Typography>
           </div>
