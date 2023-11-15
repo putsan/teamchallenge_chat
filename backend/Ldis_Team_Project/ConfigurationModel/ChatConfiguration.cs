@@ -1,7 +1,12 @@
 ﻿using Ldis_Team_Project.Models;
-using LdisProduction.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Ldis_Team_Project.ConfigurationModel
 {
@@ -9,8 +14,53 @@ namespace Ldis_Team_Project.ConfigurationModel
     {
         public void Configure(EntityTypeBuilder<Chat> builder)
         {
-            builder.HasMany(x => x.MessageId).WithMany(x => x.ChatId);
-            builder.HasMany(x => x.Users).WithMany(x => x.Chats);
+
+            builder
+                .HasMany(x => x.Messages)
+                .WithMany(x => x.Chats);
+
+            builder
+                .HasMany(x => x.Users)
+                .WithMany(x => x.Chats);
+
+            builder
+                .HasMany(x => x.Tags)
+                .WithMany(x => x.Chats);
+
+
+
+            builder
+                .HasOne(el => el.Genre)
+                .WithMany(el=>el.Chats)
+                .HasForeignKey(el => el.GenreId)
+                .IsRequired();
+            //builder
+            //    .HasOne(el => el.Genre)
+            //    .WithMany(el => el.Chats)
+            //    .HasForeignKey(el => el.GenreId)
+            //    .IsRequired();
+            //builder
+            //    .HasIndex(x => x.GenreId)
+            //    .IsUnique(false);
+
+            builder
+                .HasOne(x => x.Visible)
+                .WithMany(x => x.Chats)
+                .HasForeignKey(x => x.VisibleId)
+                .IsRequired();
+            //builder
+            //    .HasIndex(x => x.VisibleId)
+            //    .IsUnique(false);
+
+
+            builder
+                .HasOne(x => x.Avatar)
+                .WithMany(x => x.Chats)
+                .HasForeignKey(x => x.AvatarId)
+                .IsRequired();
+            //builder
+            //    .HasIndex(x => x.AvatarId)
+            //    .IsUnique(false);
         }
     }
 }

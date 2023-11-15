@@ -1,8 +1,10 @@
 using Ldis_Team_Project.DbContextApplicationFolder;
+using Ldis_Team_Project.Models;
 using Ldis_Team_Project.Models.BusinesModels;
 using Ldis_Team_Project.ServiceExtensionCollection;
 using Ldis_Team_Project.SignalR;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Serilog;
@@ -44,6 +46,116 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+Console.WriteLine("hello");
+var options = new DbContextOptionsBuilder<DbContextApplication>()
+    .UseSqlite("DataBaseConnect")
+    .Options;
+using (DbContextApplication db = new DbContextApplication(options))
+{
+    var genres = db.Genres.ToList();
+    var images = db.Images.ToList();
+    var messagesTypes = db.MessageTypes.ToList();
+    var reactions = db.Reactions.ToList();
+    var tags = db.Tags.ToList();
+    var visibles = db.Visibles.ToList();
+    var chats = db.Chats.ToList();
+
+    //Chat chat3 = new Chat
+    //{
+    //    NameChat = "22222 chat",
+    //    Description = "22222",
+    //    CreatDate = DateTime.Now,
+    //    CountUsers = 222,
+    //    Link = "2222.link",
+    //    Genre = genres.First(el => el.Id == 3),
+    //    VisibleId = visibles.FirstOrDefault(el => el.Id == 3).Id,
+    //    AvatarId = images.FirstOrDefault(el => el.Id == 3).Id,
+    //    Tags = new List<Tag>
+    //    {
+    //        tags.FirstOrDefault(el=>el.Id == 3),
+    //        tags.FirstOrDefault(el=>el.Id == 1)
+    //    },
+    //    Actual = 1
+    //};
+    Message message1 = new Message
+    {
+        Chats = new List<Chat>
+        {
+            chats.First(el=>el.Id==1)
+        },
+        Content = "hello 11111111",
+        Timestamp = DateTime.Now,
+        IsRead = true,
+        MessageType = messagesTypes.First(el => el.Id == 1),
+        edited = false,
+        Reactions = new List<Reaction>
+        {
+            reactions.FirstOrDefault(el => el.Id == 2),
+            reactions.First(el => el.Id == 4)
+        },
+        ForwardedFrom = null,
+        deletedByReceiver = false,
+        deletedBySender = false
+    };
+
+    Message message2 = new Message
+    {
+        Chats = new List<Chat>
+        {
+            chats.First(el=>el.Id == 1),
+            chats.First(el=>el.Id == 2)
+        },
+        Content = "222222222222.link",
+        Timestamp = DateTime.Now,
+        IsRead = false,
+        MessageTypeId = messagesTypes.First(el => el.Id == 2).Id,
+        edited = false,
+        Reactions = new List<Reaction>
+        {
+            reactions.FirstOrDefault(el => el.Id == 1)
+        },
+        ForwardedFromId = null,
+        deletedByReceiver = true,
+        deletedBySender = false
+    };
+
+    Message message3 = new Message
+    {
+        Content = "newwwwwwwwwwwwww 33333333",
+        Timestamp = DateTime.Now,
+        IsRead = true,
+        MessageType = messagesTypes.First(el => el.Id == 1),
+        edited = false,
+        ForwardedFrom = null,
+        deletedByReceiver = false,
+        deletedBySender = false
+    };
+    try
+    {
+        // Your code to save changes to the database
+        db.Messages.Add(message1);
+        db.Messages.Add(message2);
+        db.Messages.Add(message3);
+        db.SaveChanges();
+    }
+    catch (DbUpdateException ex)
+    {
+        if (ex.InnerException != null)
+        {
+            var innerException = ex.InnerException;
+            while (innerException.InnerException != null)
+            {
+                innerException = innerException.InnerException;
+            }
+
+            Console.WriteLine("Inner Exception: " + innerException.Message);
+        }
+        else
+        {
+            Console.WriteLine("DbUpdateException: " + ex.Message);
+        }
+    }
+}
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAuthentication();

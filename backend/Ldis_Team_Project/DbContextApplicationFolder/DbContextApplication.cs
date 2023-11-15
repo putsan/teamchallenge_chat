@@ -8,8 +8,13 @@ namespace Ldis_Team_Project.DbContextApplicationFolder
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Chat> Chats { get; set; }
-        public DbSet<NoRegisterUser> NoRegisterUsers { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<MessageType> MessageTypes { get; set; }
+        public DbSet<Reaction> Reactions { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<Visible> Visibles { get; set; }
         public DbContextApplication(DbContextOptions<DbContextApplication> options) : base (options)
         {
             Database.Migrate();
@@ -25,7 +30,8 @@ namespace Ldis_Team_Project.DbContextApplicationFolder
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new ChatConfiguration());
             modelBuilder.ApplyConfiguration(new MessageConfiguration());
-            modelBuilder.ApplyConfiguration(new NoRegisterUserConfiguration());
+            modelBuilder.ApplyConfiguration(new TagConfiguraation());
+            modelBuilder.ApplyConfiguration(new ReactionConfiguration());
         }
     }
 }
