@@ -1,12 +1,12 @@
-import "./HeaderLobbyIcons.scss"
-import ForumIcon from '@mui/icons-material/Forum';
-import SettingsIcon from '@mui/icons-material/Settings';
+import "./HeaderLobbyIcons.scss";
+import ForumIcon from "@mui/icons-material/Forum";
 import { Button } from "@mui/material";
- const HeaderLobbyIcons = () => {
-    return(
-    <div className="Header">  
+import SettingsButton from "../Settings/SettingsButton.jsx";
 
-    <div>
+const HeaderLobbyIcons = () => {
+  return (
+    <div className="Header">
+      <div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="39"
@@ -35,19 +35,16 @@ import { Button } from "@mui/material";
           </defs>
         </svg>
       </div>
-      <div style={{display: "flex"}}>
-    <Button>
-  <div style={{display:"block"}}><ForumIcon /> </div>
-    </Button> 
-    <Button>
-   <SettingsIcon/>
-   </Button> 
+      <div style={{ display: "flex" }}>
+        <Button>
+          <div style={{ display: "block" }}>
+            <ForumIcon />
+          </div>
+        </Button>
+        <SettingsButton />
+      </div>
     </div>
-    </div>
-
-
-
-    )
-}
+  );
+};
 
 export default HeaderLobbyIcons;

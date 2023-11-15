@@ -8,6 +8,7 @@ import Lobby from "../pages/Lobby.jsx";
 import StartFlow from "../pages/StartFlow/StartFlow.jsx";
 import theme from "../theme";
 import "./App.scss";
+import Settings from "../components/Settings/Settings.jsx";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/lobby" element={<Lobby />} />
           <Route path="/home" element={<Home />} />
           <Route path="/testChat" element={<Chat />} />
+          <Route path="/settings" element={<Settings />} />
         </Routes>
       </Router>
     </ThemeProvider>
