@@ -1,7 +1,7 @@
 import "./HeaderLobbyIcons.scss";
 import ForumIcon from "@mui/icons-material/Forum";
 import { Button } from "@mui/material";
-import SettingsButton from "../Settings/SettingsButton.jsx";
+import SetingsButton from "../SetingsButton.jsx";
 
 const HeaderLobbyIcons = () => {
   return (
@@ -41,7 +41,7 @@ const HeaderLobbyIcons = () => {
             <ForumIcon />
           </div>
         </Button>
-        <SettingsButton />
+        <SetingsButton />
       </div>
     </div>
   );

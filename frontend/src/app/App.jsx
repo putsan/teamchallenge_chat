@@ -7,7 +7,7 @@ import Lobby from "../pages/Lobby.jsx";
 import StartFlow from "../pages/StartFlow/StartFlow.jsx";
 import theme from "../theme";
 import "./App.scss";
-import Settings from "../components/Settings/Settings.jsx";
+import Settings from "../pages/Settings/Settings.jsx";
 
 function App() {
   return (

@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { useNavigate } from "react-router-dom";
 
-const SettingsButton = () => {
+const SetingsButton = () => {
   const navigate = useNavigate();
 
   const handleOpen = () => {
@@ -17,4 +17,4 @@ const SettingsButton = () => {
     </div>
   );
 };
-export default SettingsButton;
+export default SetingsButton;
