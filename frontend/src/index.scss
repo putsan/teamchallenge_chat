@@ -1,6 +1,8 @@
 @import "@fontsource/roboto"; /* Defaults to weight 400 */
 @import "@fontsource/roboto/500.css";
 
+@import "./theme/styles/reset";
+
 :root {
   font-family: Roboto, sans-serif;
   font-size: 16px;
@@ -10,7 +12,7 @@
   font-weight: 400;
   font-style: normal;
   line-height: 20px; /* 125% */
-  color: #212429;
+  color: #073b4c;
   text-size-adjust: 100%;
   text-rendering: optimizelegibility;
 
@@ -18,4 +20,8 @@
   -moz-osx-font-smoothing: grayscale;
 
   font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
 }
