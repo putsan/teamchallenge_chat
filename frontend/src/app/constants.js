@@ -16,3 +16,9 @@ export const BTN_STYLES = {
   PRIMARY: "Main",
   SECONDARY: "Secondary",
 };
+
+export const ICON_STYLES = {
+  THEME: "theme",
+  LANGUAGE: "language",
+  INFO: "info",
+};

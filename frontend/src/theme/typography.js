@@ -38,6 +38,12 @@ const typography = {
     fontWeight: 400,
     lineHeight: "20px", // 125%
   },
+  body2: {
+    fontSize: "17px",
+    fontStyle: "normal",
+    fontWeight: 400,
+    lineHeight: "22px",
+  },
   caption: {
     fontSize: "12px",
     fontStyle: "normal",

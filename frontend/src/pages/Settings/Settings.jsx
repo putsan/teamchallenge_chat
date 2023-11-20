@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import palette from "../../theme/palette.js";
 import typography from "../../theme/typography.js";
 import "./Settings.scss";
+import SettingsItem from "../../components/SettingsComponents/SettingsItem.jsx";
+import { ICON_STYLES } from "../../app/constants.js";
 
 const Settings = () => {
   const navigate = useNavigate();
@@ -19,8 +21,13 @@ const Settings = () => {
         alignItems="center"
         sx={{ marginBottom: "27px" }}
       >
-        <IconButton edge="start" aria-label="back" onClick={handleGoBack}>
-          <ArrowBackIcon sx={{ color: palette.midnight, marginLeft: "26px" }} />
+        <IconButton
+          edge="start"
+          aria-label="back"
+          onClick={handleGoBack}
+          sx={{ marginLeft: "26px" }}
+        >
+          <ArrowBackIcon sx={{ color: palette.midnight }} />
         </IconButton>
         <Typography
           sx={{
@@ -54,6 +61,13 @@ const Settings = () => {
           </div>
         </Grid>
       </Grid>
+      <div className="separator" />
+      <SettingsItem title="Мова інтерфейсу" icon={ICON_STYLES.LANGUAGE} />
+      <div className="separator" style={{ marginLeft: "64px" }} />
+      <SettingsItem title="Тема" icon={ICON_STYLES.THEME} />
+      <div style={{ marginTop: "22px" }}>
+        <SettingsItem title="Правила спільноти" icon={ICON_STYLES.INFO} />
+      </div>
     </div>
   );
 };
