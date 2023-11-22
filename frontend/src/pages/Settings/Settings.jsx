@@ -10,6 +10,10 @@ import { ICON_STYLES } from "../../app/constants.js";
 
 const Settings = () => {
   const navigate = useNavigate();
+  // дані для відображення(тест)
+  const languages = ["Українська", "English"];
+  const themes = ["Світла", "Темна"];
+
   const handleGoBack = () => {
     navigate(-1);
   };
@@ -62,9 +66,13 @@ const Settings = () => {
         </Grid>
       </Grid>
       <div className="separator" />
-      <SettingsItem title="Мова інтерфейсу" icon={ICON_STYLES.LANGUAGE} />
+      <SettingsItem
+        title="Мова інтерфейсу"
+        icon={ICON_STYLES.LANGUAGE}
+        props={languages}
+      />
       <div className="separator" style={{ marginLeft: "64px" }} />
-      <SettingsItem title="Тема" icon={ICON_STYLES.THEME} />
+      <SettingsItem title="Тема" icon={ICON_STYLES.THEME} props={themes} />
       <div style={{ marginTop: "22px" }}>
         <SettingsItem title="Правила спільноти" icon={ICON_STYLES.INFO} />
       </div>
