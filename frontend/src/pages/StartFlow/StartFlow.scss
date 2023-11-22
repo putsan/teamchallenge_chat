@@ -7,9 +7,21 @@
     flex-grow: 1;
   }
 
+  &__image {
+    margin-top: 94px;
+  }
+
   &__bottom {
     display: flex;
     flex-direction: column;
+  }
+
+  &__title {
+    margin-bottom: 10px !important;
+  }
+
+  &__title-part {
+    color: var(--primary-color);
   }
 
   &__buttons {
