@@ -1,7 +1,7 @@
 import "./HeaderLobbyIcons.scss";
 import ForumIcon from "@mui/icons-material/Forum";
 import { Button } from "@mui/material";
-import SetingsButton from "../SetingsButton.jsx";
+import SetingsButton from "../SettingsComponents/SetingsButton.jsx";
 
 const HeaderLobbyIcons = () => {
   return (
