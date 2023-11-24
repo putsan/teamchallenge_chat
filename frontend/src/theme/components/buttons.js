@@ -1,3 +1,5 @@
+import palette from "../palette";
+
 const buttons = {
   MuiButton: {
     styleOverrides: {
@@ -8,9 +10,19 @@ const buttons = {
         lineHeight: "16px",
         letterSpacing: "1px",
       },
+      outlined: {
+        borderColor: palette.primary.main,
+      },
       sizeSmall: {
         height: "48px",
         minWidth: "160px",
+      },
+    },
+  },
+  MuiIconButton: {
+    styleOverrides: {
+      sizeLarge: {
+        padding: 0,
       },
     },
   },
