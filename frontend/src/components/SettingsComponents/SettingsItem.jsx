@@ -5,7 +5,6 @@ import { useState } from "react";
 import typography from "../../theme/typography.js";
 import palette from "../../theme/palette.js";
 import IconFactory from "../icons/IconFactory.jsx";
-import "./SettingsItem.scss";
 import SettingsModal from "./SettingsModal/SettingsModal.jsx";
 
 const SettingsItem = ({ icon, title, props }) => {
