@@ -9,6 +9,8 @@ module.exports = {
     "stylelint-order"
   ],
   "rules": {
-    "color-named": null
+    "color-named": null,
+    "selector-max-id": 1,
+    "declaration-property-value-disallowed-list": null,
   }
 };

@@ -6,6 +6,13 @@ const typography = {
     fontWeight: 500,
     lineHeight: "normal",
   },
+  h1Bold: {
+    fontFamily: "Rubik One, sans-serif",
+    fontSize: "28px",
+    fontWeight: 400,
+    lineHeight: "38px",
+    letterSpacing: "0.4px",
+  },
   h2: {
     fontSize: "38px",
     fontStyle: "normal",

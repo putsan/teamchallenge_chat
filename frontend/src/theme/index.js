@@ -10,3 +10,8 @@ const theme = createTheme({
 });
 
 export default theme;
+
+export const applyPrimaryColor = (color) => {
+  const root = document.getElementById("root");
+  root.style.setProperty("--primary-color", color);
+};

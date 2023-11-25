@@ -3,7 +3,7 @@ const palette = {
     main: "#E7476F", // pink
   },
   secondary: {
-    main: "#FDD616", // yellow
+    main: "#FFD166", // yellow
   },
 
   error: {
