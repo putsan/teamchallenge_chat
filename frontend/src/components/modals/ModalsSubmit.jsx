@@ -1,8 +1,20 @@
 import "./ModalsSubmit.scss";
 import modalType from "./ModalType";
+<<<<<<< Updated upstream
 const ModalsSubmit = ({type}) => {
   return (
     <div className="modal">
+=======
+import { useState } from "react";
+const ModalsSubmit = ({type}) => {
+  const [showModal,setShowModal] = useState(true)
+  const closeModal = () => {
+    setShowModal(false)
+  }
+  return (
+    showModal && <div onClick={closeModal} className="background">
+    <div onClick={(e) => e.stopPropagation()} className="modal">
+>>>>>>> Stashed changes
       <div className="modal-content">
         <button className="backgtoun-svg">
           <input className="uploadFile--input" type="file" />
@@ -40,7 +52,12 @@ const ModalsSubmit = ({type}) => {
         </button>
         {modalType[type]}
       </div>
+<<<<<<< Updated upstream
       <button className="decline-btn">Скасувати</button>
+=======
+      <button onClick={closeModal} className="decline-btn">Скасувати</button>
+    </div>
+>>>>>>> Stashed changes
     </div>
   );
 };
