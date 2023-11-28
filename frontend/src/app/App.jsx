@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "@mui/material";
-
 import Chat from "../components/temporraryTestComponents/Chat.jsx";
 import Authentication from "../pages/Authentication.jsx";
 import Home from "../pages/Home/Home.jsx";
@@ -8,6 +7,7 @@ import Lobby from "../pages/Lobby.jsx";
 import StartFlow from "../pages/StartFlow/StartFlow.jsx";
 import theme from "../theme";
 import "./App.scss";
+import Settings from "../pages/Settings/Settings.jsx";
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
           <Route path="/lobby" element={<Lobby />} />
           <Route path="/home" element={<Home />} />
           <Route path="/testChat" element={<Chat />} />
+          <Route path="/settings" element={<Settings />} />
         </Routes>
       </Router>
     </ThemeProvider>
