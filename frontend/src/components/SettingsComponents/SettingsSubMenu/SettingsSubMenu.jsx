@@ -1,8 +1,8 @@
 import { Grid } from "@mui/material";
-import "./SettingsModal.scss";
+import "./SettingsSubMenu.scss";
 import palette from "../../../theme/palette.js";
 
-const SettingsModal = ({ props }) => {
+const SettingsSubMenu = ({ props }) => {
   if (!props) {
     return undefined;
   }
@@ -31,4 +31,4 @@ const SettingsModal = ({ props }) => {
     </Grid>
   );
 };
-export default SettingsModal;
+export default SettingsSubMenu;

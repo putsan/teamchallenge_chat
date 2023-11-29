@@ -17,8 +17,8 @@ export const BTN_STYLES = {
   SECONDARY: "Secondary",
 };
 
-export const ICON_STYLES = {
-  THEME: "theme",
-  LANGUAGE: "language",
-  INFO: "info",
+export const SETTINGS_ITEM_STYLES = {
+  THEME: "Тема",
+  LANGUAGE: "Мова інтерфейсу",
+  INFO: "Правила спільноти",
 };
