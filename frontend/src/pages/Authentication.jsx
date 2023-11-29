@@ -1,23 +1,51 @@
 import { useLocation, Link } from "react-router-dom";
-import { Button, TextField } from "@mui/material";
+import { Button, Grid, TextField, Typography } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
+import typography from "../theme/typography.js";
+import palette from "../theme/palette.js";
 
 function Authentication() {
   const location = useLocation();
   const { state } = location;
+  // debugger;
   const isItRegistrationScreen = state && state.stage === "registration";
 
   return (
-    <div>
-      <p>Скоро тут буде чат</p>
+    <Grid
+      container
+      sx={{ display: "flex", flexDirection: "column", paddingTop: "55px" }}
+    >
+      <Typography
+        sx={{
+          ...typography.h1Bold,
+          color: palette.primary.main,
+          paddingBottom: "14px",
+        }}
+      >
+        LDIS
+      </Typography>
+      <Typography sx={{ ...typography.h4, color: palette.midnight }}>
+        Твоя платформа для вільного спілкування!
+      </Typography>
+      <Grid container>
+        <Typography sx={{ ...typography.caption, textTransform: "uppercase" }}>
+          Ім’я користувача
+        </Typography>
+        <TextField
+          id="outlined-basic"
+          sx={{ margin: "0 25px" }}
+          variant="outlined"
+        />
+      </Grid>
 
-      <div style={{ margin: "25px" }}>
-        <TextField label="Ім’я користувача" variant="standard" />
-      </div>
+      <TextField
+        id="outlined-basic"
+        sx={{ margin: "25px" }}
+        variant="outlined"
+        type="password"
+      />
 
-      <div style={{ margin: "25px" }}>
-        <TextField label="Пароль" variant="standard" type="password" />
-      </div>
+      {/* <TextField label="Пароль" variant="standard" type="password" /> */}
 
       {isItRegistrationScreen && (
         <div style={{ margin: "25px" }}>
@@ -45,7 +73,7 @@ function Authentication() {
 
       <br />
       {(isItRegistrationScreen && <RegistrationFooter />) || <LoginFooter />}
-    </div>
+    </Grid>
   );
 }
 
