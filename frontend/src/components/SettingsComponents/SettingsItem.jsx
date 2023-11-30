@@ -26,6 +26,11 @@ const SettingsItem = ({ itemData }) => {
     setIsSubMenuOpen((prevIsSubMenuOpen) => !prevIsSubMenuOpen);
   };
 
+  const onIconButtonClick = (event) => {
+    event.stopPropagation();
+    onSettingsItemClick();
+  };
+
   return (
     <Grid
       container
@@ -51,13 +56,13 @@ const SettingsItem = ({ itemData }) => {
       </Grid>
       <Grid container sx={{ width: "40px", position: "relative" }}>
         <IconButton
-          onClick={onSettingsItemClick}
           sx={{
             color: palette.grey["350"],
             "&:hover": {
               backgroundColor: "transparent",
             },
           }}
+          onClick={onIconButtonClick}
         >
           {isArrowRight ? (
             <KeyboardArrowRightIcon />
