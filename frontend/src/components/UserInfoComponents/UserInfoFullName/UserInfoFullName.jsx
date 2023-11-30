@@ -21,7 +21,7 @@ const UserInfoFullName = () => {
         {userData.firstName}
       </Typography>
       <div
-        className="user-info-separator"
+        className="user-info__separator"
         style={{ backgroundColor: palette.grey["100"] }}
       />
       <Typography sx={{ flex: 1, ...typography.body1, padding: "8px 10px" }}>
