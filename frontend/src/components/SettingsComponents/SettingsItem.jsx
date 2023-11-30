@@ -5,7 +5,7 @@ import { useState } from "react";
 import typography from "../../theme/typography.js";
 import palette from "../../theme/palette.js";
 import IconFactory from "../icons/IconFactory.jsx";
-import SettingsSubMenu from "./SettingsSubMenu/SettingsSubMenu.jsx";
+import SubMenu from "../SubMenu/SubMenu.jsx";
 import { SETTINGS_ITEM_STYLES } from "../../app/constants.js";
 
 const SettingsItem = ({ itemData }) => {
@@ -71,7 +71,7 @@ const SettingsItem = ({ itemData }) => {
           )}
         </IconButton>
         {isSubMenuOpen && (
-          <SettingsSubMenu
+          <SubMenu
             props={
               (isThemeStyle && themes) || (isLanguageStyle && languages) || null
             }

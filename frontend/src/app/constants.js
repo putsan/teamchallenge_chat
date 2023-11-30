@@ -22,3 +22,9 @@ export const SETTINGS_ITEM_STYLES = {
   LANGUAGE: "Мова інтерфейсу",
   INFO: "Правила спільноти",
 };
+
+export const PROFILE_HEADER_TITLES = {
+  USER_INFO: "Профіль",
+  SETTINGS: "Налаштування",
+  NEW_CHAT: "Новий чат",
+};
