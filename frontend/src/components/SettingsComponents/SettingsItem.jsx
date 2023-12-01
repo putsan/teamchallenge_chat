@@ -5,15 +5,30 @@ import { useState } from "react";
 import typography from "../../theme/typography.js";
 import palette from "../../theme/palette.js";
 import IconFactory from "../icons/IconFactory.jsx";
-import SettingsModal from "./SettingsModal/SettingsModal.jsx";
+import SubMenu from "../SubMenu/SubMenu.jsx";
+import { SETTINGS_ITEM_STYLES } from "../../app/constants.js";
 
-const SettingsItem = ({ icon, title, props }) => {
+const SettingsItem = ({ itemData }) => {
   const [isArrowRight, setIsArrowRight] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
 
-  const onIconClick = () => {
+  const languages = ["Українська", "English"];
+  const themes = ["Світла", "Темна"];
+
+  const isThemeStyle = itemData === SETTINGS_ITEM_STYLES.THEME;
+  const isLanguageStyle = itemData === SETTINGS_ITEM_STYLES.LANGUAGE;
+
+  // додати
+  // const isInfoStyle = itemData === SETTINGS_ITEM_STYLES.INFO;
+
+  const onSettingsItemClick = () => {
     setIsArrowRight((prevIsArrowRight) => !prevIsArrowRight);
-    setIsModalOpen((prevIsModalOpen) => !prevIsModalOpen);
+    setIsSubMenuOpen((prevIsSubMenuOpen) => !prevIsSubMenuOpen);
+  };
+
+  const onIconButtonClick = (event) => {
+    event.stopPropagation();
+    onSettingsItemClick();
   };
 
   return (
@@ -21,28 +36,33 @@ const SettingsItem = ({ icon, title, props }) => {
       container
       justifyContent="space-between"
       alignItems="center"
-      sx={{ backgroundColor: palette.grey["50"], padding: "7px 7px 7px 20px" }}
+      sx={{
+        backgroundColor: palette.grey["50"],
+        padding: "7px 7px 7px 20px",
+        cursor: "pointer",
+      }}
+      onClick={onSettingsItemClick}
     >
       <Grid sx={{ display: "flex", alignItems: "center" }}>
-        <IconFactory icon={icon} />
+        <IconFactory itemData={itemData} />
         <Typography
           sx={{
             marginLeft: "16px",
             ...typography.body2,
           }}
         >
-          {title}
+          {itemData}
         </Typography>
       </Grid>
       <Grid container sx={{ width: "40px", position: "relative" }}>
         <IconButton
-          onClick={onIconClick}
           sx={{
             color: palette.grey["350"],
             "&:hover": {
               backgroundColor: "transparent",
             },
           }}
+          onClick={onIconButtonClick}
         >
           {isArrowRight ? (
             <KeyboardArrowRightIcon />
@@ -50,7 +70,13 @@ const SettingsItem = ({ icon, title, props }) => {
             <KeyboardArrowDownIcon />
           )}
         </IconButton>
-        {isModalOpen && <SettingsModal props={props} />}
+        {isSubMenuOpen && (
+          <SubMenu
+            props={
+              (isThemeStyle && themes) || (isLanguageStyle && languages) || null
+            }
+          />
+        )}
       </Grid>
     </Grid>
   );
