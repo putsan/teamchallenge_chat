@@ -20,11 +20,20 @@ export const BTN_STYLES = {
 export const SETTINGS_ITEM_STYLES = {
   THEME: "Тема",
   LANGUAGE: "Мова інтерфейсу",
-  INFO: "Правила спільноти",
+  RULES: "Правила спільноти",
+  INFO: "",
 };
 
 export const PROFILE_HEADER_TITLES = {
   USER_INFO: "Профіль",
   SETTINGS: "Налаштування",
   NEW_CHAT: "Новий чат",
+};
+
+export const TEXT_FIELD_NAMES = {
+  USER_NAME: "Ім’я користувача",
+  PASSWORD: "Пароль",
+  EMAIL: "Електронна пошта",
+  CONFIRM_PASSWORD: "Підтвердіть пароль",
+  EMAIL_CODE: "Код з листа",
 };

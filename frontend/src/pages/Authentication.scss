@@ -1,0 +1,13 @@
+.auth__separator {
+  width: 100%;
+  height: 1px;
+}
+
+.auth-button__container {
+  width: 100%;
+  padding: 0 25px;
+
+  @media screen and (width >= 600px) {
+    max-width: 60%;
+  }
+}

@@ -19,7 +19,7 @@ const SettingsItem = ({ itemData }) => {
   const isLanguageStyle = itemData === SETTINGS_ITEM_STYLES.LANGUAGE;
 
   // додати
-  // const isInfoStyle = itemData === SETTINGS_ITEM_STYLES.INFO;
+  // const isRulesStyle = itemData === SETTINGS_ITEM_STYLES.RULES;
 
   const onSettingsItemClick = () => {
     setIsArrowRight((prevIsArrowRight) => !prevIsArrowRight);
