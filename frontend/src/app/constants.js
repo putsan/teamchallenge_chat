@@ -17,8 +17,14 @@ export const BTN_STYLES = {
   SECONDARY: "Secondary",
 };
 
-export const ICON_STYLES = {
-  THEME: "theme",
-  LANGUAGE: "language",
-  INFO: "info",
+export const SETTINGS_ITEM_STYLES = {
+  THEME: "Тема",
+  LANGUAGE: "Мова інтерфейсу",
+  INFO: "Правила спільноти",
+};
+
+export const PROFILE_HEADER_TITLES = {
+  USER_INFO: "Профіль",
+  SETTINGS: "Налаштування",
+  NEW_CHAT: "Новий чат",
 };

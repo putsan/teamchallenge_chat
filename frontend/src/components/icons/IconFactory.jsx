@@ -1,19 +1,19 @@
-import { ICON_STYLES } from "../../app/constants.js";
+import { SETTINGS_ITEM_STYLES } from "../../app/constants.js";
 import LangIcon from "./LangIcon.jsx";
 import ThemeIcon from "./ThemeIcon.jsx";
 import InfoIcon from "./InfoIcon.jsx";
 
-const IconFactory = ({ icon }) => {
+const IconFactory = ({ itemData }) => {
   let IconComponent;
 
-  switch (icon) {
-    case ICON_STYLES.LANGUAGE:
+  switch (itemData) {
+    case SETTINGS_ITEM_STYLES.LANGUAGE:
       IconComponent = LangIcon;
       break;
-    case ICON_STYLES.THEME:
+    case SETTINGS_ITEM_STYLES.THEME:
       IconComponent = ThemeIcon;
       break;
-    case ICON_STYLES.INFO:
+    case SETTINGS_ITEM_STYLES.INFO:
       IconComponent = InfoIcon;
       break;
     default:
