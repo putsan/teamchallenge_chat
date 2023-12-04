@@ -25,6 +25,10 @@ const SettingsItem = ({ itemData }) => {
     setIsArrowRight((prevIsArrowRight) => !prevIsArrowRight);
     setIsSubMenuOpen((prevIsSubMenuOpen) => !prevIsSubMenuOpen);
   };
+  const onBlurSubMenu = (event) => {
+    event.stopPropagation();
+    onSettingsItemClick();
+  };
 
   const onIconButtonClick = (event) => {
     event.stopPropagation();
@@ -42,6 +46,8 @@ const SettingsItem = ({ itemData }) => {
         cursor: "pointer",
       }}
       onClick={onSettingsItemClick}
+      onBlur={onBlurSubMenu}
+      tabIndex={0}
     >
       <Grid sx={{ display: "flex", alignItems: "center" }}>
         <IconFactory itemData={itemData} />
