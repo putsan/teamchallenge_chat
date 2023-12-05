@@ -44,4 +44,4 @@ const modalType = {
 };
 /* prettier-ignore */
 
-export default { modalType };
+export default  modalType ;
