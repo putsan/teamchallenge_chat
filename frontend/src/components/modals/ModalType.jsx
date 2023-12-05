@@ -2,12 +2,15 @@ const modalType = {
   deleteChatWithUser: (
     <>
       <h3>Впевнений, що хочеш видалити чат з @username?</h3>
-      <button className="delete-chat">Видалити чат</button>
-      <button className="block-delete">
+      <button type="button" className="delete-chat">
+        Видалити чат
+      </button>
+      <button type="button" className="block-delete">
         Видалити чат і заблокувати користувача
       </button>
     </>
   ),
+
   deleteChat: (
     <>
       <h3>Впевнений, що хочеш видалити чат Назва чату?</h3>
@@ -31,7 +34,7 @@ const modalType = {
   ),
   deleteAccaunt: (
     <>
-      <h3 id="exit-accaunt"  className=" delete-gtoup">
+      <h3 id="exit-accaunt" className=" delete-gtoup">
         Впевнений, що хочеш видалити аккаунт?
         <span>Це незворотня дія</span>
       </h3>
@@ -39,4 +42,6 @@ const modalType = {
     </>
   ),
 };
-export default modalType;
+/* prettier-ignore */
+
+export default { modalType };
