@@ -12,5 +12,6 @@ module.exports = {
     "color-named": null,
     "selector-max-id": 1,
     "declaration-property-value-disallowed-list": null,
+    "selector-class-pattern": null,
   }
 };
