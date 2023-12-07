@@ -6,19 +6,38 @@ import SubmitFormButton from "../SubmitFormButton.jsx";
 import AuthInputBlock from "../CustomisedInputs/AuthInputBlock.jsx";
 import AuthInputPasswordBlock from "../CustomisedInputs/AuthInputPasswordBlock.jsx";
 import RememberPassword from "../RememberPassword.jsx";
+import { authAPI } from "../../../app/api/auth.api.js";
 
 const AuthorizationForm = () => {
   const AuthorizationSchema = () => {
     return Yup.object().shape({
-      username: Yup.string()
-        .min(2, "Мінімальна довжина імені - 2 символи")
-        .max(15, "Максимальна довжина імені - 15 символів")
+      email: Yup.string()
+        .email("Некоректна електронна пошта")
         .required("Обовʼязкове поле"),
       password: Yup.string()
         .min(8, "Мінімальна довжина пароля - 8 символів")
         .max(15, "Максимальна довжина пароля - 15 символів")
         .required("Обовʼязкове поле"),
     });
+  };
+
+  const handleFormSubmit = async (values, { setSubmitting }) => {
+    console.log(values);
+    try {
+      // Выполнение запроса к серверу с использованием данных формы
+      const response = await authAPI.login(values);
+
+      // Обработка ответа от сервера, если это необходимо
+      console.log(response);
+
+      // Далее можете добавить свою логику обработки успешного запроса
+    } catch (error) {
+      // Обработка ошибок при выполнении запроса
+      console.error("Error during login:", error);
+    } finally {
+      // В любом случае, снимаем флаг isSubmitting после завершения запроса
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -37,23 +56,24 @@ const AuthorizationForm = () => {
       >
         <Formik
           initialValues={{
-            username: "",
+            email: "",
             password: "",
           }}
           validationSchema={AuthorizationSchema}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              setSubmitting(false);
-            }, 400);
-          }}
+          onSubmit={handleFormSubmit}
+          // onSubmit={(values, { setSubmitting }) => {
+          //   setTimeout(() => {
+          //     alert(JSON.stringify(values, null, 2));
+          //     setSubmitting(false);
+          //   }, 400);
+          // }}
         >
           {({ isSubmitting, isValid }) => (
             <Form>
               <AuthInputBlock
-                name="username"
-                placeholder="Імʼя користувача"
-                label="Username"
+                name="email"
+                placeholder="Електронна пошта"
+                label="Email"
               />
               <AuthInputPasswordBlock
                 name="password"

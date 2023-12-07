@@ -5,11 +5,21 @@ import { useLocation } from "react-router-dom";
 import palette from "../../theme/palette.js";
 import typography from "../../theme/typography.js";
 import "./SubmitFormButton.scss";
+import { authAPI } from "../../app/api/auth.api.js";
 
 const SubmitFormButton = ({ isValid, isSubmitting }) => {
   const location = useLocation();
   const { state } = location;
   const isRegistrationScreen = state && state.stage === "registration";
+
+  const handleGoogleAuthClick = async () => {
+    try {
+      const response = await authAPI.googleAuth();
+      console.log(response); // Обрабатываем ответ, если это необходимо
+    } catch (error) {
+      console.error("Error during Google authentication:", error);
+    }
+  };
 
   return (
     <Grid container flexDirection="column" alignItems="center">
@@ -46,7 +56,12 @@ const SubmitFormButton = ({ isValid, isSubmitting }) => {
       </Grid>
 
       <Grid item className="submit-form__container">
-        <Button variant="outlined" size="small" sx={{ width: "100%" }}>
+        <Button
+          variant="outlined"
+          size="small"
+          sx={{ width: "100%" }}
+          onClick={handleGoogleAuthClick}
+        >
           <Typography sx={{ ...typography.body1, marginRight: "10px" }}>
             Продовжити з
           </Typography>
