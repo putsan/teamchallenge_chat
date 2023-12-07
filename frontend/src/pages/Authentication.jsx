@@ -50,7 +50,9 @@ function Authentication() {
         Твоя платформа для вільного спілкування!
       </Typography>
 
-      {isRegistrationScreen ? <RegistrationForm /> : <AuthorizationForm />}
+      <div className="auth__form">
+        {isRegistrationScreen ? <RegistrationForm /> : <AuthorizationForm />}
+      </div>
 
       <Grid
         position="absolute"

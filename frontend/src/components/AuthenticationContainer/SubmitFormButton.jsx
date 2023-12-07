@@ -4,17 +4,16 @@ import GoogleIcon from "@mui/icons-material/Google";
 import { useLocation } from "react-router-dom";
 import palette from "../../theme/palette.js";
 import typography from "../../theme/typography.js";
+import "./SubmitFormButton.scss";
 
 const SubmitFormButton = ({ isValid, isSubmitting }) => {
   const location = useLocation();
   const { state } = location;
   const isRegistrationScreen = state && state.stage === "registration";
 
-  // console.log(isRegistrationScreen)
-
   return (
     <Grid container flexDirection="column" alignItems="center">
-      <Grid item className="auth-button__container">
+      <Grid item className="submit-form__container">
         <Button
           variant="contained"
           size="small"
@@ -34,19 +33,19 @@ const SubmitFormButton = ({ isValid, isSubmitting }) => {
         justifyContent="space-between"
       >
         <div
-          className="auth__separator"
+          className="submit-form__separator"
           style={{ backgroundColor: palette.midnight }}
         />
         <Typography sx={{ margin: "0 28px", ...typography.caption }}>
           АБО
         </Typography>
         <div
-          className="auth__separator"
+          className="submit-form__separator"
           style={{ backgroundColor: palette.midnight }}
         />
       </Grid>
 
-      <Grid item className="auth-button__container">
+      <Grid item className="submit-form__container">
         <Button variant="outlined" size="small" sx={{ width: "100%" }}>
           <Typography sx={{ ...typography.body1, marginRight: "10px" }}>
             Продовжити з

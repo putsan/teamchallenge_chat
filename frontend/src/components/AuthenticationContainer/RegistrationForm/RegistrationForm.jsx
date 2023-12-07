@@ -41,7 +41,6 @@ const RegistrationForm = () => {
       display="flex"
       flexDirection="column"
       alignItems="center"
-      className="text-fields__container"
       sx={{ color: palette.grey["300"] }}
     >
       <Grid
