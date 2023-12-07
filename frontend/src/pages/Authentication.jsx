@@ -1,7 +1,5 @@
-import { Link, useLocation } from "react-router-dom";
-import { Button, Grid, Typography } from "@mui/material";
-import GoogleIcon from "@mui/icons-material/Google";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useLocation } from "react-router-dom";
+import { Grid, Typography } from "@mui/material";
 import typography from "../theme/typography.js";
 import palette from "../theme/palette.js";
 import "./Authentication.scss";
@@ -10,14 +8,14 @@ import { SETTINGS_ITEM_STYLES } from "../app/constants.js";
 import RegistrationFooter from "../components/AuthenticationContainer/RegistrationContainer/RegistrationFooter.jsx";
 import LoginFooter from "../components/AuthenticationContainer/LoginContainer/LoginFooter.jsx";
 import IconFactory from "../components/icons/IconFactory.jsx";
-import TextFieldsContainer from "../components/AuthenticationContainer/TextFieldContainer/TextFieldsContainer.jsx";
+import RegistrationForm from "../components/AuthenticationContainer/RegistrationForm/RegistrationForm.jsx";
+import AuthorizationForm from "../components/AuthenticationContainer/AuthorizationForm/AuthorizationForm.jsx";
 
 function Authentication() {
   const location = useLocation();
   const { state } = location;
 
   const isRegistrationScreen = state && state.stage === "registration";
-
   return (
     <Grid
       container
@@ -52,57 +50,8 @@ function Authentication() {
         Твоя платформа для вільного спілкування!
       </Typography>
 
-      <TextFieldsContainer isRegistrationScreen={isRegistrationScreen} />
+      {isRegistrationScreen ? <RegistrationForm /> : <AuthorizationForm />}
 
-      <Typography
-        sx={{
-          ...typography.caption,
-          color: palette.midnight,
-          marginBottom: "31px",
-          textDecoration: "underline",
-        }}
-      >
-        <Link to="/auth" style={{ color: palette.midnight }}>
-          Я не пам&apos;ятаю свій пароль!
-        </Link>
-      </Typography>
-
-      <Grid container flexDirection="column" alignItems="center">
-        <Grid item className="auth-button__container">
-          <Button variant="contained" size="small" sx={{ width: "100%" }}>
-            {(isRegistrationScreen && "Продовжити") || "Вхід"}
-            <ArrowForwardIcon />
-          </Button>
-        </Grid>
-
-        <Grid
-          sx={{ margin: "6px 0", width: "100%" }}
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-        >
-          <div
-            className="auth__separator"
-            style={{ backgroundColor: palette.midnight }}
-          />
-          <Typography sx={{ margin: "0 28px", ...typography.caption }}>
-            АБО
-          </Typography>
-          <div
-            className="auth__separator"
-            style={{ backgroundColor: palette.midnight }}
-          />
-        </Grid>
-
-        <Grid item className="auth-button__container">
-          <Button variant="outlined" size="small" sx={{ width: "100%" }}>
-            <Typography sx={{ ...typography.body1, marginRight: "10px" }}>
-              Продовжити з
-            </Typography>
-            <GoogleIcon />
-          </Button>
-        </Grid>
-      </Grid>
       <Grid
         position="absolute"
         sx={{ left: "-27px", bottom: "104px", transform: "scaleX(-1)" }}
