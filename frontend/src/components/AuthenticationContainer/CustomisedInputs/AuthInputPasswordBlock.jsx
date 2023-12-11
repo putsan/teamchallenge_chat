@@ -6,7 +6,7 @@ import { useState } from "react";
 import ErrorFeedback from "./ErrorFeedback.jsx";
 import typography from "../../../theme/typography.js";
 
-const AuthInputBlock = ({ label, name, placeholder }) => {
+const AuthInputPasswordBlock = ({ label, name, placeholder }) => {
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => {
     setIsVisible((prev) => !prev);
@@ -64,4 +64,4 @@ const AuthInputBlock = ({ label, name, placeholder }) => {
   );
 };
 
-export default AuthInputBlock;
+export default AuthInputPasswordBlock;

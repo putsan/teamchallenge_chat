@@ -2,19 +2,12 @@ import { Grid } from "@mui/material";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import palette from "../../../theme/palette.js";
-import AuthInputBlock from "../CustomisedInputs/AuthInputBlock.jsx";
-import AuthInputPasswordBlock from "../CustomisedInputs/AuthInputPasswordBlock.jsx";
 import SubmitFormButton from "../SubmitFormButton.jsx";
 import RememberPassword from "../RememberPassword.jsx";
+import CustomInputField from "../CustomisedInputs/CustomInputField.jsx";
 
 // продумати логіку використання
-// const placeholders = {
-//   [TEXT_FIELD_NAMES.USER_NAME]: "Username",
-//   [TEXT_FIELD_NAMES.PASSWORD]: "Мінімум 8 символів",
-//   [TEXT_FIELD_NAMES.EMAIL]: "Username@gmail.com",
-//   [TEXT_FIELD_NAMES.EMAIL_CODE]: "Код має містити 6 цифр",
-//   [TEXT_FIELD_NAMES.CONFIRM_PASSWORD]: "Підтвердіть пароль",
-// };
+
 const RegistrationForm = () => {
   const RegistrationSchema = () => {
     return Yup.object().shape({
@@ -66,22 +59,24 @@ const RegistrationForm = () => {
         >
           {({ isSubmitting, isValid }) => (
             <Form>
-              <AuthInputBlock
+              <CustomInputField
                 name="username"
                 placeholder="Створи своє унікальне ім’я"
                 label="Імʼя користувача"
               />
-              <AuthInputBlock
+              <CustomInputField
                 name="email"
                 placeholder="Username@gmail.com"
                 label="Електронна пошта"
               />
-              <AuthInputPasswordBlock
+              <CustomInputField
+                type="password"
                 name="password"
                 placeholder="Мінімум 8 символів"
                 label="Пароль"
               />
-              <AuthInputPasswordBlock
+              <CustomInputField
+                type="password"
                 name="confirmPassword"
                 placeholder="Мінімум 8 символів"
                 label="Підтвердіть пароль"

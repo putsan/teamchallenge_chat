@@ -27,7 +27,13 @@ const SubmitFormButton = ({ isValid, isSubmitting }) => {
         <Button
           variant="contained"
           size="small"
-          sx={{ width: "100%" }}
+          sx={{
+            width: "100%",
+            "&.Mui-disabled": {
+              background: "hsl(345,77%,76%)",
+              color: "white",
+            },
+          }}
           type="submit"
           disabled={!isValid || isSubmitting}
         >

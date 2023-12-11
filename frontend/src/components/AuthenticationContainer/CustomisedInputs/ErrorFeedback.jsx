@@ -6,9 +6,10 @@ const ErrorFeedback = ({ errors, touched }) => {
   return (
     <div
       style={{
+        display: "flex",
         minHeight: "2em",
-        paddingTop: "8px",
-        color: palette.primary.main,
+        paddingTop: "4px",
+        color: palette.error.main,
       }}
     >
       {errors && touched && (

@@ -3,10 +3,9 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import palette from "../../../theme/palette.js";
 import SubmitFormButton from "../SubmitFormButton.jsx";
-import AuthInputBlock from "../CustomisedInputs/AuthInputBlock.jsx";
-import AuthInputPasswordBlock from "../CustomisedInputs/AuthInputPasswordBlock.jsx";
 import RememberPassword from "../RememberPassword.jsx";
 import { authAPI } from "../../../app/api/auth.api.js";
+import CustomInputField from "../CustomisedInputs/CustomInputField.jsx";
 
 const AuthorizationForm = () => {
   const AuthorizationSchema = () => {
@@ -61,22 +60,18 @@ const AuthorizationForm = () => {
           }}
           validationSchema={AuthorizationSchema}
           onSubmit={handleFormSubmit}
-          // onSubmit={(values, { setSubmitting }) => {
-          //   setTimeout(() => {
-          //     alert(JSON.stringify(values, null, 2));
-          //     setSubmitting(false);
-          //   }, 400);
-          // }}
         >
           {({ isSubmitting, isValid }) => (
             <Form>
-              <AuthInputBlock
+              <CustomInputField
                 name="email"
                 placeholder="Електронна пошта"
                 label="Email"
               />
-              <AuthInputPasswordBlock
+
+              <CustomInputField
                 name="password"
+                type="password"
                 placeholder="Мінімум 8 символів"
                 label="Пароль"
               />
