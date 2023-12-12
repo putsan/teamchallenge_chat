@@ -7,11 +7,7 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
 {
     public class LoadImageOnServer : ILoadImageOnServerService
     {
-        IRepository Repository;
-        public LoadImageOnServer(IRepository Repository)
-        {
-            this.Repository = Repository;
-        }
+
         public string LoadChatAvatar(IFormFile file, string ChatName)
         {
             int CountSymbolsChatName = ChatName.Length;

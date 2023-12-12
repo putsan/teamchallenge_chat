@@ -3611,11 +3611,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DotNetProject\\Ldis_Project_Reliz\\TestTimer\\TestTimer.csproj",
+      "projectUniqueName": "D:\\DotNetProject\\teamchallenge_chat\\backend\\TestTimer\\TestTimer.csproj",
       "projectName": "TestTimer",
-      "projectPath": "D:\\DotNetProject\\Ldis_Project_Reliz\\TestTimer\\TestTimer.csproj",
+      "projectPath": "D:\\DotNetProject\\teamchallenge_chat\\backend\\TestTimer\\TestTimer.csproj",
       "packagesPath": "C:\\Users\\illan\\.nuget\\packages\\",
-      "outputPath": "D:\\DotNetProject\\Ldis_Project_Reliz\\TestTimer\\obj\\",
+      "outputPath": "D:\\DotNetProject\\teamchallenge_chat\\backend\\TestTimer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\illan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3632,8 +3632,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\DotNetProject\\Ldis_Project_Reliz\\Ldis_Project_Reliz.Server\\Ldis_Project_Reliz.Server.csproj": {
-              "projectPath": "D:\\DotNetProject\\Ldis_Project_Reliz\\Ldis_Project_Reliz.Server\\Ldis_Project_Reliz.Server.csproj"
+            "D:\\DotNetProject\\teamchallenge_chat\\backend\\Ldis_Project_Reliz.Server\\Ldis_Project_Reliz.Server.csproj": {
+              "projectPath": "D:\\DotNetProject\\teamchallenge_chat\\backend\\Ldis_Project_Reliz.Server\\Ldis_Project_Reliz.Server.csproj"
             }
           }
         }

@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "wHpbER4vLEl+LizEacko00Rxd98tXzIIusCC5kGzAxE=",
+  "Hash": "QXweBZPletU8dVH3VHB2Ox2/il1GoX/Mh6gT4WgxXts=",
   "Source": "Ldis_Project_Reliz.Server",
   "BasePath": "_content/Ldis_Project_Reliz.Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "D:\\DotNetProject\\Ldis_Project_Reliz\\ldis_project_reliz.client\\ldis_project_reliz.client.esproj",
+      "Identity": "D:\\DotNetProject\\teamchallenge_chat\\backend\\ldis_project_reliz.client\\ldis_project_reliz.client.esproj",
       "Version": 2,
       "Source": "ldis_project_reliz.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",

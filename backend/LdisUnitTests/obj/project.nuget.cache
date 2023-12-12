@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "88C/t9T/YH2f1J1cY6qFBUL+HBnSpnVIsxZkij7KqMw0kPXNNb1qdWFja90zmx8l5o3FuQ98+aEWQCqXx5vIyw==",
+  "dgSpecHash": "LBt8v6TGhcjJ7lhfJnCpw6mkVKW9P78kyLSh0f6iHIyfW2U/i5fqtnwh5GC4sj19TCfzKcH1mlqGAnXMQre//w==",
   "success": true,
-  "projectFilePath": "D:\\DotNetProject\\Ldis_Project_Reliz\\LdisUnitTests\\LdisUnitTests.csproj",
+  "projectFilePath": "D:\\DotNetProject\\teamchallenge_chat\\backend\\LdisUnitTests\\LdisUnitTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\illan\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\illan\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
