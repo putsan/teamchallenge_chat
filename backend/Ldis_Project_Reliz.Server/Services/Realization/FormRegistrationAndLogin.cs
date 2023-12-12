@@ -21,7 +21,6 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
             }
             return "Користувача з таким паролем або email не існуе";
         }
-
         string IFormRegistrationAndAuthorizationService.FormRegistration(string UserName, string Password, string Email)
         {
             if (Repository.FindUserForСheckExistenceRegistration(Email, Password))

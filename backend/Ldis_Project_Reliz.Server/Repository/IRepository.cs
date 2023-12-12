@@ -19,5 +19,6 @@ namespace Ldis_Project_Reliz.Server.Repository
         void ExitFromGroup(string Email, string ChatName);
         User FindUserByEmailForDeletedTimer(string Email);
         List<Chat> FindChat(string NameChat);
+        void UptadeUserAvatar(IFormFile file);
     }
 }

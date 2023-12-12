@@ -10,8 +10,10 @@ namespace Ldis_Project_Reliz.Server.Repository
     {
         DbContextApplication Context;
         ILoadImageOnServerService LoadImage;
-        public RepositoryRealization(DbContextApplication Context, ILoadImageOnServerService LoadImage)
+        IHttpContextAccessor ContextAccessor;
+        public RepositoryRealization(DbContextApplication Context, ILoadImageOnServerService LoadImage, IHttpContextAccessor ContextAccessor)
         {
+            this.ContextAccessor = ContextAccessor;
             this.Context = Context;
             this.LoadImage = LoadImage;
         }
@@ -62,7 +64,8 @@ namespace Ldis_Project_Reliz.Server.Repository
             Context.SaveChanges();
         }
         public void CreateNewUser(string Email, string UserName, string Password, string ImageLink)
-         {
+        {
+            ContextAccessor.HttpContext.Response.Cookies.Append(DataToCacheSessionCookieKey.UserName,UserName);
             if (ImageLink == null)
             {
                 ImageLink = "https://icons.veryicon.com/png/o/miscellaneous/rookie-official-icon-gallery/225-default-avatar.png";
@@ -119,6 +122,7 @@ namespace Ldis_Project_Reliz.Server.Repository
             if (User == null)
                 return false;
             else
+                ContextAccessor.HttpContext.Response.Cookies.Append(DataToCacheSessionCookieKey.UserName,User.UserName);
                 return true;
         }
         public bool FindUserForСheckExistenceRegistration(string Email, string Password)
@@ -143,7 +147,7 @@ namespace Ldis_Project_Reliz.Server.Repository
         }
         public void CreateNewGroup(string NameGroup,string Description,int CountUsers,bool AutoDeletingUser,string Genre,string Visible, IFormFile file )
         {
-            string ImageName = LoadImage.LoadChatAvatar(file,NameGroup);
+           string ImageName = LoadImage.LoadChatAvatar(file,NameGroup);
             var AvatarInstance = AddNewImage(ImageName);
             var GenreInstance = new Genre
             {
@@ -205,6 +209,16 @@ namespace Ldis_Project_Reliz.Server.Repository
                 Users = new List<User>(),
             };
             return ImageInstance;
+        }
+        public void UptadeUserAvatar(IFormFile file)
+        {
+            string UserName = "Alex" /*ContextAccessor.HttpContext.Request.Cookies[DataToCacheSessionCookieKey.UserName]*/;
+            string Email = "illanazarov966@gmail.com" /*ContextAccessor.HttpContext.Request.Cookies[DataToCacheSessionCookieKey.EmailForAllOperationWithEmail]*/;
+            var User = Context.Users.Include(x => x.Avatar).FirstOrDefault(x => x.Enail == Email);
+            string Imagename = LoadImage.LoadUserAvatar(file,UserName);
+            var AvatarInstance = AddNewImage(Imagename);
+            User.Avatar = AvatarInstance;
+            Context.SaveChanges();
         }
     }
 }

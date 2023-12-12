@@ -57,7 +57,7 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
         {
             int IntervalCall = 24 * 60 * 1000;
             TimerCallback timerCallback = new TimerCallback(Delete);
-            TimerInstance = new Timer(timerCallback, null, 0, 5000);
+            TimerInstance = new Timer(timerCallback, null, 0, IntervalCall);
         }
 
         public Task StartAsync(CancellationToken cancellationToken)

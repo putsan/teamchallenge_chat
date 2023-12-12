@@ -12,9 +12,9 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
         {
             int CountSymbolsChatName = ChatName.Length;
             StringBuilder builder = new StringBuilder(ChatName);
-            builder.Insert(CountSymbolsChatName,"ChatAvatar");
+            builder.Insert(CountSymbolsChatName,"ChatAvatar.jpg");
             string ImageName = Convert.ToString(builder);
-            string FullPathToFile = $"D:\\DotNetProject\\Ldis_Project_Reliz\\Ldis_Project_Reliz.Server\\Images\\{builder}";
+            string FullPathToFile = $"D:\\DotNetProject\\teamchallenge_chat\\backend\\Ldis_Project_Reliz.Server\\Images\\{ImageName}";
             using (Bitmap bitmap = new Bitmap(file.OpenReadStream()))
             {
                 bitmap.Save(FullPathToFile, System.Drawing.Imaging.ImageFormat.Jpeg);
@@ -26,9 +26,9 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
         {
             int CountSymbolsChatName = UserName.Length;
             StringBuilder builder = new StringBuilder(UserName);
-            builder.Insert(CountSymbolsChatName, "UserAvatar");
+            builder.Insert(CountSymbolsChatName, "UserAvatar.jpg");
             string ImageName = Convert.ToString(builder);
-            string FullPathToFile = $"D:\\DotNetProject\\Ldis_Project_Reliz\\Ldis_Project_Reliz.Server\\Images\\{ImageName}";
+            string FullPathToFile = $"D:\\DotNetProject\\teamchallenge_chat\\backend\\Ldis_Project_Reliz.Server\\Images\\{ImageName}";
             using (Bitmap bitmap = new Bitmap(file.OpenReadStream()))
             {                
                 bitmap.Save(FullPathToFile, System.Drawing.Imaging.ImageFormat.Jpeg);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Ldis_Project_Reliz.Server.Repository;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Ldis_Project_Reliz.Server.Controllers
 {
@@ -6,6 +7,11 @@ namespace Ldis_Project_Reliz.Server.Controllers
     [Route("setting/[controller]")]
     public class ApiUserSettingController : ControllerBase
     {
+        IRepository Repository;
+        public ApiUserSettingController(IRepository Repository)
+        {
+            this.Repository = Repository;
+        }
         [HttpPost("changePassword/{Password}")]
         public IActionResult ChangePassword (string Password)
         {
@@ -33,7 +39,9 @@ namespace Ldis_Project_Reliz.Server.Controllers
         [HttpPost("changeProfileImage")]
         public IActionResult ChangeProfileImage()
         {
+            var file = HttpContext.Request.Form.Files["image"];
+            Repository.UptadeUserAvatar(file);
             return Ok();
         }
     }
-}
+} 
