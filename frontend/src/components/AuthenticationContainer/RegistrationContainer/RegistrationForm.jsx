@@ -5,8 +5,13 @@ import palette from "../../../theme/palette.js";
 import SubmitFormButton from "../SubmitFormButton.jsx";
 import RememberPassword from "../RememberPassword.jsx";
 import CustomInputField from "../CustomisedInputs/CustomInputField.jsx";
-
-// продумати логіку використання
+import {
+  CONFIRM_PASSWORD_INPUT_FIELD,
+  EMAIL_INPUT_FIELD,
+  PASSWORD_INPUT_FIELD,
+  USERNAME_INPUT_FIELD,
+} from "../../../app/constants.js";
+import AuthorizationFooter from "../AuthorizationContainer/AuthorizationFooter.jsx";
 
 const RegistrationForm = () => {
   const RegistrationSchema = () => {
@@ -59,30 +64,15 @@ const RegistrationForm = () => {
         >
           {({ isSubmitting, isValid }) => (
             <Form>
-              <CustomInputField
-                name="username"
-                placeholder="Створи своє унікальне ім’я"
-                label="Імʼя користувача"
-              />
-              <CustomInputField
-                name="email"
-                placeholder="Username@gmail.com"
-                label="Електронна пошта"
-              />
-              <CustomInputField
-                type="password"
-                name="password"
-                placeholder="Мінімум 8 символів"
-                label="Пароль"
-              />
-              <CustomInputField
-                type="password"
-                name="confirmPassword"
-                placeholder="Мінімум 8 символів"
-                label="Підтвердіть пароль"
-              />
+              <CustomInputField fieldItem={USERNAME_INPUT_FIELD} />
+              <CustomInputField fieldItem={PASSWORD_INPUT_FIELD} />
+              <CustomInputField fieldItem={EMAIL_INPUT_FIELD} />
+              <CustomInputField fieldItem={CONFIRM_PASSWORD_INPUT_FIELD} />
               <RememberPassword />
               <SubmitFormButton isSubmitting={isSubmitting} isValid={isValid} />
+              <Grid sx={{ margin: "40px 0" }}>
+                <AuthorizationFooter />
+              </Grid>
             </Form>
           )}
         </Formik>

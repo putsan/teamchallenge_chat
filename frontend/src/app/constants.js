@@ -30,10 +30,31 @@ export const PROFILE_HEADER_TITLES = {
   NEW_CHAT: "Новий чат",
 };
 
-export const TEXT_FIELD_NAMES = {
-  USER_NAME: "Ім’я користувача",
-  PASSWORD: "Пароль",
-  EMAIL: "Електронна пошта",
-  CONFIRM_PASSWORD: "Підтвердіть пароль",
-  EMAIL_CODE: "Код з листа",
+export const USERNAME_INPUT_FIELD = {
+  name: "username",
+  label: "Ім’я користувача",
+  placeholder: "Створи своє унікальне ім’я",
 };
+
+export const EMAIL_INPUT_FIELD = {
+  name: "email",
+  label: "Електронна пошта",
+  placeholder: "Username@gmail.com",
+};
+
+export const PASSWORD_INPUT_FIELD = {
+  name: "password",
+  label: "Пароль",
+  placeholder: "Мінімум 8 символів",
+  type: "password",
+};
+
+export const CONFIRM_PASSWORD_INPUT_FIELD = {
+  name: "confirmPassword",
+  label: "Підтвердіть пароль",
+  placeholder: "Мінімум 8 символів",
+  type: "password",
+};
+export const MAIN_TITLE = "LDIS";
+
+export const AUTH_SUBTITLE = "Твоя платформа для вільного спілкування!";

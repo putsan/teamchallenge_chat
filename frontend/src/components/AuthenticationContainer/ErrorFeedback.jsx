@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
-import palette from "../../../theme/palette.js";
-import typography from "../../../theme/typography.js";
+import palette from "../../theme/palette.js";
+import typography from "../../theme/typography.js";
 
 const ErrorFeedback = ({ errors, touched }) => {
   return (

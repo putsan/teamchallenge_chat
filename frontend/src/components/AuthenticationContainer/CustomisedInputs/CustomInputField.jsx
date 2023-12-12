@@ -3,11 +3,13 @@ import { Grid, InputAdornment, TextField, Typography } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useState } from "react";
-import ErrorFeedback from "./ErrorFeedback.jsx";
+import ErrorFeedback from "../ErrorFeedback.jsx";
 import typography from "../../../theme/typography.js";
 import palette from "../../../theme/palette.js";
 
-const CustomInputField = ({ label, name, type = "text", placeholder }) => {
+const CustomInputField = ({
+  fieldItem: { label, placeholder, name, type = "text" },
+}) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => {

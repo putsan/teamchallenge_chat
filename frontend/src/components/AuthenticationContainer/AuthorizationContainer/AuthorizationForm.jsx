@@ -6,6 +6,11 @@ import SubmitFormButton from "../SubmitFormButton.jsx";
 import RememberPassword from "../RememberPassword.jsx";
 import { authAPI } from "../../../app/api/auth.api.js";
 import CustomInputField from "../CustomisedInputs/CustomInputField.jsx";
+import {
+  EMAIL_INPUT_FIELD,
+  PASSWORD_INPUT_FIELD,
+} from "../../../app/constants.js";
+import RegistrationFooter from "../RegistrationContainer/RegistrationFooter.jsx";
 
 const AuthorizationForm = () => {
   const AuthorizationSchema = () => {
@@ -63,20 +68,13 @@ const AuthorizationForm = () => {
         >
           {({ isSubmitting, isValid }) => (
             <Form>
-              <CustomInputField
-                name="email"
-                placeholder="Електронна пошта"
-                label="Email"
-              />
-
-              <CustomInputField
-                name="password"
-                type="password"
-                placeholder="Мінімум 8 символів"
-                label="Пароль"
-              />
+              <CustomInputField fieldItem={EMAIL_INPUT_FIELD} />
+              <CustomInputField fieldItem={PASSWORD_INPUT_FIELD} />
               <RememberPassword />
               <SubmitFormButton isSubmitting={isSubmitting} isValid={isValid} />
+              <Grid sx={{ margin: "40px 0" }}>
+                <RegistrationFooter />
+              </Grid>
             </Form>
           )}
         </Formik>
