@@ -24,6 +24,7 @@ const CustomInputField = ({ label, name, type = "text", placeholder }) => {
     "&:hover .MuiOutlinedInput-notchedOutline": {
       borderColor: meta.error && meta.touched && palette.error.main,
     },
+
     "& .MuiOutlinedInput-notchedOutline": {
       borderColor: meta.error && meta.touched && palette.error.main,
     },
