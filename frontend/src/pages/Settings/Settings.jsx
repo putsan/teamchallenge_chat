@@ -1,13 +1,24 @@
 import { Grid } from "@mui/material";
 import "./Settings.scss";
+import { useState } from "react";
 import SettingsFooter from "../../components/SettingsComponents/SettingsFooter/SettingsFooter.jsx";
 import ProfileHeader from "../../components/SettingsComponents/ProfileHeader.jsx";
 import SettingsItems from "../../components/SettingsComponents/SettingsItems.jsx";
 import UserAvatar from "../../components/UserInfoComponents/UserAvatar.jsx";
 import SettingsProfileName from "../../components/SettingsComponents/SettingsProfileName/SettingsProfileName.jsx";
 import { PROFILE_HEADER_TITLES } from "../../app/constants.js";
+import ModalDelete from "../../components/modals/ModalsSubmit.jsx";
 
 const Settings = ({ isAuthUser = true }) => {
+  const [modal, setModal] = useState(false);
+
+  const openModal = () => {
+    setModal(true);
+  };
+
+  const closeModal = () => {
+    setModal(false);
+  };
   return (
     <Grid
       container
@@ -34,8 +45,13 @@ const Settings = ({ isAuthUser = true }) => {
       </div>
 
       <div>
-        <SettingsFooter isAuthUser={isAuthUser} />
+        <SettingsFooter openModal={openModal} isAuthUser={isAuthUser} />
       </div>
+      <ModalDelete
+        type="deleteChatWithUser"
+        show={modal}
+        onClose={closeModal}
+      />
     </Grid>
   );
 };
