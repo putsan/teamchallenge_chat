@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "T33ZtSakt2Ew2w+1mgSFAXjtOLf0E2t5CXVBK88FjGGX2gcUhGc5QNDWed7744Om8rAkaAGaTFPfdQ103nobZw==",
+  "success": true,
+  "projectFilePath": "D:\\DotNetProject\\teamchallenge_chat\\backend\\LoadImage\\LoadImage.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\illan\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\illan\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\illan\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "C:\\Users\\illan\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "C:\\Users\\illan\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "C:\\Users\\illan\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}
