@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LmRTSkbZPINH1e+FXRzH9MH7aE87asYuSrRiaDJmcx5h3YeE3a8G/0kgqX6M/77wYqPW98bvdmF7I77JPjWqFg==",
+  "dgSpecHash": "92FEPIOzqe7DxdglUIdFCMFvcZ/yvvQ239KNp0ulQVDg+Kos4yJVzKyuMcDFEWnplFdMMjX/MkbBKM7NZu1lLw==",
   "success": true,
-  "projectFilePath": "D:\\DotNetProject\\teamchallenge_chat\\backend\\TestTimer\\TestTimer.csproj",
+  "projectFilePath": "D:\\teamchallenge_chat\\backend\\TestTimer\\TestTimer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\illan\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\illan\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

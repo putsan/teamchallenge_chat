@@ -24,6 +24,7 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
 
         public string LoadUserAvatar(IFormFile file,string UserName)
         {
+            Console.WriteLine("Hello");
             int CountSymbolsChatName = UserName.Length;
             StringBuilder builder = new StringBuilder(UserName);
             builder.Insert(CountSymbolsChatName, "UserAvatar.jpg");

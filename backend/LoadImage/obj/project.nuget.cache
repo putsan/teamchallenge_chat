@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "T33ZtSakt2Ew2w+1mgSFAXjtOLf0E2t5CXVBK88FjGGX2gcUhGc5QNDWed7744Om8rAkaAGaTFPfdQ103nobZw==",
+  "dgSpecHash": "56MNUGoVJLzH6KrjVU187POwnBrugSbRUf8qCCj3Moe5EqKPr/jmG6A2RTRiuHSj0xBZXg1dluM/TGXVklpQQQ==",
   "success": true,
-  "projectFilePath": "D:\\DotNetProject\\teamchallenge_chat\\backend\\LoadImage\\LoadImage.csproj",
+  "projectFilePath": "D:\\teamchallenge_chat\\backend\\LoadImage\\LoadImage.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\illan\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\illan\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",

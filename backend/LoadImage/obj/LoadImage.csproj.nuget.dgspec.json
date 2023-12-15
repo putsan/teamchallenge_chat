@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\DotNetProject\\teamchallenge_chat\\backend\\LoadImage\\LoadImage.csproj": {}
+    "D:\\teamchallenge_chat\\backend\\LoadImage\\LoadImage.csproj": {}
   },
   "projects": {
-    "D:\\DotNetProject\\teamchallenge_chat\\backend\\LoadImage\\LoadImage.csproj": {
+    "D:\\teamchallenge_chat\\backend\\LoadImage\\LoadImage.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\DotNetProject\\teamchallenge_chat\\backend\\LoadImage\\LoadImage.csproj",
+        "projectUniqueName": "D:\\teamchallenge_chat\\backend\\LoadImage\\LoadImage.csproj",
         "projectName": "LoadImage",
-        "projectPath": "D:\\DotNetProject\\teamchallenge_chat\\backend\\LoadImage\\LoadImage.csproj",
+        "projectPath": "D:\\teamchallenge_chat\\backend\\LoadImage\\LoadImage.csproj",
         "packagesPath": "C:\\Users\\illan\\.nuget\\packages\\",
-        "outputPath": "D:\\DotNetProject\\teamchallenge_chat\\backend\\LoadImage\\obj\\",
+        "outputPath": "D:\\teamchallenge_chat\\backend\\LoadImage\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\illan\\AppData\\Roaming\\NuGet\\NuGet.Config",

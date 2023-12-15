@@ -11,12 +11,13 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("LoadImage")]
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("7cf6c8ca-3df1-45ea-9f29-66a120e63565")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("Ldis_Team_Project")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("LoadImage")]
-[assembly: System.Reflection.AssemblyTitleAttribute("LoadImage")]
+[assembly: System.Reflection.AssemblyProductAttribute("Ldis_Team_Project")]
+[assembly: System.Reflection.AssemblyTitleAttribute("Ldis_Team_Project")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Создано классом WriteCodeFragment MSBuild.
