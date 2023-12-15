@@ -27,40 +27,24 @@ namespace Ldis_Team_Project.ConfigurationModel
                 .HasMany(x => x.Tags)
                 .WithMany(x => x.Chats);
 
-
-
             builder
                 .HasOne(el => el.Genre)
-                .WithMany(el=>el.Chats)
+                .WithMany(el=>el.Chats).OnDelete(DeleteBehavior.Cascade)
                 .HasForeignKey(el => el.GenreId)
                 .IsRequired();
-            //builder
-            //    .HasOne(el => el.Genre)
-            //    .WithMany(el => el.Chats)
-            //    .HasForeignKey(el => el.GenreId)
-            //    .IsRequired();
-            //builder
-            //    .HasIndex(x => x.GenreId)
-            //    .IsUnique(false);
 
             builder
                 .HasOne(x => x.Visible)
-                .WithMany(x => x.Chats)
+                .WithMany(x => x.Chats).OnDelete(DeleteBehavior.Cascade)
                 .HasForeignKey(x => x.VisibleId)
                 .IsRequired();
-            //builder
-            //    .HasIndex(x => x.VisibleId)
-            //    .IsUnique(false);
-
 
             builder
                 .HasOne(x => x.Avatar)
-                .WithMany(x => x.Chats)
+                .WithMany(x => x.Chats).OnDelete(DeleteBehavior.Cascade)
                 .HasForeignKey(x => x.AvatarId)
                 .IsRequired();
-            //builder
-            //    .HasIndex(x => x.AvatarId)
-            //    .IsUnique(false);
+
         }
     }
 }

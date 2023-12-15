@@ -301,5 +301,16 @@ namespace Ldis_Project_Reliz.Server.Repository
             User.IsRegidtred = false;
             Context.SaveChanges();
         }
+        public string DeleteGroup(int Id)
+        {
+            var Group = Context.Chats.FirstOrDefault(x => x.Id == Id);
+            if (Group != null)
+            {
+                Context.Remove(Group);
+                Context.SaveChanges();
+                return $"Группа {Group.NameChat} успешно удаленна";
+            }
+            return "Ошибка";
+        }
     }
 }

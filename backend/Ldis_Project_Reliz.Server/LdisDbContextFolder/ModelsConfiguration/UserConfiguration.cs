@@ -25,18 +25,10 @@ namespace Ldis_Team_Project.ConfigurationModel
 
             builder
                 .HasOne(x => x.Avatar)
-                .WithMany(x => x.Users)
+                .WithMany(x => x.Users).OnDelete(DeleteBehavior.Cascade)
                 .HasForeignKey(x => x.AvatarId)
                 .IsRequired();
 
-            //builder
-            //    .HasMany(x=>x.ForwardedMessages)
-            //    .WithOne(x=>x.ForwardedFrom)
-            //    .HasForeignKey(x=>x.ForwardedFromId)
-            //    .IsRequired(false);
-            //builder
-            //    .HasIndex(x => x.AvatarId)
-            //    .IsUnique(false);
         }
     }
 }

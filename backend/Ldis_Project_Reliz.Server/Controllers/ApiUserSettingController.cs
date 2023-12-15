@@ -26,12 +26,18 @@ namespace Ldis_Project_Reliz.Server.Controllers
             string result = Repository.ChangePassword(Password);
             return Ok(result);
         }
-        [HttpGet]
+        [HttpGet("personalUserArea")]
         public IActionResult PersonalSettingsInfo()
         {
             var User = Repository.UserInfo();
-            var UserInfo = new UserInfoDto
+            var Avatar = LoadUploadImage.UploadImage(User.Avatar.Link);
+            if (Avatar == null)
             {
+                string DefaultLinkImage = "https://icons.veryicon.com/png/o/miscellaneous/rookie-official-icon-gallery/225-default-avatar.png";
+            }
+            UserInfoDto UserInfo = new UserInfoDto
+            {
+                Avatar = Avatar,
                 Email = User.Enail,
                 RegisteredAt = User.RegisteredAt,
                 Status = User.Status,

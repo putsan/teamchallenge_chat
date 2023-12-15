@@ -51,10 +51,11 @@ namespace Ldis_Project_Reliz.Server.Controllers
             Repository.CreateNewGroup(ChatName,Describing,CountUsers,AutoDelete,ChatGenre,Visible,file);
             return Ok();
         }
-        [HttpPost("deleteGroup/{Role},{Id}")]
-        public IActionResult DeleteGroup(string Role,int Id)
+        [HttpPost("deleteGroup/{Id}")]
+        public IActionResult DeleteGroup(int Id)
         {
-            return Ok();
+            string result = Repository.DeleteGroup(Id);
+            return Ok(result);
         }
     }
 }

@@ -27,5 +27,6 @@ namespace Ldis_Project_Reliz.Server.Repository
         User UserInfo();
         void SaveChanges();
         void LogOut();
+        string DeleteGroup(int Id);
     }
 }
