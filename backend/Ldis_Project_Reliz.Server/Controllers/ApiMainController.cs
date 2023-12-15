@@ -11,8 +11,8 @@ namespace Ldis_Project_Reliz.Server.Controllers
     public class ApiMainController : ControllerBase
     {
         IRepository Repository;
-        ILoadImageOnServerService LoadImage;
-        public ApiMainController(IRepository Repository, ILoadImageOnServerService LoadImage)
+        ILoadUploadImageServerService LoadImage;
+        public ApiMainController(IRepository Repository, ILoadUploadImageServerService LoadImage)
         {
             this.LoadImage = LoadImage;
             this.Repository = Repository;
@@ -20,7 +20,9 @@ namespace Ldis_Project_Reliz.Server.Controllers
         [HttpGet("getRandomChat")]
         public IActionResult GetRandomChat()
         {
-            return Ok();
+            var Chat = Repository.RandomChat();
+            string responce = JsonSerializer.Serialize(Chat);
+            return Ok(responce);
         }
 
         [HttpGet("getAllChats")]

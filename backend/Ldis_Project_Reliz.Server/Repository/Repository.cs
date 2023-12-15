@@ -1,6 +1,7 @@
 ﻿using Ldis_Project_Reliz.Server.BusinesStaticMethod;
 using Ldis_Project_Reliz.Server.LdisDbContext;
 using Ldis_Project_Reliz.Server.Services.Interfaces;
+using Ldis_Project_Reliz.Server.Services.Realization;
 using Ldis_Team_Project.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,9 +10,9 @@ namespace Ldis_Project_Reliz.Server.Repository
     public class RepositoryRealization : IRepository
     {
         DbContextApplication Context;
-        ILoadImageOnServerService LoadImage;
+        ILoadUploadImageServerService LoadImage;
         IHttpContextAccessor ContextAccessor;
-        public RepositoryRealization(DbContextApplication Context, ILoadImageOnServerService LoadImage, IHttpContextAccessor ContextAccessor)
+        public RepositoryRealization(DbContextApplication Context, ILoadUploadImageServerService LoadImage, IHttpContextAccessor ContextAccessor)
         {
             this.ContextAccessor = ContextAccessor;
             this.Context = Context;
@@ -147,8 +148,20 @@ namespace Ldis_Project_Reliz.Server.Repository
         }
         public void CreateNewGroup(string NameGroup,string Description,int CountUsers,bool AutoDeletingUser,string Genre,string Visible, IFormFile file )
         {
-           string ImageName = LoadImage.LoadChatAvatar(file,NameGroup);
-            var AvatarInstance = AddNewImage(ImageName);
+            var ImageInfo = LoadImage.LoadChatAvatar(file, NameGroup);
+            string ImageCode = null, ImageLink = null;
+            foreach (var item in ImageInfo)
+            {
+                if (item.Key == "ImageName")
+                {
+                    ImageCode = item.Value;
+                }
+                if (item.Key == "FullPathToFile")
+                {
+                    ImageLink = item.Value;
+                }
+            }
+            var AvatarInstance = AddNewImage(ImageCode, ImageLink);
             var GenreInstance = new Genre
             {
                 NameGenre = Genre,
@@ -157,7 +170,7 @@ namespace Ldis_Project_Reliz.Server.Repository
             var VisibleInstance = new Visible
             {
                 TypeVisible = Visible,
-                Chats = new List<Chat>()               
+                Chats = new List<Chat>()
             };
             Random rand = new Random();
             string CodeImg = Convert.ToString(rand.Next(100000));
@@ -177,7 +190,7 @@ namespace Ldis_Project_Reliz.Server.Repository
                 AvatarId = AvatarInstance.Id,
                 Tags = new List<Tag>()
             };
-            Context.AddRange(GenreInstance,GroupInstance);
+            Context.AddRange(GenreInstance, GroupInstance);
             Context.SaveChanges();
         }
         public List<Chat> FindChat(string NameChat)
@@ -200,24 +213,92 @@ namespace Ldis_Project_Reliz.Server.Repository
             }
             return SuitableChat;
         }
-        public Image AddNewImage(string ImageCode)
+        public Image AddNewImage(string ImageCode,string LinkImage)
         {
             var ImageInstance = new Image
             {
                 CodeImg = ImageCode,
                 Chats = new List<Chat>(),
                 Users = new List<User>(),
+                Link = LinkImage
             };
             return ImageInstance;
         }
         public void UptadeUserAvatar(IFormFile file)
         {
+
             string UserName = "Alex" /*ContextAccessor.HttpContext.Request.Cookies[DataToCacheSessionCookieKey.UserName]*/;
             string Email = "illanazarov966@gmail.com" /*ContextAccessor.HttpContext.Request.Cookies[DataToCacheSessionCookieKey.EmailForAllOperationWithEmail]*/;
             var User = Context.Users.Include(x => x.Avatar).FirstOrDefault(x => x.Enail == Email);
-            string Imagename = LoadImage.LoadUserAvatar(file,UserName);
-            var AvatarInstance = AddNewImage(Imagename);
+            var ImageInfo = LoadImage.LoadUserAvatar(file,UserName);
+            string ImageCode = null, ImageLink = null;
+            foreach (var item in ImageInfo)
+            {
+                if (item.Key == "ImageName")
+                {
+                    ImageCode = item.Value;
+                }
+                if (item.Key == "FullPathToFile")
+                {
+                    ImageLink = item.Value;
+                }
+            }
+            var AvatarInstance = AddNewImage(ImageCode,ImageLink);
             User.Avatar = AvatarInstance;
+            Context.SaveChanges();
+        }
+        public string ChangeUserName(string UserName)
+        {
+            var ExistUserName = Context.Users.AsNoTracking().FirstOrDefault(x => x.UserName == UserName);
+            if (ExistUserName == null)
+            {
+                var User = Context.Users.FirstOrDefault(x => x.Enail == ContextAccessor.HttpContext.Request.Cookies[DataToCacheSessionCookieKey.EmailForAllOperationWithEmail]);
+                User.UserName = UserName;
+                return "Имя успешно изменено";
+            }
+            return "Данное имя уже занято";
+        }
+        public string ChangePassword(string Password)
+        {
+            var ExistPassword = Context.Users.AsNoTracking().FirstOrDefault(x => x.Password == Password);
+            if (ExistPassword == null)
+            {
+                var User = Context.Users.FirstOrDefault(x => x.Enail == ContextAccessor.HttpContext.Request.Cookies[DataToCacheSessionCookieKey.EmailForAllOperationWithEmail]);
+                User.Password = Password;
+                return "Пароль успешно изменен";
+            }
+            return "Данный пароль уже занят";
+        }
+        public string DeleteAccount()
+        {
+            var User = Context.Users.FirstOrDefault(x => x.Enail == ContextAccessor.HttpContext.Request.Cookies[DataToCacheSessionCookieKey.EmailForAllOperationWithEmail]);
+            if (User != null)
+            {
+                ContextAccessor.HttpContext.Response.Cookies.Delete(DataToCacheSessionCookieKey.EmailForAllOperationWithEmail);
+                ContextAccessor.HttpContext.Response.Cookies.Delete(DataToCacheSessionCookieKey.UserName);
+                Context.Remove(User);
+                Context.SaveChanges();
+                return "Аккаунт успешно удален";
+            }
+            return "Ошибка операции";
+        }
+        public Chat RandomChat()
+        {
+            var AllChat = Context.Chats;
+            Random rand = new Random();
+            int Id = rand.Next(AllChat.Count());
+            return AllChat.FirstOrDefault(x => x.Id == Id);
+        }
+        public User UserInfo()
+        {
+            var User = Context.Users.Include(x => x.Avatar).FirstOrDefault(x => x.Enail == DataToCacheSessionCookieKey.EmailForAllOperationWithEmail);
+            return User;
+        }
+        public void SaveChanges() => Context.SaveChanges();
+        public void LogOut ()
+        {
+            var User = UserInfo();
+            User.IsRegidtred = false;
             Context.SaveChanges();
         }
     }

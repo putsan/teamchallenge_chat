@@ -3,5 +3,6 @@
     public interface IClaimsAuthentificationService
     {
         Task Authentification(string Email);
+        Task LogOut();
     }
 }

@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Ldis_Project_Reliz.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f37ac673821e62fd5f33e0968aee2b9933628382")]
 [assembly: System.Reflection.AssemblyProductAttribute("Ldis_Project_Reliz.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Ldis_Project_Reliz.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
