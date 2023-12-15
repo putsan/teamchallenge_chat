@@ -8,6 +8,7 @@ import UserAvatar from "../../components/UserInfoComponents/UserAvatar.jsx";
 import SettingsProfileName from "../../components/SettingsComponents/SettingsProfileName/SettingsProfileName.jsx";
 import { PROFILE_HEADER_TITLES } from "../../app/constants.js";
 import ModalDelete from "../../components/modals/ModalsSubmit.jsx";
+import modalConstnats from '../../app/constants/modals.js';
 
 const Settings = ({ isAuthUser = true }) => {
   const [modal, setModal] = useState(false);
@@ -48,7 +49,7 @@ const Settings = ({ isAuthUser = true }) => {
         <SettingsFooter openModal={openModal} isAuthUser={isAuthUser} />
       </div>
       <ModalDelete
-        type="deleteChatWithUser"
+        type={modalConstnats.deleteChatUser}
         show={modal}
         onClose={closeModal}
       />

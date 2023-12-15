@@ -9,7 +9,6 @@ import UserInfoText from "../../components/UserInfoComponents/UserInfoText.jsx";
 import UserInfoProfileDetails from "../../components/UserInfoComponents/UserInfoProfileDetails.jsx";
 import modalConstnats from '../../app/constants/modals.js';
 const UserInfo = () => {
-  console.log(modalConstnats.deleteChatUser)
   const [modal, setModal] = useState(false);
 
   const openModal = () => {
