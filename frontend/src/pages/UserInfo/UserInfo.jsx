@@ -7,8 +7,9 @@ import { useState } from "react";
 import ModalDelete from "../../components/modals/ModalsSubmit.jsx";
 import UserInfoText from "../../components/UserInfoComponents/UserInfoText.jsx";
 import UserInfoProfileDetails from "../../components/UserInfoComponents/UserInfoProfileDetails.jsx";
-
+import modalConstnats from '../../app/constants/modals.js';
 const UserInfo = () => {
+  console.log(modalConstnats.deleteChatUser)
   const [modal, setModal] = useState(false);
 
   const openModal = () => {
@@ -56,7 +57,7 @@ const UserInfo = () => {
         </Button>
       </Grid>
       <ModalDelete
-        type={`deleteChatWithUser`}
+        type={modalConstnats.deleteChatUser}
         show={modal}
         onClose={closeModal}
       ></ModalDelete>
