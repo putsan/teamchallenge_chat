@@ -1,0 +1,17 @@
+.lobby__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+
+  &__circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+  }
+}

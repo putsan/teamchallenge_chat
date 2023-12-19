@@ -1,11 +1,11 @@
 import { Button } from "@mui/material";
-import HeaderLobbyIcons from "../HeaderLobbyIcons/HeaderLobbyIcons";
 import HeaderLobbyText from "../HeaderLobbyText/HeaderLobbyText";
+import LobbyHeader from "../HeaderLobbyIcons/LobbyHeader.jsx";
 
 const HeaderLobby = () => {
   return (
     <div>
-      <HeaderLobbyIcons />
+      <LobbyHeader />
       <HeaderLobbyText />
 
       <div style={{ margin: "55px 0 92px" }}>
