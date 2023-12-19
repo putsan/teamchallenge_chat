@@ -25,26 +25,17 @@ namespace Ldis_Team_Project.ConfigurationModel
                 .HasMany(x => x.Reactions)
                 .WithMany(x => x.Messages);
 
-
-
             builder
                 .HasOne(x => x.MessageType)
                 .WithMany(x => x.Messages)
                 .HasForeignKey(x => x.MessageTypeId)
                 .IsRequired();
-            //builder
-            //    .HasIndex(x => x.MessageTypeId)
-            //    .IsUnique(false);
-
 
             builder
                 .HasOne(x => x.ForwardedFrom)
                 .WithMany(x => x.ForwardedMessages)
                 .HasForeignKey(x => x.ForwardedFromId)
                 .IsRequired(false);
-            //builder
-            //    .HasIndex(x => x.ForwardedFromId)
-            //    .IsUnique(false);
         }
     }
 }

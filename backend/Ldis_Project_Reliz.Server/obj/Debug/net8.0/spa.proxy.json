@@ -3,7 +3,7 @@
 "ServerUrl": "https://localhost:5173",
 "RedirectUrl": "",
 "LaunchCommand": "npm run dev",
-"WorkingDirectory": "D:\\DotNetProject\\teamchallenge_chat\\backend\\Ldis_Project_Reliz.Server\\..\\ldis_project_reliz.client",
+"WorkingDirectory": "D:\\teamchallenge_chat\\backend\\Ldis_Project_Reliz.Server\\..\\ldis_project_reliz.client",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }

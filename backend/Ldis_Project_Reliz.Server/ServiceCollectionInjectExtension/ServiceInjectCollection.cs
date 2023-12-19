@@ -16,7 +16,7 @@ namespace Ldis_Project_Reliz.Server.ServiceCollectionInjectExtension
             service.AddTransient<IRepository,RepositoryRealization>();
             service.AddTransient<IClaimsAuthentificationService, ClaimsAuthentification>();
             service.AddTransient<IFormRegistrationAndAuthorizationService,FormRegistrationAndLogin>();
-            service.AddTransient<ILoadImageOnServerService,LoadImageOnServer>();
+            service.AddTransient<ILoadUploadImageServerService,LoadUploadImageServer>();
             service.AddHostedService<DeleteNoActivityUserTimer>();
             return service;
         }

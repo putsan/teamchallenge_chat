@@ -1,4 +1,5 @@
 ﻿using Ldis_Project_Reliz.Server.BusinesStaticMethod;
+using Ldis_Project_Reliz.Server.Repository;
 using Ldis_Project_Reliz.Server.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -10,8 +11,10 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
     public class ClaimsAuthentification : IClaimsAuthentificationService
     {
         IHttpContextAccessor HttpAccessor;
-        public ClaimsAuthentification(IHttpContextAccessor HttpAccessor)
+        IRepository Repository;
+        public ClaimsAuthentification(IHttpContextAccessor HttpAccessor, IRepository Repository)
         {
+            this.Repository = Repository;
             this.HttpAccessor = HttpAccessor;
         }
         public async Task Authentification(string Email)
@@ -24,6 +27,14 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
             var IdentityUser = new ClaimsIdentity(ClaimsUser, CookieAuthenticationDefaults.AuthenticationScheme);
             var ClaimsPrincipal = new ClaimsPrincipal(IdentityUser);
             await HttpAccessor.HttpContext.SignInAsync(ClaimsPrincipal);
+        }
+
+        public async Task LogOut()
+        {
+            HttpAccessor.HttpContext.SignOutAsync();
+            HttpAccessor.HttpContext.Response.Cookies.Delete(DataToCacheSessionCookieKey.EmailForAllOperationWithEmail);
+            HttpAccessor.HttpContext.Response.Cookies.Delete(DataToCacheSessionCookieKey.UserName);
+            Repository.LogOut();
         }
     }
 }

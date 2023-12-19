@@ -13,5 +13,7 @@ module.exports = {
     "selector-max-id": 1,
     "declaration-property-value-disallowed-list": null,
     "selector-class-pattern": null,
+    "max-nesting-depth": null,
+    "selector-max-compound-selectors": null,
   }
 };
