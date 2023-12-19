@@ -1,12 +1,12 @@
-import "./LobbyHeader.scss";
+import "./LobbyHeaderBar.scss";
 import { Box, IconButton, Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
-import SetingsButton from "../SettingsComponents/SetingsButton.jsx";
-import palette from "../../theme/palette";
-import typography from "../../theme/typography.js";
+import SetingsButton from "../../SettingsComponents/SetingsButton.jsx";
+import palette from "../../../theme/palette.js";
+import typography from "../../../theme/typography.js";
 
-const LobbyHeader = () => {
+const LobbyHeaderBar = () => {
   return (
     <Box className="lobby__header">
       <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
@@ -47,4 +47,4 @@ const LobbyHeader = () => {
   );
 };
 
-export default LobbyHeader;
+export default LobbyHeaderBar;

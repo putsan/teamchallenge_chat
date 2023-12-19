@@ -1,10 +1,10 @@
-import HeaderLobby from "../components/HeaderLobby/HeaderLobby";
+import LobbyHeader from "../components/LobbyComponent/LobbyHeader/LobbyHeader.jsx";
 import MainLobby from "../components/MainLobby/MainLobby";
 
 function Lobby() {
   return (
     <div>
-      <HeaderLobby />
+      <LobbyHeader />
       <MainLobby />
     </div>
   );
