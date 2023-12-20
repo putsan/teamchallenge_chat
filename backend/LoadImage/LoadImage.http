@@ -1,6 +1,0 @@
-@LoadImage_HostAddress = http://localhost:5195
-
-GET {{LoadImage_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

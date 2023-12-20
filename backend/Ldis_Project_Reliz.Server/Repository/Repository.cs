@@ -1,5 +1,6 @@
 ﻿using Ldis_Project_Reliz.Server.BusinesStaticMethod;
 using Ldis_Project_Reliz.Server.LdisDbContext;
+using Ldis_Project_Reliz.Server.Models.BusinesModel;
 using Ldis_Project_Reliz.Server.Services.Interfaces;
 using Ldis_Project_Reliz.Server.Services.Realization;
 using Ldis_Team_Project.Models;
@@ -56,13 +57,22 @@ namespace Ldis_Project_Reliz.Server.Repository
             Context.AddRange(MessageInstance,MessageTypeInstance);
             Context.SaveChanges();
         }
-        public void AddToGroup(string UserName, string GroupName, string Email)
+        public string AddToGroup(string UserName, string GroupName, string Email,out bool sucssesfulAdded)
         {
             var Chat = Context.Chats.Include(x => x.Users).FirstOrDefault(x => x.NameChat == GroupName);
+            int currentCountUsers = Chat.CurrentCountUsers.Value + 1;
+            if (currentCountUsers > Chat.CountUsers)
+            {
+                sucssesfulAdded = false;
+                return "Все места в группе заняты";
+            }
             var User = Context.Users.Include(x => x.Chats).FirstOrDefault(x => x.UserName == UserName && Email == Email);
+            Chat.CurrentCountUsers++;
             Chat.Users.Add(User);
             User.Chats.Add(Chat);
             Context.SaveChanges();
+            sucssesfulAdded = true;
+            return "";
         }
         public void CreateNewUser(string Email, string UserName, string Password, string ImageLink)
         {
@@ -100,6 +110,7 @@ namespace Ldis_Project_Reliz.Server.Repository
         {
             var User = Context.Users.FirstOrDefault(x => x.Enail == Email);
             var Chat = Context.Chats.FirstOrDefault(x => x.NameChat == ChatName);
+            Chat.CurrentCountUsers--;
             User.Chats.Remove(Chat);
             Chat.Users.Remove(User);
             Context.SaveChanges();
@@ -172,9 +183,6 @@ namespace Ldis_Project_Reliz.Server.Repository
                 TypeVisible = Visible,
                 Chats = new List<Chat>()
             };
-            Random rand = new Random();
-            string CodeImg = Convert.ToString(rand.Next(100000));
-
             var GroupInstance = new Chat
             {
                 NameChat = NameGroup,
@@ -287,11 +295,11 @@ namespace Ldis_Project_Reliz.Server.Repository
             var AllChat = Context.Chats;
             Random rand = new Random();
             int Id = rand.Next(AllChat.Count());
-            return AllChat.FirstOrDefault(x => x.Id == Id);
+            return AllChat.AsNoTracking().Include(x => x.Avatar).FirstOrDefault(x => x.Id == Id);
         }
         public User UserInfo()
         {
-            var User = Context.Users.Include(x => x.Avatar).FirstOrDefault(x => x.Enail == DataToCacheSessionCookieKey.EmailForAllOperationWithEmail);
+            var User = Context.Users.Include(x => x.Avatar).FirstOrDefault(x => x.Enail == "illanazarov966@gmail.com");
             return User;
         }
         public void SaveChanges() => Context.SaveChanges();
@@ -311,6 +319,28 @@ namespace Ldis_Project_Reliz.Server.Repository
                 return $"Группа {Group.NameChat} успешно удаленна";
             }
             return "Ошибка";
+        }
+        public List<MessageInfoDto> LoadAllChatMessage(string GroupName)
+        {
+            var Chat = Context.Chats.AsNoTracking().Include(x => x.Messages).ThenInclude(x => x.ForwardedFrom).FirstOrDefault(x => x.NameChat == GroupName);
+
+            var AllMessage = Chat.Messages.ToList();
+
+            List<MessageInfoDto> AllMesagesListDto = new List<MessageInfoDto>();
+            foreach (var message in AllMessage)
+            {
+                int hours = message.Timestamp.Value.Hour;
+                int minutes = message.Timestamp.Value.Minute;
+                var timestamp = new TimeSpan(hours,minutes,0);
+                var MessageInfoDtoInstance = new MessageInfoDto
+                {
+                    Content = message.Content,
+                    Timestamp = timestamp,
+                    ForwardedUserName = message.ForwardedFrom.UserName
+                };
+                AllMesagesListDto.Add(MessageInfoDtoInstance);
+            }
+            return AllMesagesListDto;
         }
     }
 }

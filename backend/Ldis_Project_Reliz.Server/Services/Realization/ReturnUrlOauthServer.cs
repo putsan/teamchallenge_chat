@@ -8,10 +8,10 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
     public class ReturnUrlOauthServer : IReturnUrlOauthServerService
     {
         IGoogleOauthService GoogleOauth;
-        IMemoryCache MemoryCache;
-        public ReturnUrlOauthServer(IGoogleOauthService GoogleOauth, IMemoryCache MemoryCache)
+        IHttpContextAccessor ContextAccessor;
+        public ReturnUrlOauthServer(IGoogleOauthService GoogleOauth, IHttpContextAccessor ContextAccessor)
         {
-            this.MemoryCache = MemoryCache;
+            this.ContextAccessor = ContextAccessor;
             this.GoogleOauth = GoogleOauth;
         }
         string IReturnUrlOauthServerService.ReturnUrlOauthServer()
@@ -21,7 +21,7 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
             string CodeVerifier = Guid.NewGuid().ToString();
             string CodeChallenge = Sha256Encoder.Sha256Compute(CodeVerifier);
             Console.WriteLine($"Code verifier - {CodeChallenge}");
-            MemoryCache.Set(DataToCacheSessionCookieKey.CodeChallengeGoogleOauthCache,CodeVerifier, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(10)));
+            ContextAccessor.HttpContext.Session.SetString(DataToCacheSessionCookieKey.CodeChallengeGoogleOauthSession,CodeVerifier);
             return GoogleOauth.GeneratedUrlOauthServer(Scope,RedirectUrl,CodeChallenge);          
         }
     }

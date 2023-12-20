@@ -12,10 +12,10 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
     public class DeleteNoActivityUserTimer : IDeleteNoActivityUserTimerService , IHostedService
     {
         Timer TimerInstance;
-        IMemoryCache MemoryCache;
-        public DeleteNoActivityUserTimer(IMemoryCache MemoryCache)
+        IHttpContextAccessor ContextAccessor;
+        public DeleteNoActivityUserTimer(IHttpContextAccessor ContextAccessor)
         {
-            this.MemoryCache = MemoryCache;       
+            this.ContextAccessor = ContextAccessor;       
         }
         public void Delete(object obj)
         {
@@ -25,27 +25,33 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
                 using (DbContextApplication dbContextApplication = new DbContextApplication(dbContextOptions))
                 {
                     Console.WriteLine("Start");
-                    MemoryCache.Set(DataToCacheSessionCookieKey.EmailForAllOperationWithEmail, "illanazarov966@gmail.com");
-                    string Email = (string)MemoryCache.Get(DataToCacheSessionCookieKey.EmailForAllOperationWithEmail);
-                    var User = dbContextApplication.Users.Include(x => x.Chats).FirstOrDefault(x => x.Enail == Email);
-                    foreach (var item in User.Chats)
+                    string Email = ContextAccessor.HttpContext.Request.Cookies[DataToCacheSessionCookieKey.EmailForAllOperationWithEmail];
+                    if (Email == null)
                     {
-                        var Chat = dbContextApplication.Chats.Include(x => x.Messages).Include(x => x.Users).FirstOrDefault(x => x.Id == item.Id);
-                        if (Chat.AutoDeletingUser == true && Chat.Messages.Count != 0)
+
+                    }
+                    else
+                    {
+                        var User = dbContextApplication.Users.Include(x => x.Chats).FirstOrDefault(x => x.Enail == Email);
+                        foreach (var item in User.Chats)
                         {
-                            var LastMessage = Chat.Messages.Last();
-                            var Difference = DateTime.Now - LastMessage.Timestamp;
-                            if (Difference.Value.TotalHours > 24)
+                            var Chat = dbContextApplication.Chats.Include(x => x.Messages).Include(x => x.Users).FirstOrDefault(x => x.Id == item.Id);
+                            if (Chat.AutoDeletingUser == true && Chat.Messages.Count != 0)
                             {
-                                Chat.Users.Remove(User);
+                                var LastMessage = Chat.Messages.Last();
+                                var Difference = DateTime.Now - LastMessage.Timestamp;
+                                if (Difference.Value.TotalHours > 24)
+                                {
+                                    Chat.Users.Remove(User);
+                                }
+                            }
+                            else
+                            {
+                                continue;
                             }
                         }
-                        else
-                        {
-                            continue;
-                        }
+                        dbContextApplication.SaveChanges();
                     }
-                    dbContextApplication.SaveChanges();
                 }
             }
             catch (Exception exeption)

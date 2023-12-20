@@ -25,6 +25,7 @@ namespace Ldis_Team_Project.Models
         public Visible? Visible { get; set; }
         public DateTime? CreatDate { get; set; }
         public int? CountUsers { get; set; }
+        public int? CurrentCountUsers { get; set; }
         public string? Link {  get; set; }
         public bool AutoDeletingUser { get; set; }
         public ICollection<Tag>? Tags { get; set; }

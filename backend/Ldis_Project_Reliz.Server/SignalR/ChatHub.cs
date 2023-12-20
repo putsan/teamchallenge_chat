@@ -2,6 +2,7 @@
 using Ldis_Project_Reliz.Server.Repository;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Caching.Memory;
+using System.Text;
 
 namespace Ldis_Project_Reliz.Server.SignalR
 {
@@ -16,14 +17,27 @@ namespace Ldis_Project_Reliz.Server.SignalR
         }
         public async Task Enter(string UserName,string GroupName)
         {
-            await Groups.AddToGroupAsync(Context.ConnectionId,GroupName);
-            Clients.Group(GroupName).SendAsync("Notify",$"{UserName} додався до группи");
-            Repository.AddToGroup(UserName, GroupName, HttpContext.HttpContext.Request.Cookies[DataToCacheSessionCookieKey.EmailForAllOperationWithEmail]);
+            bool succsesAddedResult;
+            string responce = Repository.AddToGroup(UserName, GroupName, HttpContext.HttpContext.Request.Cookies[DataToCacheSessionCookieKey.EmailForAllOperationWithEmail],out succsesAddedResult);
+            if (succsesAddedResult == false)
+            {
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    string url = "";
+                    string postData = responce;
+                    HttpContent content = new StringContent(postData, Encoding.UTF8, "application/json");
+                }
+            }
+            else if (succsesAddedResult == true)
+            {
+                Clients.Group(GroupName).SendAsync("Notify", $"{UserName} додався до группи");
+                await Groups.AddToGroupAsync(Context.ConnectionId, GroupName);
+            }
         }
         public async Task Send (string UserName,string GroupName,string Message)
         {
             Clients.Group(GroupName).SendAsync("Receive",Message,UserName);
-            Repository.AddMessage(Message,GroupName,UserName, HttpContext.HttpContext.Request.Cookies[DataToCacheSessionCookieKey.EmailForAllOperationWithEmail]);
+            Repository.AddMessage(Message,GroupName,UserName, "illanazarov966@gmail.com");
         }
         public async Task ExitGroup (string GroupName,string UserName)
         {

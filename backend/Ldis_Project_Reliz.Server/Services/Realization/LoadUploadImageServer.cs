@@ -15,7 +15,7 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
             StringBuilder builder = new StringBuilder(ChatName);
             builder.Insert(CountSymbolsChatName, "ChatAvatar.jpg");
             string ImageName = Convert.ToString(builder);
-            string FullPathToFile = $"D:\\DotNetProject\\teamchallenge_chat\\backend\\Ldis_Project_Reliz.Server\\Images\\{ImageName}";
+            string FullPathToFile = $"D:\\teamchallenge_chat\\backend\\Ldis_Project_Reliz.Server\\Images\\{ImageName}";
             using (Bitmap bitmap = new Bitmap(file.OpenReadStream()))
             {
                 bitmap.Save(FullPathToFile, System.Drawing.Imaging.ImageFormat.Jpeg);
@@ -34,7 +34,7 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
             StringBuilder builder = new StringBuilder(UserName);
             builder.Insert(CountSymbolsChatName, "UserAvatar.jpg");
             string ImageName = Convert.ToString(builder);
-            string FullPathToFile = $"D:\\DotNetProject\\teamchallenge_chat\\backend\\Ldis_Project_Reliz.Server\\Images\\{ImageName}";
+            string FullPathToFile = $"D:\\teamchallenge_chat\\backend\\Ldis_Project_Reliz.Server\\Images\\{ImageName}";
             using (Bitmap bitmap = new Bitmap(file.OpenReadStream()))
             {
                 bitmap.Save(FullPathToFile, System.Drawing.Imaging.ImageFormat.Jpeg);
@@ -47,12 +47,10 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
             return AvatarInfo;
         }
 
-        public FileStreamResult UploadImage(string ImageLink)
+        public FileStream UploadImage(string ImageLink)
         {
             FileStream fileStream = new FileStream(ImageLink, FileMode.Open, FileAccess.Read);
-            FileStreamResult fileResult = new FileStreamResult(fileStream, "application/octet-stream");
-            fileResult.FileDownloadName = "Image.jpg";
-            return fileResult;
+            return fileStream;
         }
     }
 }
