@@ -4,11 +4,15 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import palette from "../../../theme/palette.js";
 import typography from "../../../theme/typography.js";
 
-const SettingsFooter = ({ isAuthUser }) => {
+const SettingsFooter = ({ isAuthUser, openModal }) => {
   return (
     <div className="settings-footer">
       {isAuthUser ? (
-        <Button to="#" style={{ color: palette.primary.main }}>
+        <Button
+          onClick={openModal}
+          to="#"
+          style={{ color: palette.primary.main }}
+        >
           Видалити профіль
         </Button>
       ) : (

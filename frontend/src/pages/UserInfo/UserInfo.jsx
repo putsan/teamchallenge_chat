@@ -3,10 +3,22 @@ import ProfileHeader from "../../components/SettingsComponents/ProfileHeader.jsx
 import { PROFILE_HEADER_TITLES } from "../../app/constants.js";
 import "../../components/UserInfoComponents/UserInfoFullName/UserInfoFullName.scss";
 import palette from "../../theme/palette.js";
+import { useState } from "react";
+import ModalDelete from "../../components/modals/ModalsSubmit.jsx";
 import UserInfoText from "../../components/UserInfoComponents/UserInfoText.jsx";
 import UserInfoProfileDetails from "../../components/UserInfoComponents/UserInfoProfileDetails.jsx";
-
+import modalConstnats from '../../app/constants/modals.js';
 const UserInfo = () => {
+  const [modal, setModal] = useState(false);
+
+  const openModal = () => {
+    setModal(true);
+  };
+
+  const closeModal = () => {
+    setModal(false);
+  };
+
   return (
     <Grid
       display="flex"
@@ -23,7 +35,6 @@ const UserInfo = () => {
           title="bio"
           text="Design adds value faster, than it adds cost"
         />
-
         <Grid item style={{ margin: "88px 0 24px 0 " }}>
           <Button variant="contained" size="small" sx={{ marginRight: "10px" }}>
             Додати
@@ -36,10 +47,19 @@ const UserInfo = () => {
         </Grid>
       </Grid>
       <Grid item sx={{ marginBottom: "56px" }}>
-        <Button to="#" style={{ color: palette.error.main }}>
+        <Button
+          to="#"
+          onClick={openModal}
+          style={{ color: palette.error.main }}
+        >
           Видалити профіль
         </Button>
       </Grid>
+      <ModalDelete
+        type={modalConstnats.deleteChatUser}
+        show={modal}
+        onClose={closeModal}
+      ></ModalDelete>
     </Grid>
   );
 };
