@@ -6,6 +6,6 @@ namespace Ldis_Project_Reliz.Server.Services.Interfaces
     {
         Dictionary<string,string> LoadUserAvatar(IFormFile file,string UserName);
         Dictionary<string, string> LoadChatAvatar(IFormFile file, string ChatName);
-        FileStream UploadImage(string ImageLInk);
+        object UploadImage(string ImageLInk);
     }
 }

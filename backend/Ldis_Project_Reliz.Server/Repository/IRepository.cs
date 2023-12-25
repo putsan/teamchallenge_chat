@@ -8,7 +8,7 @@ namespace Ldis_Project_Reliz.Server.Repository
     public interface IRepository
     {
         Image AddNewImage(string ImageCode, string ImageLink);
-        bool FindUserForСheckExistence(string Email);
+        Task<bool> FindUserForСheckExistence(string Email);
         bool FindUserForСheckExistenceRegistration(string Email, string Password);
         bool FindUserForСheckExistenceLogin(string Email, string Password);
         void CreateNewUser(string Email, string UserName, string Password, string ImageLink);

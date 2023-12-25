@@ -8,12 +8,11 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
     public class ReturnUrlOauthServer : IReturnUrlOauthServerService
     {
         IGoogleOauthService GoogleOauth;
-        IHttpContextAccessor ContextAccessor;
-        public ReturnUrlOauthServer(IGoogleOauthService GoogleOauth, IHttpContextAccessor ContextAccessor)
+        public ReturnUrlOauthServer(IGoogleOauthService GoogleOauth)
         {
-            this.ContextAccessor = ContextAccessor;
             this.GoogleOauth = GoogleOauth;
         }
+        /*Генерация url сервеа аутентификации*/
         string IReturnUrlOauthServerService.ReturnUrlOauthServer()
         {
             string RedirectUrl = "https://localhost:7209/GoogleOauth/Code";
@@ -21,8 +20,7 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
             string CodeVerifier = Guid.NewGuid().ToString();
             string CodeChallenge = Sha256Encoder.Sha256Compute(CodeVerifier);
             Console.WriteLine($"Code verifier - {CodeChallenge}");
-            ContextAccessor.HttpContext.Session.SetString(DataToCacheSessionCookieKey.CodeChallengeGoogleOauthSession,CodeVerifier);
-            return GoogleOauth.GeneratedUrlOauthServer(Scope,RedirectUrl,CodeChallenge);          
+            return GoogleOauth.GeneratedUrlOauthServer(Scope,RedirectUrl,CodeChallenge,CodeVerifier);          
         }
     }
 }

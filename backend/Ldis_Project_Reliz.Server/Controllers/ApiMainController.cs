@@ -36,7 +36,8 @@ namespace Ldis_Project_Reliz.Server.Controllers
                     CountUsers = Chat.CountUsers.Value,
                     NameChat = Chat.NameChat
                 };
-                ContextAccessor.HttpContext.Session.SetString(DataToCacheSessionCookieKey.AvatarChatLinkSession, Chat.Avatar.Link);
+                string link = Chat.Avatar.Link;
+                ContextAccessor.HttpContext.Response.Cookies.Append(DataToCacheSessionCookieKey.AvatarChatLinkSession,link);
                 string responce = JsonSerializer.Serialize(ChatInfoDtoInstance);
                 return Ok(responce);
             }
@@ -48,8 +49,17 @@ namespace Ldis_Project_Reliz.Server.Controllers
         [HttpGet("getAvatarRandomChat")]
         public IActionResult GetAvatarRandomChat()
         {
-            var avatar = LoadUploadImage.UploadImage(ContextAccessor.HttpContext.Session.GetString(DataToCacheSessionCookieKey.AvatarLinkSession));
-            return File(avatar, "application/octet-stream", "ChatAvatar.jpg");
+            string linkImage = ContextAccessor.HttpContext.Request.Cookies[DataToCacheSessionCookieKey.AvatarChatLinkSession];
+            var avatar = LoadUploadImage.UploadImage(linkImage);
+            if (avatar.GetType() == typeof(string))
+            {
+                return Ok(avatar);
+            }
+            else if (avatar.GetType() == typeof(string))
+            {
+                return File((FileStream)avatar, "application/octet-stream", "ChatAvatar.jpg");
+            }
+            return StatusCode(505);
         }
         [HttpGet("getAllChats")]
         public IActionResult GetAllChats()

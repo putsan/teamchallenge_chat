@@ -8,7 +8,7 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
 {
     public class LoadUploadImageServer : ILoadUploadImageServerService
     {
-
+        /*Загрузка аватара для группы в файловую систему*/
         public Dictionary<string, string> LoadChatAvatar(IFormFile file, string ChatName)
         {
             int CountSymbolsChatName = ChatName.Length;
@@ -27,7 +27,7 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
             };
             return AvatarInfo;
         }
-
+        /*Загрузка аватара для юзера в файловую систему*/
         public Dictionary<string, string> LoadUserAvatar(IFormFile file,string UserName)
         {
             int CountSymbolsChatName = UserName.Length;
@@ -46,9 +46,13 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
             };
             return AvatarInfo;
         }
-
-        public FileStream UploadImage(string ImageLink)
+        /*Получение изображения из файловой системы по ссылке*/
+        public object UploadImage(string ImageLink)
         {
+            if (ImageLink == null)
+            {
+                return "https://cdn-icons-png.flaticon.com/512/69/69589.png";
+            }
             FileStream fileStream = new FileStream(ImageLink, FileMode.Open, FileAccess.Read);
             return fileStream;
         }

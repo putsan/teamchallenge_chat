@@ -25,7 +25,9 @@ builder.Services.AddSignalR(hubOptions =>
 });
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(3);
+    options.IdleTimeout = TimeSpan.FromMinutes(5);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
 });
 builder.Services.AddCors(options =>
 {

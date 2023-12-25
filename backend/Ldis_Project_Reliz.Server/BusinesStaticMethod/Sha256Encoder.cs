@@ -6,6 +6,7 @@ namespace Ldis_Project_Reliz.Server.BusinesStaticMethod
 {
     public static class Sha256Encoder
     {
+        /*Генерация CodeChallenge*/
         public static string Sha256Compute(string codeVerification)
         {
             using var sha256 = SHA256.Create();

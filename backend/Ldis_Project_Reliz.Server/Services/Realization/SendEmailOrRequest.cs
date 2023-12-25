@@ -18,6 +18,7 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
         {
             this.GetDataConfig = GetDataConfig;
         }
+        /*Отправка кода авторизации на почту*/
         public string SendCodeAuthentification(string Email)
         {
             string Sender = GetDataConfig.GetSenderEmail();

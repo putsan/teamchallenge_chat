@@ -115,13 +115,9 @@ namespace Ldis_Project_Reliz.Server.Repository
             Chat.Users.Remove(User);
             Context.SaveChanges();
         }
-        public bool FindUserForСheckExistence(string Email)
+        public async Task<bool> FindUserForСheckExistence(string Email)
         {
-            var User = Context.Users.AsNoTracking().FirstOrDefault(x => x.Enail == Email);
-            if (User == null)
-                return false;
-            else
-              return true;
+            return await Context.Users.AnyAsync(x => x.Enail == Email);
         }
         public User FindUserByEmailForDeletedTimer (string Email)
         {
@@ -235,8 +231,8 @@ namespace Ldis_Project_Reliz.Server.Repository
         public void UptadeUserAvatar(IFormFile file)
         {
 
-            string UserName = "Alex" /*ContextAccessor.HttpContext.Request.Cookies[DataToCacheSessionCookieKey.UserName]*/;
-            string Email = "illanazarov966@gmail.com" /*ContextAccessor.HttpContext.Request.Cookies[DataToCacheSessionCookieKey.EmailForAllOperationWithEmail]*/;
+            string UserName = ContextAccessor.HttpContext.Request.Cookies[DataToCacheSessionCookieKey.UserName];
+            string Email = ContextAccessor.HttpContext.Request.Cookies[DataToCacheSessionCookieKey.EmailForAllOperationWithEmail];
             var User = Context.Users.Include(x => x.Avatar).FirstOrDefault(x => x.Enail == Email);
             var ImageInfo = LoadImage.LoadUserAvatar(file,UserName);
             string ImageCode = null, ImageLink = null;
@@ -262,6 +258,7 @@ namespace Ldis_Project_Reliz.Server.Repository
             {
                 var User = Context.Users.FirstOrDefault(x => x.Enail == ContextAccessor.HttpContext.Request.Cookies[DataToCacheSessionCookieKey.EmailForAllOperationWithEmail]);
                 User.UserName = UserName;
+                Context.SaveChanges();
                 return "Имя успешно изменено";
             }
             return "Данное имя уже занято";
@@ -273,6 +270,7 @@ namespace Ldis_Project_Reliz.Server.Repository
             {
                 var User = Context.Users.FirstOrDefault(x => x.Enail == ContextAccessor.HttpContext.Request.Cookies[DataToCacheSessionCookieKey.EmailForAllOperationWithEmail]);
                 User.Password = Password;
+                Context.SaveChanges();
                 return "Пароль успешно изменен";
             }
             return "Данный пароль уже занят";
@@ -299,7 +297,8 @@ namespace Ldis_Project_Reliz.Server.Repository
         }
         public User UserInfo()
         {
-            var User = Context.Users.Include(x => x.Avatar).FirstOrDefault(x => x.Enail == "illanazarov966@gmail.com");
+            string Email = ContextAccessor.HttpContext.Request.Cookies[DataToCacheSessionCookieKey.EmailForAllOperationWithEmail];
+            var User = Context.Users.Include(x => x.Avatar).FirstOrDefault(x => x.Enail == Email);
             return User;
         }
         public void SaveChanges() => Context.SaveChanges();

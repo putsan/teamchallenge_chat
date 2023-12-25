@@ -35,7 +35,6 @@ namespace Ldis_Project_Reliz.Server.Controllers
         {
             var User = Repository.UserInfo();
             ContextAccessor.HttpContext.Session.SetString(DataToCacheSessionCookieKey.AvatarLinkSession,User.Avatar.Link);
-            var avatar = LoadUploadImage.UploadImage(User.Avatar.Link);
             var DtoUserInfoInstance = new UserInfoDto
             {
                 Email = User.Enail,
@@ -50,7 +49,7 @@ namespace Ldis_Project_Reliz.Server.Controllers
         public IActionResult GetImageUser ()
         {
             var avatar = LoadUploadImage.UploadImage(ContextAccessor.HttpContext.Session.GetString(DataToCacheSessionCookieKey.AvatarLinkSession));
-            return File(avatar, "application/octet-stream", "filename.jpg");
+            return File((FileStream)avatar, "application/octet-stream", "filename.jpg");
         }
         [HttpPost("changeUserName/{UserName}")]
         public IActionResult ChangeUserName(string UserName)

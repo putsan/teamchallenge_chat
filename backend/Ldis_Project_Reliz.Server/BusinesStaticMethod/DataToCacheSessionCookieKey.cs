@@ -2,6 +2,7 @@
 
 namespace Ldis_Project_Reliz.Server.BusinesStaticMethod
 {
+    /*Все ключи для установки данных в сессии cookie и кеш */
     public static class DataToCacheSessionCookieKey
     {
         public const string CodeChallengeGoogleOauthSession = "SessionCodeChallengeKey";
