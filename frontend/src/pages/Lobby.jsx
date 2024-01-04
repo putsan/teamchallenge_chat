@@ -1,11 +1,11 @@
 import LobbyHeader from "../components/LobbyComponent/LobbyHeader/LobbyHeader.jsx";
-import MainLobby from "../components/MainLobby/MainLobby";
+import LobbyThemesContainer from "../components/LobbyThemesContainer/LobbyThemesContainer.jsx";
 
 function Lobby() {
   return (
     <div>
       <LobbyHeader />
-      <MainLobby />
+      <LobbyThemesContainer />
     </div>
   );
 }

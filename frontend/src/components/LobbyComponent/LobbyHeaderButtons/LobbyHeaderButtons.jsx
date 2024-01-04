@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import typography from "../../theme/typography.js";
+import typography from "../../../theme/typography.js";
 import "./LobbyHeaderButtons.scss";
 
 const LobbyHeaderButtons = ({ isRegistered = true }) => {
@@ -13,7 +13,7 @@ const LobbyHeaderButtons = ({ isRegistered = true }) => {
             sx={{ ...typography.body1, paddingRight: "7px", fontWeight: "500" }}
           >
             Почати рандомний чат
-          </Typography>{" "}
+          </Typography>
           <PeopleOutlineOutlinedIcon />
         </Button>
         {isRegistered && (
@@ -26,7 +26,7 @@ const LobbyHeaderButtons = ({ isRegistered = true }) => {
               }}
             >
               Створити чат
-            </Typography>{" "}
+            </Typography>
             <AddOutlinedIcon />
           </Button>
         )}

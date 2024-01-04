@@ -8,14 +8,14 @@ import typography from "../../../theme/typography.js";
 
 const LobbyHeaderBar = () => {
   return (
-    <Box className="lobby__header">
+    <Box className="lobby-header">
       <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
         <Box
           sx={{
             backgroundColor: palette.secondary.main,
             marginRight: "9px",
           }}
-          className="lobby__header__circle"
+          className="lobby-header__circle"
         >
           <Typography
             sx={{ color: palette.primary.main, ...typography.h6Bold }}
