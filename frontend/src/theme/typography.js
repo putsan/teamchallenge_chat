@@ -39,6 +39,15 @@ const typography = {
     letterSpacing: "0.96px",
     textTransform: "uppercase",
   },
+  h6Bold: {
+    fontFamily: "Rubik One, sans-serif",
+    fontSize: "10px",
+    fontStyle: "normal",
+    fontWeight: 400,
+    lineHeight: "17px", // 170%
+    letterSpacing: "-0.1px",
+    textTransform: "uppercase",
+  },
   body1: {
     fontSize: "16px",
     fontStyle: "normal",
@@ -56,6 +65,13 @@ const typography = {
     fontStyle: "normal",
     fontWeight: 400,
     lineHeight: "normal",
+  },
+  subtitle: {
+    fontSize: "20px",
+    fontStyle: "normal",
+    fontWeight: 500,
+    lineHeight: "24px", // 120%
+    letterSpacing: "0.15px",
   },
 };
 

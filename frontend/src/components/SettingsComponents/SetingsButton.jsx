@@ -1,6 +1,7 @@
-import Button from "@mui/material/Button";
-import SettingsIcon from "@mui/icons-material/Settings";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { useNavigate } from "react-router-dom";
+import { IconButton } from "@mui/material";
+import palette from "../../theme/palette.js";
 
 const SetingsButton = () => {
   const navigate = useNavigate();
@@ -11,9 +12,9 @@ const SetingsButton = () => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>
-        <SettingsIcon />
-      </Button>
+      <IconButton onClick={handleOpen} sx={{ color: palette.midnight }}>
+        <SettingsOutlinedIcon />
+      </IconButton>
     </div>
   );
 };

@@ -1,0 +1,16 @@
+.lobby-themes {
+  display: flex;
+  flex-direction: column;
+  margin: 26px 16px;
+
+  &__title {
+    display: flex;
+    margin-bottom: 15px;
+    margin-left: 0;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+  }
+}

@@ -28,3 +28,8 @@ export const PROFILE_HEADER_TITLES = {
   SETTINGS: "Налаштування",
   NEW_CHAT: "Новий чат",
 };
+
+export const LOBBY_TITLES = {
+  MAIN_QUESTION: "Про що хочеш поговорити сьогодні?",
+  POPULAR_THEMES: "Найпопулярніші теми",
+};
