@@ -62,7 +62,7 @@ namespace Ldis_Project_Reliz.Server.Controllers
 
         [HttpGet("logOut")]
         public IActionResult LogOut()
-        {           
+        {
             var User = Repository.UserInfo();
             User.IsRegidtred = false;
             Repository.SaveChanges();
@@ -77,4 +77,4 @@ namespace Ldis_Project_Reliz.Server.Controllers
             return Ok();
         }
     }
-} 
+}

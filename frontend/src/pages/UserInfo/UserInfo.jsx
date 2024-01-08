@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { Button, Grid } from "@mui/material";
 import ProfileHeader from "../../components/SettingsComponents/ProfileHeader.jsx";
 import { PROFILE_HEADER_TITLES } from "../../app/constants.js";
@@ -7,7 +9,7 @@ import { useState } from "react";
 import ModalDelete from "../../components/modals/ModalsSubmit.jsx";
 import UserInfoText from "../../components/UserInfoComponents/UserInfoText.jsx";
 import UserInfoProfileDetails from "../../components/UserInfoComponents/UserInfoProfileDetails.jsx";
-import modalConstnats from '../../app/constants/modals.js';
+import modalConstnats from "../../app/constants/modals.js";
 const UserInfo = () => {
   const [modal, setModal] = useState(false);
 

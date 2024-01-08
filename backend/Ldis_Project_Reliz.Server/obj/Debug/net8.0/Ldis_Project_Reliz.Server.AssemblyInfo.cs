@@ -21,4 +21,3 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Создано классом WriteCodeFragment MSBuild.
-

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { useEffect, useState } from "react";
 import "./ModalsSubmit.scss";
 import modalType from "./ModalType";

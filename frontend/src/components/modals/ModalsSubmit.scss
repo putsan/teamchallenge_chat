@@ -1,115 +1,140 @@
+/* stylelint-disable font-family-no-missing-generic-family-keyword */
 .modal-background {
-  height: 100%;
-  width: 100%;
-  background: #00000033;
   position: absolute;
-  left: 0;
   top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: #0003;
+
   .modal {
     position: absolute;
     top: 50%;
     left: 50%;
     translate: -50% -50%;
+
     button {
-      background: inherit;
       cursor: pointer;
+      background: inherit;
     }
+
     .modal-content {
-      padding-left: 30px;
-      padding-right: 30px;
-      min-width: 369px;
-      .delete-chat {
-        color: #e70000;
-        text-align: center;
-        font-family: Roboto;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        margin-top: 32px;
-      }
-      .block-delete {
-        color: #e70000;
-        text-align: center;
-        font-family: Roboto;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        margin-top: 33px;
-      }
-      h3 {
-        color: #073b4c;
-        font-family: Roboto;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-        margin-top: 15px;
-        max-width: 284px;
-      }
-      #exit-accaunt {
-        max-width: 323px;
-      }
-      .delete-gtoup {
-        font-weight: 400;
-        max-width: 335px;
-        span {
-          color: #073b4c;
-          font-family: Roboto;
-          font-size: 12px;
-          font-style: normal;
-          font-weight: 400;
-          line-height: normal;
-        }
-      }
-      background: white;
       display: flex;
       flex-direction: column;
       align-items: center;
-      border-radius: 4px;
-      border: 1px solid #ffd166;
+
+      min-width: 369px;
+      padding: 15px 30px 22px;
+
+      background: white;
       background: #f8f9fa;
-      padding-top: 15px;
-      padding-bottom: 22px;
+      border: 1px solid #ffd166;
+      border-radius: 4px;
+
+      .delete-chat {
+        margin-top: 32px;
+
+        font-family: Roboto;
+        font-size: 16px;
+        font-weight: 400;
+        font-style: normal;
+        line-height: normal;
+        color: #e70000;
+        text-align: center;
+      }
+
+      .block-delete {
+        margin-top: 33px;
+
+        font-family: Roboto;
+        font-size: 16px;
+        font-weight: 400;
+        font-style: normal;
+        line-height: normal;
+        color: #e70000;
+        text-align: center;
+      }
+
+      h3 {
+        max-width: 284px;
+        margin-top: 15px;
+
+        font-family: Roboto;
+        font-size: 16px;
+        font-weight: 700;
+        font-style: normal;
+        line-height: normal;
+        color: #073b4c;
+      }
+
+      #exit-accaunt {
+        max-width: 323px;
+      }
+
+      .delete-gtoup {
+        max-width: 335px;
+        font-weight: 400;
+
+        span {
+          font-family: Roboto;
+          font-size: 12px;
+          font-weight: 400;
+          font-style: normal;
+          line-height: normal;
+          color: #073b4c;
+        }
+      }
 
       .background-svg {
-        border-radius: 50%;
-        background: #acb5bd;
-        display: flex;
-        height: 100px;
-        width: 100px;
-        justify-content: center;
-        align-items: center;
         position: relative;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 100px;
+        height: 100px;
+
+        background: #acb5bd;
+        border-radius: 50%;
+
         .uploadFile--input {
+          cursor: pointer;
+
+          position: absolute;
+          top: 0;
+          left: 0;
+
+          width: 100%;
+          height: 100%;
+
+          color: #fff0;
+
           &::-webkit-file-upload-button {
             visibility: hidden;
           }
-          color: #ffffff00;
-          cursor: pointer;
-          width: 100%;
-          height: 100%;
-          left: 0;
-          top: 0;
-          position: absolute;
         }
       }
     }
+
     .decline-btn {
       width: 100%;
+      margin-top: 12px;
       padding: 17px;
-      color: #073b4c;
-      text-align: center;
+
       font-family: Roboto;
       font-size: 16px;
-      font-style: normal;
       font-weight: 400;
+      font-style: normal;
       line-height: normal;
-      border-radius: 4px;
-      border: 1px solid #ffd166;
+      color: #073b4c;
+      text-align: center;
+
       background: #ffd166;
-      margin-top: 12px;
+      border: 1px solid #ffd166;
+      border-radius: 4px;
     }
   }
 }

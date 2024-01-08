@@ -9,7 +9,7 @@ const SettingsItems = () => {
       <div className="separator" style={{ marginLeft: "64px" }} />
       <SettingsItem itemData={SETTINGS_ITEM_STYLES.THEME} />
       <div style={{ marginTop: "22px" }}>
-        <SettingsItem itemData={SETTINGS_ITEM_STYLES.INFO} />
+        <SettingsItem itemData={SETTINGS_ITEM_STYLES.RULES} />
       </div>
     </Grid>
   );

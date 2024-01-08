@@ -1,7 +1,8 @@
 import { SETTINGS_ITEM_STYLES } from "../../app/constants.js";
 import LangIcon from "./LangIcon.jsx";
 import ThemeIcon from "./ThemeIcon.jsx";
-import InfoIcon from "./InfoIcon.jsx";
+import InfoIcon from "./RulesIcon.jsx";
+import InformationIcon from "./InformationIcon.jsx";
 
 const IconFactory = ({ itemData }) => {
   let IconComponent;
@@ -13,8 +14,11 @@ const IconFactory = ({ itemData }) => {
     case SETTINGS_ITEM_STYLES.THEME:
       IconComponent = ThemeIcon;
       break;
-    case SETTINGS_ITEM_STYLES.INFO:
+    case SETTINGS_ITEM_STYLES.RULES:
       IconComponent = InfoIcon;
+      break;
+    case SETTINGS_ITEM_STYLES.INFO:
+      IconComponent = InformationIcon;
       break;
     default:
       IconComponent = " ";

@@ -19,11 +19,15 @@ const SettingsItem = ({ itemData }) => {
   const isLanguageStyle = itemData === SETTINGS_ITEM_STYLES.LANGUAGE;
 
   // додати
-  // const isInfoStyle = itemData === SETTINGS_ITEM_STYLES.INFO;
+  // const isRulesStyle = itemData === SETTINGS_ITEM_STYLES.RULES;
 
   const onSettingsItemClick = () => {
     setIsArrowRight((prevIsArrowRight) => !prevIsArrowRight);
     setIsSubMenuOpen((prevIsSubMenuOpen) => !prevIsSubMenuOpen);
+  };
+  const onBlurSubMenu = (event) => {
+    event.stopPropagation();
+    onSettingsItemClick();
   };
 
   const onIconButtonClick = (event) => {
@@ -42,6 +46,8 @@ const SettingsItem = ({ itemData }) => {
         cursor: "pointer",
       }}
       onClick={onSettingsItemClick}
+      onBlur={onBlurSubMenu}
+      tabIndex={0}
     >
       <Grid sx={{ display: "flex", alignItems: "center" }}>
         <IconFactory itemData={itemData} />
