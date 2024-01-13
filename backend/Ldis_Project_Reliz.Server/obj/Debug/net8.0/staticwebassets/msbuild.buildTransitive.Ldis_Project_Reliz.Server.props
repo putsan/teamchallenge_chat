@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Ldis_Project_Reliz.Server.props" />
+</Project>
