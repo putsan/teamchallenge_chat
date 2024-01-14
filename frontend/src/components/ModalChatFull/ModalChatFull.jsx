@@ -38,7 +38,7 @@ const ModalChatFull = () => {
             component="h2"
             sx={{ textAlign: "center" }}
           >
-            <div style={{ color: "black" }}>Упс...</div>
+            <div style={{ color: "#073B4C" }}>Упс...</div>
             <span className="span-full-chat">Нажаль чат переповнений</span>
           </Typography>
           <Typography
@@ -59,7 +59,7 @@ const ModalChatFull = () => {
                   sx={{
                     marginTop: "10%",
                     width: "200px",
-                    background: "#BFBFBF",
+                    background: "#EF476F",
                   }}
                 >
                   До списку чатів
@@ -70,9 +70,9 @@ const ModalChatFull = () => {
                   variant="contained"
                   className="list-chats"
                   sx={{
-                    marginTop: "10%",
+                    marginTop: "5%",
                     width: "200px",
-                    background: "#BFBFBF",
+                    background: "#EF476F",
                   }}
                 >
                   Здивуй мене
