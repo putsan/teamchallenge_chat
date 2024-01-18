@@ -58,3 +58,8 @@ export const CONFIRM_PASSWORD_INPUT_FIELD = {
 export const MAIN_TITLE = "LDIS";
 
 export const AUTH_SUBTITLE = "Твоя платформа для вільного спілкування!";
+
+export const LOBBY_TITLES = {
+  MAIN_QUESTION: "Про що хочеш поговорити сьогодні?",
+  POPULAR_THEMES: "Найпопулярніші теми",
+};
