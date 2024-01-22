@@ -9,6 +9,7 @@ import theme from "../theme";
 import "./App.scss";
 import Settings from "../pages/Settings/Settings.jsx";
 import UserInfo from "../pages/UserInfo/UserInfo.jsx";
+import ModalChatFull from "../components/ModalChatFull/ModalChatFull.jsx";
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
           <Route path="/testChat" element={<Chat />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/userInfo" element={<UserInfo />} />
+          {/* Тестовый роут для модалки */}
+          <Route path="/modaltest" element={<ModalChatFull />} />
         </Routes>
       </Router>
     </ThemeProvider>
