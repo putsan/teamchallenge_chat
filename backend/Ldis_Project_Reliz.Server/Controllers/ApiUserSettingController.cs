@@ -1,8 +1,10 @@
-﻿using Ldis_Project_Reliz.Server.Models.BusinesModel;
+﻿using Ldis_Project_Reliz.Server.BusinesStaticMethod;
+using Ldis_Project_Reliz.Server.Models.BusinesModel;
 using Ldis_Project_Reliz.Server.Repository;
 using Ldis_Project_Reliz.Server.Services.Interfaces;
 using Ldis_Project_Reliz.Server.Services.Realization;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
 using System.Text.Json;
 
 namespace Ldis_Project_Reliz.Server.Controllers
@@ -14,8 +16,10 @@ namespace Ldis_Project_Reliz.Server.Controllers
         IRepository Repository;
         IClaimsAuthentificationService ClaimsAuthentification;
         ILoadUploadImageServerService LoadUploadImage;
-        public ApiUserSettingController(IRepository Repository, IClaimsAuthentificationService ClaimsAuthentification, ILoadUploadImageServerService LoadUploadImage)
+        IHttpContextAccessor ContextAccessor;
+        public ApiUserSettingController(IRepository Repository, IClaimsAuthentificationService ClaimsAuthentification, ILoadUploadImageServerService LoadUploadImage, IHttpContextAccessor ContextAccessor)
         {
+            this.ContextAccessor = ContextAccessor;  
             this.LoadUploadImage = LoadUploadImage;
             this.ClaimsAuthentification = ClaimsAuthentification;
             this.Repository = Repository;
@@ -30,21 +34,22 @@ namespace Ldis_Project_Reliz.Server.Controllers
         public IActionResult PersonalSettingsInfo()
         {
             var User = Repository.UserInfo();
-            var Avatar = LoadUploadImage.UploadImage(User.Avatar.Link);
-            if (Avatar == null)
+            ContextAccessor.HttpContext.Session.SetString(DataToCacheSessionCookieKey.AvatarLinkSession,User.Avatar.Link);
+            var DtoUserInfoInstance = new UserInfoDto
             {
-                string DefaultLinkImage = "https://icons.veryicon.com/png/o/miscellaneous/rookie-official-icon-gallery/225-default-avatar.png";
-            }
-            UserInfoDto UserInfo = new UserInfoDto
-            {
-                Avatar = Avatar,
                 Email = User.Enail,
                 RegisteredAt = User.RegisteredAt,
                 Status = User.Status,
-                UserName = User.UserName,
+                UserName = User.UserName
             };
-            string JsonResponce = JsonSerializer.Serialize(UserInfo);
-            return Ok(JsonResponce);
+            string responceJsonUserInfoDto = JsonSerializer.Serialize(DtoUserInfoInstance);
+            return Ok(responceJsonUserInfoDto);
+        }
+        [HttpGet("getImage")]
+        public IActionResult GetImageUser ()
+        {
+            var avatar = LoadUploadImage.UploadImage(ContextAccessor.HttpContext.Session.GetString(DataToCacheSessionCookieKey.AvatarLinkSession));
+            return File((FileStream)avatar, "application/octet-stream", "filename.jpg");
         }
         [HttpPost("changeUserName/{UserName}")]
         public IActionResult ChangeUserName(string UserName)

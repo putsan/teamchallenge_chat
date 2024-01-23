@@ -30,6 +30,7 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
             GetDataFromConfig = getDataConfig;
         }
         private string UrlOauthServer = "https://accounts.google.com/o/oauth2/v2/auth";
+        /*Обмен кода авторизации на токен доступа*/
         public async Task<TokenResult> ExchangeCodeOnToken(string Code, string CodeVerification, string RedirectUrl)
         {
             Console.WriteLine($"Code verifier - {CodeVerification}");
@@ -65,7 +66,7 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
 
             return tokenResult;
         }
-
+        /*Получение данных пользователя из accessToken */
         public async Task<Dictionary<string, string>> GetUserDataWithAccessToken(string AccessToken)
         {
             string GoogleUserInfo = "https://www.googleapis.com/oauth2/v2/userinfo";
@@ -89,8 +90,8 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
             }
             return new Dictionary<string, string>();
         }
-
-        public string GeneratedUrlOauthServer(string scope, string redirectUrl, string CodeChallenge)
+        /*Генерация url сервера аутентификации для Oauth аутентификации через гугл*/
+        public string GeneratedUrlOauthServer(string scope, string redirectUrl, string CodeChallenge,string CodeVerifier)
         {
             Console.WriteLine($"Code verifier - {CodeChallenge}");
             var QueryParams = new Dictionary<string, string>
@@ -101,16 +102,18 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
                 {"scope",scope },
                 {"code_challenge",CodeChallenge },
                 {"code_challenge_method", "S256"  },
-                {"access_type","offline" }
+                {"access_type","offline" },
+                {"state",CodeVerifier }
             };
             var url =  QueryHelpers.AddQueryString(UrlOauthServer, QueryParams);
             return url;
         }
-
+       /*Выбор аутентификации или регистрации юзера */
         public async Task<string> AuthentificationOrRegisterUser(Dictionary<string, string> DataUserFromAccesToken)
         {
             string Email = null;
             string ImageLink = null;
+            /*Получение аватара и email юзера из AccessToken*/
             foreach (var Subject in DataUserFromAccesToken)
             {
                 if (Subject.Key == "email")
@@ -122,13 +125,14 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
                     ImageLink = Subject.Value;
                 }
             }
-            bool result =  Repository.FindUserForСheckExistence(Email);
+            bool result = await Repository.FindUserForСheckExistence(Email);
             if (result == true)
             {
                 ClaimsAuthentification.Authentification(Email);
             }
             else if (result == false)
             {
+                /*Если пользователь не зарегистрирован отправляем сообщение с кодом ему на почту*/
                 string CodeAuthentification = Send.SendCodeAuthentification(Email);
                 int index = 0;
                 StringBuilder stringBuilder = new StringBuilder(Email);
@@ -141,8 +145,9 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
                     }
                 }
                 string UserName = Convert.ToString(stringBuilder);
+                ClaimsAuthentification.Authentification(Email);
                 Repository.CreateNewUser(Email,UserName,CodeAuthentification,ImageLink);
-                return "d";
+                return "Реестрація успішна";
             }
             return "";
         }

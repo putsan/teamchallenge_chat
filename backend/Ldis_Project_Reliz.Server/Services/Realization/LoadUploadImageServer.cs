@@ -8,14 +8,14 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
 {
     public class LoadUploadImageServer : ILoadUploadImageServerService
     {
-
+        /*Загрузка аватара для группы в файловую систему*/
         public Dictionary<string, string> LoadChatAvatar(IFormFile file, string ChatName)
         {
             int CountSymbolsChatName = ChatName.Length;
             StringBuilder builder = new StringBuilder(ChatName);
             builder.Insert(CountSymbolsChatName, "ChatAvatar.jpg");
             string ImageName = Convert.ToString(builder);
-            string FullPathToFile = $"D:\\DotNetProject\\teamchallenge_chat\\backend\\Ldis_Project_Reliz.Server\\Images\\{ImageName}";
+            string FullPathToFile = $"D:\\teamchallenge_chat\\backend\\Ldis_Project_Reliz.Server\\Images\\{ImageName}";
             using (Bitmap bitmap = new Bitmap(file.OpenReadStream()))
             {
                 bitmap.Save(FullPathToFile, System.Drawing.Imaging.ImageFormat.Jpeg);
@@ -27,14 +27,14 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
             };
             return AvatarInfo;
         }
-
+        /*Загрузка аватара для юзера в файловую систему*/
         public Dictionary<string, string> LoadUserAvatar(IFormFile file,string UserName)
         {
             int CountSymbolsChatName = UserName.Length;
             StringBuilder builder = new StringBuilder(UserName);
             builder.Insert(CountSymbolsChatName, "UserAvatar.jpg");
             string ImageName = Convert.ToString(builder);
-            string FullPathToFile = $"D:\\DotNetProject\\teamchallenge_chat\\backend\\Ldis_Project_Reliz.Server\\Images\\{ImageName}";
+            string FullPathToFile = $"D:\\teamchallenge_chat\\backend\\Ldis_Project_Reliz.Server\\Images\\{ImageName}";
             using (Bitmap bitmap = new Bitmap(file.OpenReadStream()))
             {
                 bitmap.Save(FullPathToFile, System.Drawing.Imaging.ImageFormat.Jpeg);
@@ -46,13 +46,15 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
             };
             return AvatarInfo;
         }
-
-        public FileStreamResult UploadImage(string ImageLink)
+        /*Получение изображения из файловой системы по ссылке*/
+        public object UploadImage(string ImageLink)
         {
+            if (ImageLink == null)
+            {
+                return "https://cdn-icons-png.flaticon.com/512/69/69589.png";
+            }
             FileStream fileStream = new FileStream(ImageLink, FileMode.Open, FileAccess.Read);
-            FileStreamResult fileResult = new FileStreamResult(fileStream, "application/octet-stream");
-            fileResult.FileDownloadName = "Image.jpg";
-            return fileResult;
+            return fileStream;
         }
     }
 }

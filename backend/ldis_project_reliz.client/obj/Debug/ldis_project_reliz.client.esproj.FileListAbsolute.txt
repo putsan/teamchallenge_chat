@@ -1,2 +1,3 @@
 D:\DotNetProject\Ldis_Project_Reliz\ldis_project_reliz.client\obj\Debug\ldis_project_reliz.client.esproj.CoreCompileInputs.cache
 D:\DotNetProject\teamchallenge_chat\backend\ldis_project_reliz.client\obj\Debug\ldis_project_reliz.client.esproj.CoreCompileInputs.cache
+D:\teamchallenge_chat\backend\ldis_project_reliz.client\obj\Debug\ldis_project_reliz.client.esproj.CoreCompileInputs.cache

@@ -17,7 +17,7 @@ namespace Ldis_Project_Reliz.Server.LdisDbContext
         public DbSet<User> Users { get; set; }
         public DbSet<Visible> Visibles { get; set; }
       
-        public DbContextApplication(DbContextOptions<DbContextApplication> options) : base(options)
+        public DbContextApplication(DbContextOptions<DbContextApplication> options) :  base(options)
         {
             Database.Migrate();
         }

@@ -17,7 +17,18 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddMemoryCache();
-builder.Services.AddSignalR();
+builder.Services.AddSignalR(hubOptions =>
+{
+    hubOptions.ClientTimeoutInterval = TimeSpan.FromMinutes(1);
+    hubOptions.HandshakeTimeout = TimeSpan.FromSeconds(15);
+
+});
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(5);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("ClientPermission", policy =>
@@ -48,6 +59,7 @@ builder.Services.AddSession(setting =>
 
     app.UseHttpsRedirection();
     app.UseAuthentication();
+    app.UseSession();
     app.UseCors("ClientPermission");
     app.UseAuthorization();
     app.MapHub<ChatHub>("/groupchat");

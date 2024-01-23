@@ -8,28 +8,34 @@ namespace Ldis_Project_Reliz.Server.Controllers
     public class GoogleOauthController : Controller
     {
         IGoogleOauthService GoogleOauth;
-        IMemoryCache MemoryCache;
-        public GoogleOauthController(IGoogleOauthService GoogleOauth, IMemoryCache MemoryCache)
+        IHttpContextAccessor ContextAccessor;
+        public GoogleOauthController(IGoogleOauthService GoogleOauth, IHttpContextAccessor ContextAccessor)
         {
-            this.MemoryCache = MemoryCache;
+            this.ContextAccessor = ContextAccessor;
             this.GoogleOauth = GoogleOauth;
         }
-        public async Task<IActionResult> Code(string code)
+        /*Получение токена доступа*/
+        public async Task<IActionResult> Code(string code, [FromQuery] string state )
         {
             string RedirectUrl = "https://localhost:7209/GoogleOauth/Code";
-            string CodeVerifier = (string)MemoryCache.Get(DataToCacheSessionCookieKey.CodeChallengeGoogleOauthCache);
+            string CodeVerifier = state;
+            if (CodeVerifier == null)
+            {
+                return StatusCode(505);
+            }
             var Result = await GoogleOauth.ExchangeCodeOnToken(code, CodeVerifier, RedirectUrl);
             string AccessToken = Result.AccessToken;
-            MemoryCache.Set(DataToCacheSessionCookieKey.AccessTokenGoogleOauthCache,AccessToken, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(10)));
+            ContextAccessor.HttpContext.Session.SetString(DataToCacheSessionCookieKey.AccessTokenGoogleOauthSession,AccessToken);
             GetUserDataFromAccessToken();
             return Ok();
         }
+        /*Получение данных пользователя из токена доступа и передача их в сервис для регистрации или авторизации*/
         public async Task<IActionResult> GetUserDataFromAccessToken()
         {
-            string AccessToken = (string)MemoryCache.Get(DataToCacheSessionCookieKey.AccessTokenGoogleOauthCache);
+            string AccessToken = ContextAccessor.HttpContext.Session.GetString(DataToCacheSessionCookieKey.AccessTokenGoogleOauthSession);
             var InfoUser = await GoogleOauth.GetUserDataWithAccessToken(AccessToken);
-           string a = await GoogleOauth.AuthentificationOrRegisterUser(InfoUser);
-            return Ok("Реестрація успішна !");
+            string result = await GoogleOauth.AuthentificationOrRegisterUser(InfoUser);
+            return Ok();
         }
     }
 }

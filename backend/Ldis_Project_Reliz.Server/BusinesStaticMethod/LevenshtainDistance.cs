@@ -2,6 +2,7 @@
 {
     public static class LevenshtainDistance
     {
+        /*Алгоритм дистанции Левенштейна для поиска чатов*/
         public static int Calculate(string source, string target)
         {
             if (string.IsNullOrEmpty(source))

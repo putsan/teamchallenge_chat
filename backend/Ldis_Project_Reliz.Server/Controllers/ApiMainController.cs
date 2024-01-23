@@ -1,6 +1,10 @@
-﻿using Ldis_Project_Reliz.Server.Repository;
+﻿using Ldis_Project_Reliz.Server.BusinesStaticMethod;
+using Ldis_Project_Reliz.Server.Models.BusinesModel;
+using Ldis_Project_Reliz.Server.Repository;
 using Ldis_Project_Reliz.Server.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text.Json;
 
 namespace Ldis_Project_Reliz.Server.Controllers
@@ -11,20 +15,52 @@ namespace Ldis_Project_Reliz.Server.Controllers
     public class ApiMainController : ControllerBase
     {
         IRepository Repository;
-        ILoadUploadImageServerService LoadImage;
-        public ApiMainController(IRepository Repository, ILoadUploadImageServerService LoadImage)
+        ILoadUploadImageServerService LoadUploadImage;
+        IHttpContextAccessor ContextAccessor;
+        public ApiMainController(IRepository Repository, ILoadUploadImageServerService LoadUploadImage, IHttpContextAccessor ContextAccessor)
         {
-            this.LoadImage = LoadImage;
+            this.ContextAccessor = ContextAccessor;
+            this.LoadUploadImage = LoadUploadImage;
             this.Repository = Repository;
         }
         [HttpGet("getRandomChat")]
         public IActionResult GetRandomChat()
         {
-            var Chat = Repository.RandomChat();
-            string responce = JsonSerializer.Serialize(Chat);
-            return Ok(responce);
+            if (ContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+            {
+                var Chat = Repository.RandomChat();
+                var ChatInfoDtoInstance = new ChatInfoDto
+                {
+                    Description = Chat.Description,
+                    CreateDate = Chat.CreatDate.Value,
+                    CountUsers = Chat.CountUsers.Value,
+                    NameChat = Chat.NameChat
+                };
+                string link = Chat.Avatar.Link;
+                ContextAccessor.HttpContext.Response.Cookies.Append(DataToCacheSessionCookieKey.AvatarChatLinkSession,link);
+                string responce = JsonSerializer.Serialize(ChatInfoDtoInstance);
+                return Ok(responce);
+            }
+            else
+            {
+                return StatusCode(401);
+            }
         }
-
+        [HttpGet("getAvatarRandomChat")]
+        public IActionResult GetAvatarRandomChat()
+        {
+            string linkImage = ContextAccessor.HttpContext.Request.Cookies[DataToCacheSessionCookieKey.AvatarChatLinkSession];
+            var avatar = LoadUploadImage.UploadImage(linkImage);
+            if (avatar.GetType() == typeof(string))
+            {
+                return Ok(avatar);
+            }
+            else if (avatar.GetType() == typeof(string))
+            {
+                return File((FileStream)avatar, "application/octet-stream", "ChatAvatar.jpg");
+            }
+            return StatusCode(505);
+        }
         [HttpGet("getAllChats")]
         public IActionResult GetAllChats()
         {
@@ -34,9 +70,16 @@ namespace Ldis_Project_Reliz.Server.Controllers
         [HttpPost("getChat/{ChatName}")]
         public IActionResult GetChat (string ChatName)
         {
-            var Chats = Repository.FindChat(ChatName);
-            var Responce = JsonSerializer.Serialize(Chats);
-            return Ok(Responce);
+            if (ContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+            {
+                var Chats = Repository.FindChat(ChatName);
+                var Responce = JsonSerializer.Serialize(Chats);
+                return Ok(Responce);
+            }
+            else
+            {
+                return StatusCode(401);
+            }
         }
         [HttpGet]
 
@@ -46,16 +89,43 @@ namespace Ldis_Project_Reliz.Server.Controllers
             bool AutoDelete,
             string ChatGenre,
             string Describing,string Visible)
-        {
-            var file = HttpContext.Request.Form.Files["image"];
-            Repository.CreateNewGroup(ChatName,Describing,CountUsers,AutoDelete,ChatGenre,Visible,file);
-            return Ok();
+            {
+            if (ContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+            {
+                var file = HttpContext.Request.Form.Files["image"];
+                Repository.CreateNewGroup(ChatName, Describing, CountUsers, AutoDelete, ChatGenre, Visible, file);
+                return Ok();
+            }
+            else
+            {
+                return StatusCode(401);
+            }
+          
         }
+
+
         [HttpPost("deleteGroup/{Id}")]
         public IActionResult DeleteGroup(int Id)
         {
-            string result = Repository.DeleteGroup(Id);
-            return Ok(result);
+            if (ContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+            {
+                string result = Repository.DeleteGroup(Id);
+                return Ok(result);
+            }
+            else
+            {
+                return StatusCode(401);
+            }
+        }
+
+
+        [HttpPost("getAllChatMessages/{ChatName}")]
+        public IActionResult ViewAllMessages (string ChatName)
+        {
+            var AllMessagesList = Repository.LoadAllChatMessage(ChatName);
+            string responceJson = JsonSerializer.Serialize(AllMessagesList);
+            return Ok(responceJson);
         }
     }
+      
 }

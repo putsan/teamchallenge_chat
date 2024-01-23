@@ -12,6 +12,7 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
             this.ClaimsAuthentification = ClaimsAuthentification;
             this.Repository = Repository;
         }
+        /*Логика авторизации через формы*/
         string IFormRegistrationAndAuthorizationService.FormLogin(string Email, string Password)
         {
             if (Repository.FindUserForСheckExistenceLogin(Email,Password))
@@ -21,6 +22,7 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
             }
             return "Користувача з таким паролем або email не існуе";
         }
+        /*Логика регистрации через формы*/
         string IFormRegistrationAndAuthorizationService.FormRegistration(string UserName, string Password, string Email)
         {
             if (Repository.FindUserForСheckExistenceRegistration(Email, Password))
