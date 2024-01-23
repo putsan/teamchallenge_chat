@@ -4,10 +4,13 @@ EXPOSE 7209
 
 FROM mcr.microsoft.com/dotnet/sdk:latest AS build
 WORKDIR /src
-COPY ["Ldis_Project_Reliz.Server.csproj", "./"]
+# The context of the build should be the root directory of your solution.
+# Adjust the path to the csproj file accordingly.
+COPY ["Ldis_Project_Reliz.Server.csproj", "/src"]
 RUN dotnet restore "Ldis_Project_Reliz.Server.csproj"
+# Make sure to copy the entire solution context, including the csproj subdirectory.
 COPY . .
-WORKDIR "/src/Ldis_Project_Reliz.Server"
+WORKDIR "/src"
 RUN dotnet build "Ldis_Project_Reliz.Server.csproj" -c Release -o /app/build
 
 FROM build AS publish
