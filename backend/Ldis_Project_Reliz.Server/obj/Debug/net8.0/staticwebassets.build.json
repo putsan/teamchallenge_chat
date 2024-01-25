@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "D1VcnhUu0a0XjYpxjK4E/jTzjOEDpP9oZBSOK6JX7+8=",
+  "Hash": "EAKyqqGGAR0hRXzHFCv/aRrAcGwLVQ9YNDgMyCTfWjQ=",
   "Source": "Ldis_Project_Reliz.Server",
   "BasePath": "_content/Ldis_Project_Reliz.Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "D:\\teamchallenge_chat\\backend\\ldis_project_reliz.client\\ldis_project_reliz.client.esproj",
+      "Identity": "C:\\Users\\Lenovo\\source\\MyGit\\teamchallenge_chat_back\\backend\\ldis_project_reliz.client\\ldis_project_reliz.client.esproj",
       "Version": 2,
       "Source": "ldis_project_reliz.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",

@@ -18,7 +18,7 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
             if (Repository.FindUserForСheckExistenceLogin(Email,Password))
             {
                 ClaimsAuthentification.Authentification(Email);
-                return "Реестрація успішна";
+                return "Реєстрація успішна";
             }
             return "Користувача з таким паролем або email не існуе";
         }
@@ -31,7 +31,7 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
             }
             ClaimsAuthentification.Authentification(Email);
             Repository.CreateNewUser(Email,UserName,Password,null);
-            return "Реестрація успішна !";
+            return "Реєстрація успішна !";
         }
     }
 }

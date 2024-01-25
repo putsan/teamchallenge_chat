@@ -23,9 +23,15 @@ namespace Ldis_Project_Reliz.Server.LdisDbContext
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var FileConfiguration = new ConfigurationBuilder().AddUserSecrets<DbContextApplication>().Build();
-            string ConnectionString = FileConfiguration.GetConnectionString("DataBaseConnect");
-            optionsBuilder.UseSqlite(ConnectionString);
+            //var FileConfiguration = new ConfigurationBuilder().AddUserSecrets<DbContextApplication>().Build();
+            //string ConnectionString = FileConfiguration.GetConnectionString("DataBaseConnect");
+            //string connectionString = config.GetConnectionString("DefaultConnection");
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory()) // Задайте шлях до поточного каталогу, де знаходиться ваш конфігураційний файл.
+                .AddJsonFile("appsettings.json") // Вказати ім'я вашого конфігураційного файлу.
+                .Build();
+            string connectionString = configuration.GetConnectionString("DataBaseConnect");
+            optionsBuilder.UseSqlite(connectionString);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

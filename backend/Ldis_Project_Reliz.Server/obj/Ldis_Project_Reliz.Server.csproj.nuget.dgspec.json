@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\teamchallenge_chat\\backend\\Ldis_Project_Reliz.Server\\Ldis_Project_Reliz.Server.csproj": {}
+    "C:\\Users\\Lenovo\\source\\MyGit\\teamchallenge_chat_back\\backend\\Ldis_Project_Reliz.Server\\Ldis_Project_Reliz.Server.csproj": {}
   },
   "projects": {
-    "D:\\teamchallenge_chat\\backend\\Ldis_Project_Reliz.Server\\Ldis_Project_Reliz.Server.csproj": {
+    "C:\\Users\\Lenovo\\source\\MyGit\\teamchallenge_chat_back\\backend\\Ldis_Project_Reliz.Server\\Ldis_Project_Reliz.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\teamchallenge_chat\\backend\\Ldis_Project_Reliz.Server\\Ldis_Project_Reliz.Server.csproj",
+        "projectUniqueName": "C:\\Users\\Lenovo\\source\\MyGit\\teamchallenge_chat_back\\backend\\Ldis_Project_Reliz.Server\\Ldis_Project_Reliz.Server.csproj",
         "projectName": "Ldis_Project_Reliz.Server",
-        "projectPath": "D:\\teamchallenge_chat\\backend\\Ldis_Project_Reliz.Server\\Ldis_Project_Reliz.Server.csproj",
-        "packagesPath": "C:\\Users\\illan\\.nuget\\packages\\",
-        "outputPath": "D:\\teamchallenge_chat\\backend\\Ldis_Project_Reliz.Server\\obj\\",
+        "projectPath": "C:\\Users\\Lenovo\\source\\MyGit\\teamchallenge_chat_back\\backend\\Ldis_Project_Reliz.Server\\Ldis_Project_Reliz.Server.csproj",
+        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Lenovo\\source\\MyGit\\teamchallenge_chat_back\\backend\\Ldis_Project_Reliz.Server\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\illan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

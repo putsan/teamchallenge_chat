@@ -2,6 +2,7 @@ using Ldis_Project_Reliz.Server.LdisDbContext;
 using Ldis_Project_Reliz.Server.ServiceCollectionInjectExtension;
 using Ldis_Project_Reliz.Server.SignalR;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -56,8 +57,16 @@ builder.Services.AddSession(setting =>
         app.UseSwagger();
         app.UseSwaggerUI();
     }
+var options = new DbContextOptionsBuilder<DbContextApplication>()
+.UseSqlite("DataBaseConnect")
+.Options;
 
-    app.UseHttpsRedirection();
+using (DbContextApplication db = new DbContextApplication(options))
+{
+    var allChats = db.Chats.ToList();
+}
+
+app.UseHttpsRedirection();
     app.UseAuthentication();
     app.UseSession();
     app.UseCors("ClientPermission");
