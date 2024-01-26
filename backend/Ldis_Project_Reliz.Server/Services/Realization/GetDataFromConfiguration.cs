@@ -5,7 +5,10 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
     public class GetDataFromConfiguration : IGetDataFromConfigurationService
     {
         /*Получение данных из user secret*/
-        public IConfigurationRoot? ConfigurationFile = new ConfigurationBuilder().AddUserSecrets<GetDataFromConfiguration>().Build();
+        public IConfigurationRoot? ConfigurationFile = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory()) // Шлях до поточного каталогу, де знаходиться нащ конфігураційний файл.
+                .AddJsonFile("appsettings.json") // Ім'я нашого конфігураційного файлу.
+                .Build();
         /*Получение пароля приложния (нужен для отправки кода аутентификации на почту пользователя)*/
         public string GetAppPassword()
         {
@@ -19,6 +22,7 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
         /*Получение ClientId для гугл аутентификации*/
         public string GetClientId()
         {
+            string s = ConfigurationFile.GetValue<string>("GoogleOauthSecret:ClientId");
             return ConfigurationFile.GetValue<string>("GoogleOauthSecret:ClientId");
         }
         /*Получение ClientSecret для гугл аутентификации*/

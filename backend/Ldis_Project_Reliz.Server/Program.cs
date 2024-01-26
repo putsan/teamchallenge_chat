@@ -57,15 +57,6 @@ builder.Services.AddSession(setting =>
         app.UseSwagger();
         app.UseSwaggerUI();
     }
-var options = new DbContextOptionsBuilder<DbContextApplication>()
-.UseSqlite("DataBaseConnect")
-.Options;
-
-using (DbContextApplication db = new DbContextApplication(options))
-{
-    var allChats = db.Chats.ToList();
-}
-
 app.UseHttpsRedirection();
     app.UseAuthentication();
     app.UseSession();
