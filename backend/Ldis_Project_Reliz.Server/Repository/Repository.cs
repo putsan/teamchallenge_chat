@@ -117,7 +117,13 @@ namespace Ldis_Project_Reliz.Server.Repository
         }
         public async Task<bool> FindUserForСheckExistence(string Email)
         {
-            return await Context.Users.AnyAsync(x => x.Enail == Email);
+            var options = new DbContextOptionsBuilder<DbContextApplication>()
+                .UseSqlite("DataBaseConnect")
+                .Options;
+            using(DbContextApplication db = new DbContextApplication(options))
+            {
+                return await db.Users.AnyAsync(x => x.Enail == Email);
+            }
         }
         public User FindUserByEmailForDeletedTimer (string Email)
         {

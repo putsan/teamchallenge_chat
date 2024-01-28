@@ -14,11 +14,13 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
         IDataProtectionProvider ProtectionProvider;
         IHttpContextAccessor HttpAccessor;
         IRepository Repository;
+        HttpContextAccessor _httpAccessor;
         public ClaimsAuthentification(IHttpContextAccessor HttpAccessor, IRepository Repository, IDataProtectionProvider ProtectionProvider)
         {
             this.ProtectionProvider = ProtectionProvider;
             this.Repository = Repository;
             this.HttpAccessor = HttpAccessor;
+            this._httpAccessor.HttpContext = HttpAccessor.HttpContext;
         }
        /* Аутентификация юзера на основе Claims */
         public async Task Authentification(string Email)
@@ -27,7 +29,13 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
             {
                 new Claim(ClaimTypes.Email,Email)
             };
-            HttpAccessor.HttpContext.Response.Cookies.Append(DataToCacheSessionCookieKey.EmailForAllOperationWithEmail, Email);
+            //if (HttpAccessor.HttpContext.Request.Headers.ContainsKey("X-Correlation-ID"))
+            //{
+            //    HttpAccessor.HttpContext.TraceIdentifier = HttpAccessor.HttpContext.Request.Headers["X-Correlation-ID"];
+            //    // WORKAROUND: On ASP.NET Core 2.2.1 we need to re-store in AsyncLocal the new TraceId, HttpContext Pair
+            //}
+            //HttpAccessor.HttpContext.Response.Cookies.Append(DataToCacheSessionCookieKey.EmailForAllOperationWithEmail, Email);
+            _httpAccessor.HttpContext.Response.Cookies.Append(DataToCacheSessionCookieKey.EmailForAllOperationWithEmail, Email);
             var IdentityUser = new ClaimsIdentity(ClaimsUser, CookieAuthenticationDefaults.AuthenticationScheme);
             var ClaimsPrincipal = new ClaimsPrincipal(IdentityUser);
             await HttpAccessor.HttpContext.SignInAsync(ClaimsPrincipal);

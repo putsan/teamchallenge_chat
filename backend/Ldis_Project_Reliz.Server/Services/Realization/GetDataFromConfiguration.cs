@@ -22,7 +22,6 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
         /*Получение ClientId для гугл аутентификации*/
         public string GetClientId()
         {
-            string s = ConfigurationFile.GetValue<string>("GoogleOauthSecret:ClientId");
             return ConfigurationFile.GetValue<string>("GoogleOauthSecret:ClientId");
         }
         /*Получение ClientSecret для гугл аутентификации*/

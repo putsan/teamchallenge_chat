@@ -1,9 +1,12 @@
 using Ldis_Project_Reliz.Server.LdisDbContext;
 using Ldis_Project_Reliz.Server.ServiceCollectionInjectExtension;
+using Ldis_Project_Reliz.Server.Services.Realization;
 using Ldis_Project_Reliz.Server.SignalR;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Serilog;
+using static System.Net.WebRequestMethods;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +19,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddDbContext<DbContextApplication>();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDistributedMemoryCache();
-builder.Services.AddHttpContextAccessor();
+//builder.Services.AddHttpContextAccessor();
+builder.Services.TryAddSingleton<IHttpContextAccessor, Ldis_Project_Reliz.Server.Services.Realization.HttpContextAccessor>();
+builder.Services.AddScoped<ClaimsAuthentification>();
 builder.Services.AddMemoryCache();
 builder.Services.AddSignalR(hubOptions =>
 {
@@ -57,6 +62,7 @@ builder.Services.AddSession(setting =>
         app.UseSwagger();
         app.UseSwaggerUI();
     }
+
 app.UseHttpsRedirection();
     app.UseAuthentication();
     app.UseSession();

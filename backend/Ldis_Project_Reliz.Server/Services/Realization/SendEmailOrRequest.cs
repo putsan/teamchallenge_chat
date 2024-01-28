@@ -23,6 +23,12 @@ namespace Ldis_Project_Reliz.Server.Services.Realization
         {
             string Sender = GetDataConfig.GetSenderEmail();
             string AppPassword = GetDataConfig.GetAppPassword();
+        //    var smtpClient = new SmtpClient("smtp.example.com")
+        //{
+        //    Port = 587,
+        //    Credentials = new NetworkCredential("your_username", "your_password"),
+        //    EnableSsl = true,
+        //};
             using (SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587))
             {
                 Random rand = new Random();
